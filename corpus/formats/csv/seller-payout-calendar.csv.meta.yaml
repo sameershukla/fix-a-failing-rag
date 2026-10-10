@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/csv/seller-payout-calendar
+title: Seller Payout Calendar
+source_type: csv
+source_system: ops_export
+domain: finance
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Finance Operations
+environment: prod
+access_group: finance-internal
+owner: Finance Operations
+language: en
+region: US
+effective_date: '2026-10-01'
+retrieval_hazard: tabular parsing
+tags:
+- enterprise-expansion
+- format-csv
+- parsing
+- table

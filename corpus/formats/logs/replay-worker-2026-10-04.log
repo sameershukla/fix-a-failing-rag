@@ -1,0 +1,10 @@
+2026-10-04T10:20:11.012Z INFO service started build=2026.10.4
+2026-10-04T10:20:12.114Z DEBUG config loaded aws_secret=FAKE_SECRET_NOT_REAL_003
+2026-10-04T10:21:05.443Z WARN duplicate event skipped event_id=FAKE_EVT_10028 replay_id=FAKE_RPL_33 reason=idempotency_match
+2026-10-04T10:21:05.444Z ERROR Traceback (most recent call last):
+  File "/app/worker.py", line 182, in process
+    execute_action(event)
+  File "/app/actions.py", line 91, in execute_action
+    raise WorkflowRetryExhausted("FAKE synthetic failure")
+WorkflowRetryExhausted: FAKE synthetic failure
+2026-10-04T10:21:07.100Z INFO healthcheck ok

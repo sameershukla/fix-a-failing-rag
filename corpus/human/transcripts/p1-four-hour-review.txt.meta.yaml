@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/p1-four-hour-review
+title: 'Meeting transcript: p1-four-hour-review'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: support
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Enterprise Support
+environment: prod
+access_group: support-internal
+owner: Enterprise Support
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

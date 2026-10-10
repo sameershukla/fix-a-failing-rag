@@ -1,0 +1,13 @@
+retry:
+  safe_methods:
+  - GET
+  - HEAD
+  max_attempts: 4
+  base_delay_ms: 250
+  max_delay_ms: 4000
+  jitter: full
+  retry_status:
+  - 429
+  - 502
+  - 503
+  - 504

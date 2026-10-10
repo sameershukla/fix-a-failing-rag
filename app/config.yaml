@@ -1,0 +1,44 @@
+# Baseline config: what a team plausibly builds first.
+# Fixed size chunks, vector only search, K = 5. Do not make this harder on purpose.
+# Every setting here contributes to the config hash. Change a value, get a new run id.
+
+# Which corpus layers are indexed. Part III stays out until Module 8.
+corpus:
+  include: [corpus]
+  exclude: []
+
+# 2c. Chunking: fixed size, counted in tokens, no structure awareness.
+# Tokens are counted with the embedding model's own tokenizer. Chunks are cut from the
+# original text by character offsets, so start_char and end_char still point into the document.
+chunking:
+  strategy: fixed
+  unit: tokens
+  size_tokens: 500
+  overlap_tokens: 50
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+
+# 2a. Embedding model: small, local, free, runs on a laptop CPU. 384 dimensions.
+# Swapped for a bigger one in Module 3, lesson 7, decided by evals.
+embedding:
+  provider: sentence-transformers
+  model: sentence-transformers/all-MiniLM-L6-v2
+  dimensions: 384
+  normalize: true
+
+# 2b. Vector store: Chroma, local and file based. Disposable, rebuilt from chunks.
+vector_store:
+  provider: chroma
+  collection: baseline
+  distance: cosine
+
+# Retrieval: vector only. No BM25, no reranker, no filters, no query rewriting.
+retrieval:
+  mode: vector
+  k: 5
+
+# 2d. Answer LLM: Claude through the API, behind one call_llm() function.
+# To switch providers, change only that function.
+llm:
+  provider: anthropic
+  model: claude-sonnet-5-5
+  max_tokens: 1000

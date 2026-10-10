@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/json/credit-risk-limits
+title: Credit Risk Limits
+source_type: json_config
+source_system: config_registry
+domain: payments
+version: '2026.10'
+status: active
+authority: primary
+company: BrightCart
+team: Payments Platform
+environment: prod
+access_group: payments-engineering
+owner: Payments Platform
+language: en
+region: global
+effective_date: '2026-10-01'
+retrieval_hazard: nested config hierarchy
+tags:
+- enterprise-expansion
+- format-json
+- parsing
+- config

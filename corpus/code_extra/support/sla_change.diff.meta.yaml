@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/code/support/sla_change.diff
+title: sla_change.diff
+source_type: developer_artifact
+source_system: git
+domain: support
+version: git-2026-10-05
+status: active
+authority: implementation
+company: BrightCart
+team: Support Engineering
+environment: prod
+access_group: engineering
+owner: Support Engineering
+language: text
+region: global
+created_date: '2026-10-05'
+retrieval_hazard: cross-file call chain, tests, diff, stack trace
+tags:
+- enterprise-expansion
+- code-aware
+- cross-file

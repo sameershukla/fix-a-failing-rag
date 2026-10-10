@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/pdf/warehouse-emergency-sheet
+title: Warehouse Emergency Sheet
+source_type: scanned_pdf
+source_system: document_archive
+domain: facilities
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Facilities Operations
+environment: prod
+access_group: facilities-internal
+owner: Facilities Operations
+language: en
+region: US
+effective_date: '2026-10-01'
+retrieval_hazard: OCR required
+tags:
+- enterprise-expansion
+- format-pdf
+- parsing
+- ocr

@@ -1,0 +1,24 @@
+From: analyst4@brightcart.example
+To: reliability-ops@brightcart.example
+Subject: RE: sev1 status page gap
+Date: Tue, 29 Sep 2026 15:04:00 -0500
+
+Team,
+
+I checked the owning handbook and confirmed the current rule: SEV-1 public status updates are required at least every 30 minutes until mitigation.
+
+Please use that for ticket FAKE_TKT_9004.
+
+--
+Avery Chen
+BrightCart | Site Reliability
+
+-----Original Message-----
+From: first.line@brightcart.example
+Sent: Tuesday, September 29, 2026 2:11 PM
+Subject: sev1 status page gap
+
+I found an old note saying: incident chat had updates but public page did not. Is that still right?
+
+-----Earlier reply-----
+No idea, maybe ask in Slack.

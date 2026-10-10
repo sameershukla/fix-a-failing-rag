@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7008
+STATUS: resolved
+PRIORITY: P1
+REQUESTER_EMAIL: FAKE_user8@example.test
+CALLBACK_PHONE: FAKE_555_010_0008
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: support told customer deletion was guaranteed tomorrow.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Privacy Operations
+Verified current rule: An active legal hold stops deletion even when the privacy request is valid.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

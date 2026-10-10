@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7005
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user5@example.test
+CALLBACK_PHONE: FAKE_555_010_0005
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: customer thought each purchase had its own 12-month timer.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Growth Platform
+Verified current rule: BrightPoints expire after 12 months of account inactivity.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

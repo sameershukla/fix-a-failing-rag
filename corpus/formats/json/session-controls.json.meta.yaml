@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/json/session-controls
+title: Session Controls
+source_type: json_config
+source_system: config_registry
+domain: security
+version: '2026.10'
+status: active
+authority: primary
+company: BrightCart
+team: Security Platform
+environment: prod
+access_group: security-engineering
+owner: Security Platform
+language: en
+region: global
+effective_date: '2026-10-01'
+retrieval_hazard: nested config hierarchy
+tags:
+- enterprise-expansion
+- format-json
+- parsing
+- config

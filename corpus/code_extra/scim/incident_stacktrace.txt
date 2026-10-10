@@ -1,0 +1,6 @@
+2026-09-19T04:11:08Z ERROR user=FAKE_USER_882 session revoke timed out
+Traceback (most recent call last):
+  File "/app/scim/deprovision.py", line 22, in deprovision
+    session_store.revoke_all(user_id)
+TimeoutError: session store timed out after 5s
+Follow-up: login was disabled at 04:11; session revocation completed at 04:19.

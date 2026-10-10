@@ -1,0 +1,8 @@
+{
+  "credits": {
+    "standard_support_limit_usd": 250,
+    "supervisor_limit_usd": 1000,
+    "finance_approval_usd": 10000,
+    "on_approval_expiry": "reject"
+  }
+}

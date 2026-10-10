@@ -1,0 +1,10 @@
+2026-10-04T10:20:11.012Z INFO service started build=2026.10.4
+2026-10-04T10:20:12.114Z DEBUG config loaded FAKE_SECRET_api_key=FAKE_SECRET_NOT_REAL_001
+2026-10-04T10:21:05.443Z ERROR refund worker exhausted retry for FAKE_REFUND_8821; next_action=PAYMENT_OPS_REVIEW; idempotency_key=FAKE_IDEMP_aa81
+2026-10-04T10:21:05.444Z ERROR Traceback (most recent call last):
+  File "/app/worker.py", line 182, in process
+    execute_action(event)
+  File "/app/actions.py", line 91, in execute_action
+    raise WorkflowRetryExhausted("FAKE synthetic failure")
+WorkflowRetryExhausted: FAKE synthetic failure
+2026-10-04T10:21:07.100Z INFO healthcheck ok

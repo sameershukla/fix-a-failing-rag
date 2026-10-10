@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/csv/inspection-reason-codes
+title: Inspection Reason Codes
+source_type: csv
+source_system: ops_export
+domain: warehouse
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Warehouse Operations
+environment: prod
+access_group: warehouse-internal
+owner: Warehouse Operations
+language: en
+region: US
+effective_date: '2026-10-01'
+retrieval_hazard: tabular parsing
+tags:
+- enterprise-expansion
+- format-csv
+- parsing
+- table

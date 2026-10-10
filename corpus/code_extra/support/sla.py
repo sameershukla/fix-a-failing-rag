@@ -1,0 +1,2 @@
+SLA_MINUTES = {"P1": 15, "P2": 60, "P3": 480}
+EXEC_ESCALATION_HOURS = {"P1": 4}

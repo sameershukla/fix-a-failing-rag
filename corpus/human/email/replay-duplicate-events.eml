@@ -1,0 +1,24 @@
+From: analyst7@brightcart.example
+To: platform-ops@brightcart.example
+Subject: RE: replay duplicate events
+Date: Tue, 29 Sep 2026 15:07:00 -0500
+
+Team,
+
+I checked the owning handbook and confirmed the current rule: Replay workers use event_id as the idempotency key and do not create a new key for retries.
+
+Please use that for ticket FAKE_TKT_9007.
+
+--
+Avery Chen
+BrightCart | Data Platform
+
+-----Original Message-----
+From: first.line@brightcart.example
+Sent: Tuesday, September 29, 2026 2:11 PM
+Subject: replay duplicate events
+
+I found an old note saying: old script used a random UUID. Is that still right?
+
+-----Earlier reply-----
+No idea, maybe ask in Slack.

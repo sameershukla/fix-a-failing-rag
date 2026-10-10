@@ -1,0 +1,23 @@
+doc_id: generated/human/tickets/seller-reserve-question
+title: 'Ticket export: seller-reserve-question'
+source_type: ticket_export
+source_system: supportdesk
+domain: finance
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Finance Platform
+environment: prod
+access_group: finance-internal
+owner: Finance Platform
+language: en
+region: global
+created_date: '2026-09-30'
+retrieval_hazard: comments out of order, status fields, copied stale advice
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

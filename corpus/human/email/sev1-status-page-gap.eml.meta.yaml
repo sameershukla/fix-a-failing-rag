@@ -1,0 +1,23 @@
+doc_id: generated/human/email/sev1-status-page-gap
+title: 'Email chain: Sev1 Status Page Gap'
+source_type: email_chain
+source_system: mail_export
+domain: reliability
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Site Reliability
+environment: prod
+access_group: reliability-internal
+owner: Site Reliability
+language: en
+region: global
+created_date: '2026-09-29'
+retrieval_hazard: quoted replies, stale answer, signatures
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

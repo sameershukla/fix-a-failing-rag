@@ -1,0 +1,23 @@
+doc_id: generated/human/email/replay-duplicate-events
+title: 'Email chain: Replay Duplicate Events'
+source_type: email_chain
+source_system: mail_export
+domain: platform
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Data Platform
+environment: prod
+access_group: platform-internal
+owner: Data Platform
+language: en
+region: global
+created_date: '2026-09-29'
+retrieval_hazard: quoted replies, stale answer, signatures
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

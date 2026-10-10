@@ -1,0 +1,5 @@
+retention:
+  support_transcripts_days: 365
+  agent_traces_days: 30
+  privacy_exports_days: 7
+  legal_hold_behavior: skip_delete

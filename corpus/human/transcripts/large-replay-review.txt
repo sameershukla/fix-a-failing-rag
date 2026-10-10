@@ -1,0 +1,9 @@
+00:00:04 Nia: okay, recording. this is about large replay review.
+00:00:18 Omar: before we start, developer wanted to run it from laptop.
+00:01:03 Nia: that's exactly what I want to verify, not assume.
+00:02:16 Priya: I have the current source open. It says a production replay above 1 million events needs two Data Platform approvers.
+00:02:44 Omar: wait, can you repeat the number / condition?
+00:02:49 Priya: a production replay above 1 million events needs two Data Platform approvers. That's the current wording.
+00:03:20 Nia: good. action item is to update the case and not copy the old meeting note.
+00:04:55 Omar: unrelated, deployment window moved to Thursday.
+00:06:10 Nia: done. ending recording.

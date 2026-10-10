@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/code/privacy/delete_job.py
+title: delete_job.py
+source_type: source_code
+source_system: git
+domain: privacy
+version: git-2026-10-05
+status: active
+authority: implementation
+company: BrightCart
+team: Privacy Engineering
+environment: prod
+access_group: engineering
+owner: Privacy Engineering
+language: python
+region: global
+created_date: '2026-10-05'
+retrieval_hazard: cross-file call chain, tests, diff, stack trace
+tags:
+- enterprise-expansion
+- code-aware
+- cross-file

@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7004
+STATUS: resolved
+PRIORITY: P1
+REQUESTER_EMAIL: FAKE_user4@example.test
+CALLBACK_PHONE: FAKE_555_010_0004
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: incident chat had updates but public page did not.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Site Reliability
+Verified current rule: SEV-1 public status updates are required at least every 30 minutes until mitigation.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

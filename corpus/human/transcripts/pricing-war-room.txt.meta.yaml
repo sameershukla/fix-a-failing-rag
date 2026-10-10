@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/pricing-war-room
+title: 'Meeting transcript: pricing-war-room'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: catalog
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Catalog Platform
+environment: prod
+access_group: catalog-internal
+owner: Catalog Platform
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

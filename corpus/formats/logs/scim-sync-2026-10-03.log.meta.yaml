@@ -1,0 +1,22 @@
+doc_id: generated/logs/scim-sync-2026-10-03
+title: scim-sync-2026-10-03
+source_type: application_log
+source_system: log_archive
+domain: identity
+version: '1'
+status: active
+authority: observational
+company: BrightCart
+team: Identity Engineering
+environment: prod
+access_group: engineering-restricted
+owner: Identity Engineering
+language: en
+region: us-central
+created_date: '2026-10-04'
+retrieval_hazard: timestamps, stack traces, fake secrets, machine text
+tags:
+- enterprise-expansion
+- format-log
+- security
+- fake-secret

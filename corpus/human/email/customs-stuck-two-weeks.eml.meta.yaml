@@ -1,0 +1,23 @@
+doc_id: generated/human/email/customs-stuck-two-weeks
+title: 'Email chain: Customs Stuck Two Weeks'
+source_type: email_chain
+source_system: mail_export
+domain: fulfillment
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Global Fulfillment
+environment: prod
+access_group: fulfillment-internal
+owner: Global Fulfillment
+language: en
+region: global
+created_date: '2026-09-29'
+retrieval_hazard: quoted replies, stale answer, signatures
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

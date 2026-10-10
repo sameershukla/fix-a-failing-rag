@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/yaml/notification-routing
+title: Notification Routing
+source_type: yaml_config
+source_system: config_registry
+domain: notifications
+version: '2026.10'
+status: active
+authority: primary
+company: BrightCart
+team: Notifications Platform
+environment: prod
+access_group: notifications-engineering
+owner: Notifications Platform
+language: en
+region: global
+effective_date: '2026-10-01'
+retrieval_hazard: nested YAML hierarchy
+tags:
+- enterprise-expansion
+- format-yaml
+- parsing
+- config

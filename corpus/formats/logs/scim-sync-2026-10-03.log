@@ -1,0 +1,10 @@
+2026-10-04T10:20:11.012Z INFO service started build=2026.10.4
+2026-10-04T10:20:12.114Z DEBUG config loaded token=FAKE_SECRET_NOT_REAL_002
+2026-10-04T10:21:05.443Z INFO deprovision user=FAKE_user17@example.test login_disabled_ms=141000 sessions_revoked_ms=612000 result=SUCCESS
+2026-10-04T10:21:05.444Z ERROR Traceback (most recent call last):
+  File "/app/worker.py", line 182, in process
+    execute_action(event)
+  File "/app/actions.py", line 91, in execute_action
+    raise WorkflowRetryExhausted("FAKE synthetic failure")
+WorkflowRetryExhausted: FAKE synthetic failure
+2026-10-04T10:21:07.100Z INFO healthcheck ok

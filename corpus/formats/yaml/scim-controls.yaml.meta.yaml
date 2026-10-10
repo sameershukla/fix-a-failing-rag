@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/yaml/scim-controls
+title: Scim Controls
+source_type: yaml_config
+source_system: config_registry
+domain: enterprise
+version: '2026.10'
+status: active
+authority: primary
+company: BrightCart
+team: Enterprise Platform
+environment: prod
+access_group: enterprise-engineering
+owner: Enterprise Platform
+language: en
+region: global
+effective_date: '2026-10-01'
+retrieval_hazard: nested YAML hierarchy
+tags:
+- enterprise-expansion
+- format-yaml
+- parsing
+- config

@@ -1,0 +1,4 @@
+seller_tier,payout_day,reserve_pct,reserve_days,notes
+standard,Tuesday,0,0,transactions cleared through previous Friday
+new,Tuesday,10,60,rolling reserve applies
+high-risk,Every other Friday,20,90,Finance Risk approval required

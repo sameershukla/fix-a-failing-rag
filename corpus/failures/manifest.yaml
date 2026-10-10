@@ -1,0 +1,109 @@
+failures:
+- id: F001
+  failure: long document boundary and hierarchy
+  paths:
+  - corpus/longform/
+  lesson: chunk size, overlap, parent-child chunking
+  metrics:
+  - Recall@K
+  - MRR
+  - nDCG
+  expected_change: structure-aware or parent-child retrieval should improve complete
+    evidence retrieval
+- id: F002
+  failure: messy human vocabulary and corrections
+  paths:
+  - corpus/human/
+  lesson: query rewriting and authority weighting
+  metrics:
+  - HitRate@K
+  - MRR
+  expected_change: query rewriting should help vague/misspelled queries; authority
+    reranking should suppress stale comments
+- id: F003
+  failure: format parsing
+  paths:
+  - corpus/formats/
+  lesson: PDF/HTML/CSV/JSON/YAML/OpenAPI/log parsing
+  metrics:
+  - ingestion_coverage
+  - Recall@K
+  expected_change: format-aware parsing should increase indexed evidence coverage
+- id: F004
+  failure: multi-hop process facts across documents
+  paths:
+  - corpus/longform/returns/
+  - corpus/formats/json/
+  - corpus/code_extra/refunds/
+  lesson: multi-fact retrieval
+  metrics:
+  - Recall@K
+  - HitRate@K
+  expected_change: Recall should be lower than HitRate when only one of multiple required
+    evidence pieces is found
+- id: F005
+  failure: edition, region, customer-tier conflicts
+  paths:
+  - corpus/policy_history/
+  lesson: edition metadata and filters
+  metrics:
+  - Precision@K
+  - MRR
+  - answer_correctness
+  expected_change: metadata filtering should reduce stale or wrong-region matches
+- id: F006
+  failure: ACL-restricted pages
+  paths:
+  - corpus/security/restricted-*.md
+  lesson: metadata filters and access control
+  metrics:
+  - access_violation_rate
+  - Precision@K
+  expected_change: pre-retrieval ACL filters should make forbidden evidence unretrievable
+- id: F007
+  failure: fake PII and fake secrets
+  paths:
+  - corpus/security/
+  - corpus/formats/logs/
+  lesson: redaction and sensitive-data handling
+  metrics:
+  - secret_leak_rate
+  - pii_echo_rate
+  expected_change: guardrails should prevent unnecessary reproduction
+- id: F008
+  failure: indirect prompt injection
+  paths:
+  - corpus/security/indirect-prompt-injection.md
+  lesson: untrusted retrieved instructions
+  metrics:
+  - injection_success_rate
+  - faithfulness
+  expected_change: model should ignore adversarial instructions and use authoritative
+    data only
+- id: F009
+  failure: multilingual and mixed-language vocabulary
+  paths:
+  - corpus/security/*-es.md
+  - corpus/security/*spanglish.md
+  lesson: query rewriting and multilingual embeddings
+  metrics:
+  - HitRate@K
+  - MRR
+  expected_change: multilingual retrieval or translation should improve matching
+- id: F010
+  failure: cross-file code call chains
+  paths:
+  - corpus/code_extra/
+  lesson: code-aware chunking and repository context
+  metrics:
+  - code_Recall@K
+  - MRR
+  expected_change: symbol-aware chunks and file-path context should improve retrieval
+- id: F011
+  failure: deliberately absent and near-miss topics
+  paths: []
+  lesson: unanswerable/refusal
+  metrics:
+  - refusal_precision
+  - refusal_recall
+  expected_change: system should refuse rather than answer from adjacent policies

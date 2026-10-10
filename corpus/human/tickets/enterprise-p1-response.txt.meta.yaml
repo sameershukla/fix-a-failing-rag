@@ -1,0 +1,23 @@
+doc_id: generated/human/tickets/enterprise-p1-response
+title: 'Ticket export: enterprise-p1-response'
+source_type: ticket_export
+source_system: supportdesk
+domain: support
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Enterprise Support
+environment: prod
+access_group: support-internal
+owner: Enterprise Support
+language: en
+region: global
+created_date: '2026-09-30'
+retrieval_hazard: comments out of order, status fields, copied stale advice
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

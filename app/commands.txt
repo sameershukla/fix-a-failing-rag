@@ -1,0 +1,29 @@
+Baseline RAG: commands
+Run everything from the repo root. Every command takes SYSTEM=baseline (default) or SYSTEM=app. Each system keeps its own data in data/<system>/.
+
+ONE-TIME SETUP
+make setup                      # create .venv and install requirements
+
+BUILD THE INDEX
+make ingest                     # normalize + chunk + index (about 15 s, 263 chunks)
+make normalize                  # corpus/ -> data/<system>/normalized/docs.jsonl
+make chunk                      # -> data/<system>/chunks/<chunk config hash>/
+make index                      # -> data/<system>/index/ (Chroma)
+
+USE IT
+make retrieve Q="why did the agent skip approval"   # retrieval only: score, chunk id, where it ends. No API key.
+make ask Q="why did the agent skip approval"        # full answer. Needs ANTHROPIC_API_KEY.
+
+SCORE IT
+make eval                       # score the golden questions, save eval/runs/<run id>/, build the dashboard
+make eval SYSTEM=app            # same for the working copy
+make dashboard                  # rebuild the dashboard from the latest run
+make dashboard RUN=<run id> BASE=<older run id>     # with deltas against an older run
+
+TYPICAL FIRST RUN
+make setup && make ingest && make eval
+
+NOTES
+- make eval needs make ingest first. It stops if data/<system>/normalized/docs.jsonl is missing.
+- make eval is retrieval only: no API key, no cost.
+- make eval-smoke, make compare and make test are in CLAUDE.md but not in the Makefile yet.

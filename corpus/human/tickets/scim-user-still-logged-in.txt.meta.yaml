@@ -1,0 +1,23 @@
+doc_id: generated/human/tickets/scim-user-still-logged-in
+title: 'Ticket export: scim-user-still-logged-in'
+source_type: ticket_export
+source_system: supportdesk
+domain: enterprise
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Enterprise Identity
+environment: prod
+access_group: enterprise-internal
+owner: Enterprise Identity
+language: en
+region: global
+created_date: '2026-09-30'
+retrieval_hazard: comments out of order, status fields, copied stale advice
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

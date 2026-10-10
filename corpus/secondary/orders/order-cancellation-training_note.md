@@ -1,0 +1,82 @@
+---
+doc_id: brightcart/secondary/2026/orders/order-cancellation-training_note
+title: 'Working Note: Canceling an Order'
+source_type: training_note
+source_system: enablement_wiki
+domain: orders
+version: working
+effective_date: '2026-09-15'
+status: active
+authority: secondary
+canonical_doc_id: brightcart/v1/orders/order-cancellation
+company: BrightCart
+audience:
+- support
+- operations
+- engineering
+tags:
+- level-2
+- secondary
+- distractor
+- semantic-overlap
+- orders
+- training_note
+---
+
+# Working Note: Canceling an Order
+
+## Context
+
+This is an active team working note about canceling an order. It is useful for understanding support symptoms and operational history, but it is not the Policy Hub source of truth.
+
+## What prompted this note
+
+Several cases used language associated with canceling an order. Agents reported that search results were inconsistent because an older wiki page, ticket comments, and the active policy all used nearly the same terminology.
+
+## Customer wording seen in tickets
+
+Customers described the issue without using internal policy names. Common phrases included "this is taking longer than I was told," "why did the system reject this," and "another agent gave me a different rule." These phrases overlap with many BrightCart policies.
+
+## What support tried
+
+Support checked the order or account state, searched for canceling an order, and compared the first few results. Some agents stopped at the first plausible snippet instead of checking the source system and status metadata.
+
+## Conflicting wording copied into a case
+
+A case comment contained the following non-authoritative wording:
+
+> A customer can cancel an order while it is in received or picking status if the warehouse can still stop fulfillment. Once the order reaches packed status, cancellation is no longer available. After packed status, the customer should wait for delivery and use the applicable return process.
+
+The wording came from a secondary note and should not be treated as the current rule.
+
+## Related decision details
+
+The current policy has conditions involving the request state, timing, eligibility, or workflow. A support case may mention some of the same decision points without carrying the complete authoritative rule.
+
+- The cancellation request is not complete until the order status changes to canceled.
+- A payment authorization can remain visible temporarily after a successful cancellation.
+- Partial cancellation is allowed only for order lines not already packed.
+
+## Search terms
+
+Useful search terms include canceling an order, orders, customer policy, eligibility, timing, limit, status, exception, support workflow, and escalation. These broad terms intentionally make this note competitive in semantic and keyword retrieval.
+
+## Operational impact
+
+When the wrong source is used, customers can receive an incorrect deadline, threshold, eligibility decision, or next step. The error can look like a model problem even when the root cause is retrieval.
+
+## Hand-off note
+
+If a case depends on the exact current value or rule, open the canonical Policy Hub document `brightcart/v1/orders/order-cancellation` rather than relying on this working note.
+
+## Why this page is not authoritative
+
+This page is maintained by a delivery team and can contain paraphrases, copied ticket text, and historical observations. Its `authority` field is `secondary` even though the page itself is active.
+
+## Follow-up
+
+Always verify the final order status. Telling a customer that a request was submitted is not the same as confirming the order was canceled. The team also tracks whether stale search results continue to appear above the current policy after index updates.
+
+## Ownership
+
+The orders operations group owns this note. Policy changes are owned in Policy Hub. Questions about conflicting search results should be sent to the RAG platform team with the query, retrieved chunk IDs, and ranking scores.

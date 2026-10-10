@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/pdf/manual-review-procedure
+title: Manual Risk Review Procedure
+source_type: pdf
+source_system: document_archive
+domain: risk
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Risk Operations
+environment: prod
+access_group: risk-internal
+owner: Risk Operations
+language: en
+region: US
+effective_date: '2026-10-01'
+retrieval_hazard: PDF text extraction
+tags:
+- enterprise-expansion
+- format-pdf
+- parsing

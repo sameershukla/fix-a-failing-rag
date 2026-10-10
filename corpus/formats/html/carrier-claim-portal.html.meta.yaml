@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/html/carrier-claim-portal
+title: Carrier Claim Portal
+source_type: html_page
+source_system: help_center
+domain: shipping
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Shipping Platform
+environment: prod
+access_group: public
+owner: Shipping Docs
+language: en
+region: global
+effective_date: '2026-10-01'
+retrieval_hazard: navigation clutter, cookie text, repeated footer
+tags:
+- enterprise-expansion
+- format-html
+- parsing

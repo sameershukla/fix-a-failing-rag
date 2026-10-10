@@ -1,0 +1,6 @@
+scim:
+  disable_login_minutes: 5
+  revoke_sessions_minutes: 15
+  break_glass:
+    approvers: 2
+    ttl_hours: 4

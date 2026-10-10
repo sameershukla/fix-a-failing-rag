@@ -1,0 +1,7 @@
+{
+  "price_change": {
+    "director_approval_decrease_pct": 30,
+    "dual_approval_decrease_pct": 60,
+    "max_scheduled_days": 30
+  }
+}

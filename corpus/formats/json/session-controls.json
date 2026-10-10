@@ -1,0 +1,13 @@
+{
+  "sessions": {
+    "consumer": {
+      "idle_minutes": 30,
+      "absolute_hours": 24
+    },
+    "enterprise_admin": {
+      "idle_minutes": 15,
+      "absolute_hours": 8,
+      "mfa_required": true
+    }
+  }
+}

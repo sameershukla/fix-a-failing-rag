@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: Order Admin Api
+  version: '3.0'
+paths:
+  /v3/admin/orders/{order_id}/cancel:
+    post:
+      summary: Cancellation above $5,000 requires an approval token.
+      parameters:
+      - name: X-Approval-Token
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '409':
+          description: Conflict

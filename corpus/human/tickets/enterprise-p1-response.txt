@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7010
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user10@example.test
+CALLBACK_PHONE: FAKE_555_010_0010
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: agent thought the timer paused overnight.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Enterprise Support
+Verified current rule: Enterprise P1 cases have a 15-minute first-response target, 24 hours a day.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

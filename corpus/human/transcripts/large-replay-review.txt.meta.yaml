@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/large-replay-review
+title: 'Meeting transcript: large-replay-review'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: platform
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Data Platform
+environment: prod
+access_group: platform-internal
+owner: Data Platform
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

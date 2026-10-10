@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7002
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user2@example.test
+CALLBACK_PHONE: FAKE_555_010_0002
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: carrier portal still says wait indefinitely.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Global Fulfillment
+Verified current rule: At 14 calendar days in customs, the customer may choose a refund or reshipment.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

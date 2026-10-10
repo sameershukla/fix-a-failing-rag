@@ -1,0 +1,23 @@
+doc_id: generated/human/tickets/replay-duplicate-events
+title: 'Ticket export: replay-duplicate-events'
+source_type: ticket_export
+source_system: supportdesk
+domain: platform
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Data Platform
+environment: prod
+access_group: platform-internal
+owner: Data Platform
+language: en
+region: global
+created_date: '2026-09-30'
+retrieval_hazard: comments out of order, status fields, copied stale advice
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

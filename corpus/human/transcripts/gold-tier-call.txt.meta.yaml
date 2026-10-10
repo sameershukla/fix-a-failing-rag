@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/gold-tier-call
+title: 'Meeting transcript: gold-tier-call'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: loyalty
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Growth Platform
+environment: prod
+access_group: loyalty-internal
+owner: Growth Platform
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

@@ -1,0 +1,9 @@
+routing:
+  payment_failure:
+    channel: pager
+    team: payments-oncall
+    after_minutes: 5
+  warehouse_delay:
+    channel: slack
+    team: warehouse-ops
+    after_minutes: 30

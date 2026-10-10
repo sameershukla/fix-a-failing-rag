@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/serial-mismatch-review
+title: 'Meeting transcript: serial-mismatch-review'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: warehouse
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Warehouse Systems
+environment: prod
+access_group: warehouse-internal
+owner: Warehouse Systems
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

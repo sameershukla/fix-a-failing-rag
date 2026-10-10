@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/code/support/sla.py
+title: sla.py
+source_type: source_code
+source_system: git
+domain: support
+version: git-2026-10-05
+status: active
+authority: implementation
+company: BrightCart
+team: Support Engineering
+environment: prod
+access_group: engineering
+owner: Support Engineering
+language: python
+region: global
+created_date: '2026-10-05'
+retrieval_hazard: cross-file call chain, tests, diff, stack trace
+tags:
+- enterprise-expansion
+- code-aware
+- cross-file

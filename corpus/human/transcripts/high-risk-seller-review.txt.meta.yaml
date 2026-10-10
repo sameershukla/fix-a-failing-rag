@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/high-risk-seller-review
+title: 'Meeting transcript: high-risk-seller-review'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: finance
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Finance Platform
+environment: prod
+access_group: finance-internal
+owner: Finance Platform
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy

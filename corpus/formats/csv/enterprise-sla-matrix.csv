@@ -1,0 +1,4 @@
+priority,first_response,coverage,exec_escalation
+P1,15 minutes,24x7,after 4 hours unmitigated
+P2,1 hour,contracted hours,after 2 missed updates
+P3,8 business hours,contracted hours,none

@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: Refund Admin Api
+  version: '3.0'
+paths:
+  /v3/admin/refunds:
+    post:
+      summary: Refund creation requires Idempotency-Key and returns 409 when the key
+        was already used with different parameters.
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '409':
+          description: Conflict

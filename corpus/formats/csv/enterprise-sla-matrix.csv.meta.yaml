@@ -1,0 +1,22 @@
+doc_id: brightcart/v3/csv/enterprise-sla-matrix
+title: Enterprise Sla Matrix
+source_type: csv
+source_system: ops_export
+domain: support
+version: '3.0'
+status: active
+authority: primary
+company: BrightCart
+team: Support Operations
+environment: prod
+access_group: support-internal
+owner: Support Operations
+language: en
+region: US
+effective_date: '2026-10-01'
+retrieval_hazard: tabular parsing
+tags:
+- enterprise-expansion
+- format-csv
+- parsing
+- table

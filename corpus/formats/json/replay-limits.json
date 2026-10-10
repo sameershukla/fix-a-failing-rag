@@ -1,0 +1,10 @@
+{
+  "replay": {
+    "default_window_hours": 72,
+    "production": {
+      "approval_threshold_events": 1000000,
+      "required_approvers": 2,
+      "idempotency_key": "event_id"
+    }
+  }
+}

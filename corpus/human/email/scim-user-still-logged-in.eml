@@ -1,0 +1,24 @@
+From: analyst3@brightcart.example
+To: enterprise-ops@brightcart.example
+Subject: RE: scim user still logged in
+Date: Tue, 29 Sep 2026 15:03:00 -0500
+
+Team,
+
+I checked the owning handbook and confirmed the current rule: SCIM deprovision disables login within 5 minutes and revokes active sessions within 15 minutes.
+
+Please use that for ticket FAKE_TKT_9003.
+
+--
+Avery Chen
+BrightCart | Enterprise Identity
+
+-----Original Message-----
+From: first.line@brightcart.example
+Sent: Tuesday, September 29, 2026 2:11 PM
+Subject: scim user still logged in
+
+I found an old note saying: admin expected an instant session kill. Is that still right?
+
+-----Earlier reply-----
+No idea, maybe ask in Slack.

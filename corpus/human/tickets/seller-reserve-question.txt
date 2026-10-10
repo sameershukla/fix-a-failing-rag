@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7009
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user9@example.test
+CALLBACK_PHONE: FAKE_555_010_0009
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: sales deck says payouts are always full value.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Finance Platform
+Verified current rule: New sellers keep a 10 percent rolling reserve for 60 days.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

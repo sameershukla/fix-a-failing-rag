@@ -1,0 +1,21 @@
+doc_id: brightcart/v3/code/scim/deprovision.py
+title: deprovision.py
+source_type: source_code
+source_system: git
+domain: scim
+version: git-2026-10-05
+status: active
+authority: implementation
+company: BrightCart
+team: Scim Engineering
+environment: prod
+access_group: engineering
+owner: Scim Engineering
+language: python
+region: global
+created_date: '2026-10-05'
+retrieval_hazard: cross-file call chain, tests, diff, stack trace
+tags:
+- enterprise-expansion
+- code-aware
+- cross-file

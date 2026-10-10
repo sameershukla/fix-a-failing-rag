@@ -1,0 +1,4 @@
+anthropic
+pyyaml
+sentence-transformers   # local embedding model (all-MiniLM-L6-v2) for the baseline
+chromadb                # local file based vector store for the baseline

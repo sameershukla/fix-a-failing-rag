@@ -1,0 +1,24 @@
+From: analyst1@brightcart.example
+To: refunds-ops@brightcart.example
+Subject: RE: refund failed after card closure
+Date: Tue, 29 Sep 2026 15:01:00 -0500
+
+Team,
+
+I checked the owning handbook and confirmed the current rule: If the original card is closed, ACH fallback requires identity verification and supervisor approval.
+
+Please use that for ticket FAKE_TKT_9001.
+
+--
+Avery Chen
+BrightCart | Payment Operations
+
+-----Original Message-----
+From: first.line@brightcart.example
+Sent: Tuesday, September 29, 2026 2:11 PM
+Subject: refund failed after card closure
+
+I found an old note saying: someone in chat said we can just send store credit. Is that still right?
+
+-----Earlier reply-----
+No idea, maybe ask in Slack.

@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7001
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user1@example.test
+CALLBACK_PHONE: FAKE_555_010_0001
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: someone in chat said we can just send store credit.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Payment Operations
+Verified current rule: If the original card is closed, ACH fallback requires identity verification and supervisor approval.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

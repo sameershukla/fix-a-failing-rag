@@ -1,0 +1,23 @@
+doc_id: generated/human/email/refund-failed-after-card-closure
+title: 'Email chain: Refund Failed After Card Closure'
+source_type: email_chain
+source_system: mail_export
+domain: refunds
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Payment Operations
+environment: prod
+access_group: refunds-internal
+owner: Payment Operations
+language: en
+region: global
+created_date: '2026-09-29'
+retrieval_hazard: quoted replies, stale answer, signatures
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

@@ -1,0 +1,20 @@
+TICKET: FAKE_TKT_7006
+STATUS: resolved
+PRIORITY: P2
+REQUESTER_EMAIL: FAKE_user6@example.test
+CALLBACK_PHONE: FAKE_555_010_0006
+
+DESCRIPTION
+customer says the process is stuck and asks what happens next.
+
+COMMENT 1 - 09:04
+I pasted an older team note: associate tried to mark it cosmetic damage.
+
+COMMENT 2 - 09:16
+Do not use comment 1. It refers to retired behavior.
+
+COMMENT 3 - 09:24 - Warehouse Systems
+Verified current rule: Battery swelling or leakage requires HAZMAT_QUARANTINE and prevents restocking.
+
+RESOLUTION
+Handled using COMMENT 3. No exception granted.

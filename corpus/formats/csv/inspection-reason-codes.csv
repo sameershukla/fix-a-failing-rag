@@ -1,0 +1,4 @@
+code,meaning,next_state,photo_count
+SERIAL_MISMATCH,serial differs from shipment,MANUAL_IDENTITY_REVIEW,2
+BATTERY_SWELL,swelling or leakage,HAZMAT_QUARANTINE,3
+MISSING_PART,customer-removable part missing,PARTIAL_REFUND_REVIEW,2

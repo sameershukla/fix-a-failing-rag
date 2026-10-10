@@ -1,0 +1,23 @@
+doc_id: generated/human/tickets/battery-return
+title: 'Ticket export: battery-return'
+source_type: ticket_export
+source_system: supportdesk
+domain: warehouse
+version: '1'
+status: active
+authority: secondary
+canonical_doc_id: null
+company: BrightCart
+team: Warehouse Systems
+environment: prod
+access_group: warehouse-internal
+owner: Warehouse Systems
+language: en
+region: global
+created_date: '2026-09-30'
+retrieval_hazard: comments out of order, status fields, copied stale advice
+tags:
+- enterprise-expansion
+- human-source
+- slack
+- messy

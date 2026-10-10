@@ -1,0 +1,22 @@
+doc_id: generated/human/transcripts/hold-release-meeting
+title: 'Meeting transcript: hold-release-meeting'
+source_type: meeting_transcript
+source_system: meeting_export
+domain: legal
+version: '1'
+status: active
+authority: secondary
+company: BrightCart
+team: Legal Operations
+environment: prod
+access_group: legal-internal
+owner: Legal Operations
+language: en
+region: global
+created_date: '2026-09-27'
+retrieval_hazard: spoken language, interruptions, corrections
+tags:
+- enterprise-expansion
+- human-source
+- transcript
+- messy
