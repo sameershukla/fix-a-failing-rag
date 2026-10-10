@@ -1,0 +1,3997 @@
+# BrightCart golden set.
+#
+# 360 questions: 314 answerable, 46 unanswerable. Each item has id, question, evidence, answerable, tags and an optional note.
+#
+# Evidence rule (read this before changing a label):
+#   Evidence lists the passages that state the correct current answer in an authoritative document:
+#   status active and authority primary or implementation. Evidence names a document and copies the passage
+#   word for word from data/<system>/normalized/docs.jsonl. It never names a chunk.
+#   Not evidence: archived and retired copies (unless the question asks about a past period), the generated
+#   noise copies (release notes, incidents, draft FAQs, support cases, wiki copies, regional notes, Slack threads),
+#   secondary notes, and the human email, Slack, ticket and call copies. These can repeat the right sentence
+#   or a wrong one. Retrieving them instead of the authoritative page counts as a miss. That is the point of the set.
+#   When two authoritative documents disagree, the later effective date wins, and the question is tagged
+#   authority-conflict. Conflicts that cannot be settled from the corpus are not asked as a number. See CHANGELOG.md.
+#   Restricted and security documents (corpus restricted, fake PII, fake secrets, prompt injection) are not in this set.
+#   Module 5 tests them with its own adversarial set.
+#
+# Wording: questions are written the way an on call engineer types them. They were drafted by a model after
+# reading the passage, then checked for copied wording. They have not been reviewed by a person yet.
+- id: q001
+  question: A shipment has been stuck in customs for 14 calendar days. What options can the customer choose?
+  evidence:
+  - doc_id: brightcart/v3/handbooks/international-customs-runbook
+    text: At 7 calendar days, the case is assigned to the customs broker queue; at 14 days, the customer may choose refund or reshipment.
+  - doc_id: brightcart/v3/lang/envios-internacionales-es
+    text: Los paquetes retenidos en aduana durante 14 días naturales permiten al cliente elegir entre reembolso o reenvío.
+  answerable: true
+  tags:
+  - module-00
+  - long-form
+  - multi-evidence
+  note: Module 0 question. The email and Slack copies of the same sentence are not evidence.
+- id: q002
+  question: After a return inspection reaches ACCEPTED, what event is sent to the refund service and how quickly must the refund request be created?
+  evidence:
+  - doc_id: brightcart/v3/handbooks/returns-to-refund-operations-handbook
+    text: After inspection reaches ACCEPTED, the refund service receives an event named return.accepted.v2 and must create the refund request within 4 hours.
+  answerable: true
+  tags:
+  - module-00
+  - long-form
+  note: Module 0 question.
+- id: q003
+  question: If the original payment card is closed, what approvals or checks are required before using ACH fallback?
+  evidence:
+  - doc_id: brightcart/v3/handbooks/returns-to-refund-operations-handbook
+    text: If the original card is closed, Payment Operations may issue an ACH fallback only after identity verification and supervisor approval.
+  - doc_id: brightcart/v3/code/refunds/service.py
+    text: |2-
+          if route == "ACH_FALLBACK":
+              if not return_record.identity_verified:
+                  raise ValueError("identity verification required")
+              if not return_record.supervisor_approved:
+                  raise PermissionError("supervisor approval required")
+  answerable: true
+  tags:
+  - module-00
+  - long-form
+  - multi-evidence
+  note: Module 0 question. The email, Slack and ticket copies of the same sentence are not evidence.
+- id: q004
+  question: when BrightCart authorizes and captures card payments
+  evidence:
+  - doc_id: brightcart/v1/payments/card-payments
+    text: BrightCart authorizes the card when the order is placed and normally captures the charge when the order ships. The authorization reserves funds but is not the final settled charge. If the order is canceled before capture, BrightCart releases the authorization request.
+  answerable: true
+  tags:
+  - module-00
+  - everyday-policy
+  - terse-query
+  note: Module 0 question.
+- id: q005
+  question: How partial refunds are handled
+  evidence:
+  - doc_id: brightcart/v1/refunds/partial-refunds
+    text: A partial refund may be issued when returned merchandise is missing customer removable parts, shows customer caused damage, or only part of a multi item order is being refunded. The deduction must be tied to a documented reason and the customer must be told the amount before the refund is finalized.
+  answerable: true
+  tags:
+  - module-00
+  - everyday-policy
+  - terse-query
+  note: Module 0 question. Broad on purpose.
+- id: q006
+  question: What is BrightCart's current API throttling limit, rate window, and retry interval according to Policy Hub?
+  evidence:
+  - doc_id: brightcart/v1/api/rate-limits
+    text: The default public API limit is 600 requests per minute per client. When the limit is exceeded, the API returns HTTP 429 and includes a Retry After value. Clients should wait for the indicated period and use backoff instead of immediately retrying in a tight loop.
+  - doc_id: brightcart/v1/api/rate-limits
+    text: 'An integration sends more than 600 requests within the active minute and receives 429 responses with Retry After: 20. The client waits at least 20 seconds and resumes gradually rather than sending the failed requests all at once.'
+  answerable: true
+  tags:
+  - module-00
+  - everyday-policy
+  - authority-conflict
+  - multi-evidence
+  note: 'Module 0 question. First written as unanswerable, but the corpus answers it: 600 requests per minute per client, Retry After 20.'
+- id: q007
+  question: What exact idempotency key does the refund service use when creating an ACH fallback refund?
+  evidence:
+  - doc_id: brightcart/v3/code/refunds/service.py
+    text: '    return send_refund(order, route, idempotency_key=return_record.refund_id)'
+  answerable: true
+  tags:
+  - module-00
+  - code
+  - call-chain
+  - exact-name
+  note: 'Module 0 question. First written as unanswerable, but the corpus answers it: return_record.refund_id.'
+- id: q008
+  question: At exactly what time or cron schedule does the support-chat retention deletion job run?
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/retention-job-config
+    text: |2-
+            days: 730
+            legal_hold_bypass: false
+            job_schedule: "0 3 * * *"
+            audit_log: required
+  answerable: true
+  tags:
+  - module-00
+  - format-aware
+  - config
+  note: Module 0 question. First written as unanswerable. The v2 retention job config gives job_schedule 0 3 * * * (03:00 daily); the first check missed it because it searched for the word cron.
+- id: q009
+  question: Where I can find DE details
+  evidence: []
+  answerable: false
+  tags:
+  - module-00
+  - unanswerable
+  - terse-query
+  note: Module 0 question. Vague on purpose. DE could mean Germany or something else. Only one table row mentions Germany (DDP order to Germany) and it does not describe where to find DE details.
+- id: q010
+  question: return window counts from what date
+  evidence:
+  - doc_id: brightcart/v1/returns/return-window
+    text: The standard return window is 30 calendar days from the carrier confirmed delivery date. The request must be opened by the end of day on day 30. Shipping time back to the warehouse does not need to fit inside the 30 day window.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q011
+  question: can support download the data export for the customer
+  evidence:
+  - doc_id: brightcart/v1/privacy/data-export
+    text: Support can explain the status but should not download the file on behalf of the customer. Expired links should be replaced by a new request, not manually reactivated.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q012
+  question: release manager says the feed will take a 35 percent price cut automatically. does it
+  evidence:
+  - doc_id: brightcart/v3/handbooks/catalog-change-runbook
+    text: A price decrease above 30 percent requires a Merchandising Director approval before publication.
+  - doc_id: brightcart/v3/json/price-change-controls
+    text: '    "director_approval_decrease_pct": 30,'
+  - doc_id: brightcart/v3/code/catalog/price_guard.py
+    text: |-
+      def approvals_required(old_price, new_price):
+          decrease = (old_price - new_price) / old_price * 100
+          if decrease >= DUAL_APPROVAL_DECREASE_PCT:
+              return 2
+          if decrease > DIRECTOR_APPROVAL_DECREASE_PCT:
+              return 1
+          return 0
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q013
+  question: how does calculate_shipping_surcharge treat a hazmat parcel
+  evidence:
+  - doc_id: brightcart/v2/code/shipping/shipping-surcharges
+    text: |2-
+          A hazmat parcel is never silently priced by this function; it returns a zero charge
+          with ``MANUAL_HAZMAT_REVIEW`` so the specialist workflow can determine eligibility.
+          Other oversized domestic parcels receive the ordinary $25 surcharge.
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+- id: q014
+  question: partial refund and a promo credit both apply. which gets worked out first
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/partial-refund-precedence
+    text: When a partial refund and promotional credit both appear eligible, this policy applies even if a nearby article appears to offer a simpler path. the original tender refund is calculated before any courtesy credit.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q015
+  question: does the time it takes the customer to ship it back count against the 30 days
+  evidence:
+  - doc_id: brightcart/v1/returns/return-window
+    text: The standard return window is 30 calendar days from the carrier confirmed delivery date. The request must be opened by the end of day on day 30. Shipping time back to the warehouse does not need to fit inside the 30 day window.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q016
+  question: failed login counter, is it per phone or per account
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-lockout
+    text: '- The counter is tracked per account, not per device.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q017
+  question: missing part on a return, what state does it go to and how many photos
+  evidence:
+  - doc_id: brightcart/v3/csv/inspection-reason-codes
+    text: MISSING_PART,customer-removable part missing,PARTIAL_REFUND_REVIEW,2
+  answerable: true
+  tags:
+  - format-aware
+  - csv
+  - module-02
+- id: q018
+  question: support told a customer their deletion is guaranteed tomorrow but there is a legal hold on the record
+  evidence:
+  - doc_id: brightcart/v3/handbooks/privacy-request-handbook
+    text: Deletion must stop for records under an active legal hold even when the customer request is otherwise valid.
+  - doc_id: brightcart/v3/handbooks/legal-hold-and-discovery-handbook
+    text: An active legal hold overrides normal deletion and retention schedules.
+  - doc_id: brightcart/v1/privacy/privacy-deletion
+    text: '- A legal hold overrides routine deletion for covered records.'
+  - doc_id: brightcart/v1/accounts/account-deletion
+    text: '- A legal hold can delay deletion of specific records.'
+  - doc_id: brightcart/v3/code/privacy/delete_job.py
+    text: |2-
+          if record.legal_hold_active:
+              return False
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q019
+  question: replay of over a million prod events with only one approver, what does the worker do
+  evidence:
+  - doc_id: brightcart/v3/code/replay/worker.py
+    text: |2-
+          if environment == "prod" and len(events) > 1_000_000 and len(approvers) < 2:
+              raise PermissionError("two Data Platform approvers required")
+  - doc_id: brightcart/v3/code/replay/test_worker.py
+    text: |-
+      def test_large_prod_replay_needs_two_approvers():
+          # intentionally abbreviated unit-test fixture
+          assert "two Data Platform approvers required"
+  - doc_id: brightcart/v3/handbooks/batch-processing-runbook
+    text: A replay above 1 million events in production requires two approvers from Data Platform.
+  - doc_id: brightcart/v3/json/replay-limits
+    text: |2-
+            "approval_threshold_events": 1000000,
+            "required_approvers": 2,
+            "idempotency_key": "event_id"
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q020
+  question: admin cancel of a 6000 dollar order with no approval token, what error
+  evidence:
+  - doc_id: brightcart/v3/code/orders/cancel.py
+    text: |2-
+          if order.total_usd > 5000 and not approval_token:
+              raise PermissionError("X-Approval-Token required above $5,000")
+  - doc_id: brightcart/v3/openapi/order-admin-api
+    text: '      summary: Cancellation above $5,000 requires an approval token.'
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q021
+  question: order cancelled but the customer still sees an authorization on their card
+  evidence:
+  - doc_id: brightcart/v1/orders/order-cancellation
+    text: '- A payment authorization can remain visible temporarily after a successful cancellation.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q022
+  question: do sandbox and prod api credentials work interchangeably
+  evidence:
+  - doc_id: brightcart/v1/api/api-auth
+    text: '- Sandbox and production credentials are separate.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q023
+  question: how much credit can standard support give before a supervisor has to step in
+  evidence:
+  - doc_id: brightcart/v3/json/credit-risk-limits
+    text: |2-
+          "standard_support_limit_usd": 250,
+          "supervisor_limit_usd": 1000,
+          "finance_approval_usd": 10000,
+  answerable: true
+  tags:
+  - format-aware
+  - json
+  - module-02
+- id: q024
+  question: how much cheaper is the yearly plus plan compared with paying monthly
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-plans
+    text: BrightCart Plus is offered as a monthly plan and an annual plan. The annual plan is priced 15 percent lower than paying the standard monthly price for twelve months. Both plans provide the same core member benefits unless a promotion explicitly adds a temporary benefit.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q025
+  question: early termination fee on an enterprise contract
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The enterprise cancellation editions give notice periods, not fees.
+- id: q026
+  question: admin cancel on a big order, what header is mandatory
+  evidence:
+  - doc_id: brightcart/v3/openapi/order-admin-api
+    text: '      summary: Cancellation above $5,000 requires an approval token.'
+  answerable: true
+  tags:
+  - format-aware
+  - openapi
+  - exact-name
+  - module-02
+- id: q027
+  question: rate limit on POST /v1/refunds
+  evidence:
+  - doc_id: brightcart/v2/structured/api/api-rate-limit-table
+    text: '| POST /v1/refunds | standard merchant production key | 60 requests per minute | return 429 after limit and include Retry-After | API Platform |'
+  - doc_id: brightcart/v2/code/api/rate-limiter
+    text: '    /v1/refunds`` allows **60 requests per minute**.  The privileged administrative'
+  answerable: true
+  tags:
+  - table
+  - exact-name
+  - terse-query
+  - multi-evidence
+  - module-02
+  note: The table and the rate limiter code docstring both say 60 per minute.
+- id: q028
+  question: does a customs hold message reset the no movement clock
+  evidence:
+  - doc_id: brightcart/v1/shipping/lost-packages
+    text: '- A customs hold message is a scan and resets the international no movement clock.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q029
+  question: customer lost their registered email and failed id checks. can we swap the email using their order history
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/account-recovery-escalation
+    text: When a user cannot access the registered email and fails normal identity verification, this policy applies even if a nearby article appears to offer a simpler path. support must not change the email based only on order history.
+  answerable: true
+  tags:
+  - boundary-policy
+  - authority-conflict
+  - module-02
+- id: q030
+  question: break glass admin account, how many approvers and when does it expire
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-identity-runbook
+    text: Break-glass accounts require two security approvers and expire after 4 hours.
+  - doc_id: brightcart/v3/yaml/scim-controls
+    text: |2-
+          approvers: 2
+          ttl_hours: 4
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The SCIM controls yaml states the same approvers and expiry.
+- id: q031
+  question: new account, big card order, billing and shipping country dont match. at what amount does it go to manual review
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/payment-manual-review
+    text: '| new account high-value card order | billing and shipping countries differ | $1,500 | hold order for manual risk review | Payments Risk |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q032
+  question: support transcript retention that applied in 2025
+  evidence:
+  - doc_id: brightcart/v3/policy/privacy/support-transcript-retention/2025.1
+    text: 'The rule for this edition is: **730 days**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: A question about a past period. The retired 2025.1 edition is the answer.
+- id: q033
+  question: mixed order, 40 percent was paid by gift card, partial refund. where does the money go
+  evidence:
+  - doc_id: brightcart/v2/structured/gift-cards/gift-card-refund-routing
+    text: '| mixed card and gift card order | refund is partial and gift card funded 40 percent | 40% to gift card | return each portion to its original tender | Payments Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q034
+  question: trial user cancels before they convert to paid, any charge
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-proration-matrix
+    text: '| trial cancellation | trial customer cancels before paid conversion | zero | end future conversion and allow trial access through stated trial end | Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q035
+  question: customer got a new device alert from a city they never visited, what do we do
+  evidence:
+  - doc_id: brightcart/v1/security/suspicious-login
+    text: For a credible suspicious login, BrightCart revokes active sessions, requires a password reset, and reviews recent profile and payment changes. The customer should be notified through a verified channel. High confidence account takeover cases are escalated to security.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q036
+  question: does the cancel function allow a shipped order
+  evidence:
+  - doc_id: brightcart/v3/code/orders/cancel.py
+    text: |2-
+          if order.state in {"SHIPPED", "DELIVERED"}:
+              raise ValueError("order can no longer be cancelled")
+  - doc_id: brightcart/v3/code/orders/test_cancel.py
+    text: |-
+      def test_shipped_order_cannot_cancel():
+          assert "order can no longer be cancelled"
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q037
+  question: seller wants same day payout, what does it cost and what if they arent eligible
+  evidence:
+  - doc_id: brightcart/v2/code/marketplace/seller-fees
+    text: |2-
+          Same-day expedited payout costs **1.5 percent** of the payout amount when the seller
+          is eligible.  If the seller is not eligible, this function raises rather than
+          silently charging the fee and promising same-day delivery.
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| expedited payout | eligible seller requests same-day payout | 1.5% payout fee | deduct expedited payout fee before transfer | Marketplace Finance |'
+  answerable: true
+  tags:
+  - code
+  - multi-evidence
+  - module-02
+  note: The table gives the rate. Only the code says what happens for an ineligible seller.
+- id: q038
+  question: order shows packed, customer wants to cancel. can we still do it
+  evidence:
+  - doc_id: brightcart/v1/orders/order-cancellation
+    text: A customer can cancel an order while it is in received or picking status if the warehouse can still stop fulfillment. Once the order reaches packed status, cancellation is no longer available. After packed status, the customer should wait for delivery and use the applicable return process.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+  note: The v2 cancellation code uses different state names (CREATED, PAID, ALLOCATED, PICKED), so the question uses the v1 vocabulary.
+- id: q039
+  question: price cut of more than 30 percent, who has to sign off before it goes live
+  evidence:
+  - doc_id: brightcart/v3/handbooks/catalog-change-runbook
+    text: A price decrease above 30 percent requires a Merchandising Director approval before publication.
+  - doc_id: brightcart/v3/json/price-change-controls
+    text: '    "director_approval_decrease_pct": 30,'
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The JSON price change controls state the same threshold.
+- id: q040
+  question: what is legacy_hourly_velocity still used for
+  evidence:
+  - doc_id: brightcart/v2/code/payments/payment-velocity
+    text: '    """Old reporting threshold retained for historical dashboards only."""'
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+  note: The function and its threshold of 20 appear only in the v2 payment velocity code.
+- id: q041
+  question: five different cards tried from one device in ten minutes. what do we do
+  evidence:
+  - doc_id: brightcart/v2/structured/security/fraud-review-matrix
+    text: '| multiple cards one device | five cards attempted from same device within ten minutes | high risk | pause checkout and open velocity review | Trust and Safety |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q042
+  question: 'refund router flag: rollout percentage and fallback'
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/feature-flag-refund-routing
+    text: |2-
+            rollout_percent: 100
+            fallback: legacy_refund_router
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - terse-query
+  - module-02
+- id: q043
+  question: how long until a sandbox test account gets purged
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| sandbox test account | synthetic account is marked non-production | 90 days | purge sandbox data after test lifecycle unless fixture is approved | Engineering |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q044
+  question: which countries can get an sms code for mfa
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The MFA article says SMS depends on supported phone regions but lists none.
+- id: q045
+  question: refund worker retry settings, how many attempts and where does it go when it gives up
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-retry-config
+    text: |2-
+            max_attempts: 2
+            backoff_seconds: 900
+            on_exhausted: payment_ops_queue
+  - doc_id: brightcart/v1/refunds/refund-status
+    text: Refunds move through pending, issued, or failed status. A failed refund is retried automatically one time. If the retry also fails, the case must be sent to payment operations for manual review. Support must not create a second independent refund.
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - multi-evidence
+  - module-02
+- id: q046
+  question: how long can we replay events before director approval is needed
+  evidence:
+  - doc_id: brightcart/v3/handbooks/batch-processing-runbook
+    text: Event replays are allowed for 72 hours without Director approval.
+  - doc_id: brightcart/v3/json/replay-limits
+    text: '    "default_window_hours": 72,'
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The replay limits json states the same.
+- id: q047
+  question: how often do we rotate webhook secrets
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The webhooks article says to rotate secrets if exposed, with no schedule.
+- id: q048
+  question: how quick must the warehouse inspect a return once the carrier drops it off
+  evidence:
+  - doc_id: brightcart/v3/handbooks/returns-to-refund-operations-handbook
+    text: The warehouse must inspect a returned parcel within 2 business days of carrier delivery.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q049
+  question: business plan drops some seats mid cycle, when does the invoice change
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-proration-matrix
+    text: '| seat decrease business | business plan removes seats mid-cycle | next invoice | retain paid seats through cycle and reduce quantity next invoice | B2B Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q050
+  question: how long are api request bodies stored before deletion
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| API request log body | production API request may contain customer payload | 30 days | delete request body while retaining minimal operational metadata | API Platform |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q051
+  question: carrier portal says wait indefinitely for a parcel stuck in customs, still right?
+  evidence:
+  - doc_id: brightcart/v3/handbooks/international-customs-runbook
+    text: At 7 calendar days, the case is assigned to the customs broker queue; at 14 days, the customer may choose refund or reshipment.
+  - doc_id: brightcart/v3/lang/envios-internacionales-es
+    text: Los paquetes retenidos en aduana durante 14 días naturales permiten al cliente elegir entre reembolso o reenvío.
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q052
+  question: retention for the raw id verification photo
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| identity verification image | verification completed and policy allows deletion | 90 days | delete raw image and retain only verification result metadata | Identity Operations |'
+  answerable: true
+  tags:
+  - table
+  - terse-query
+  - module-02
+- id: q053
+  question: can the same verified domain sit on two enterprise tenants
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-identity-runbook
+    text: A verified domain can belong to only one enterprise tenant at a time.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q054
+  question: customer cant get the reset email, can i just set a password for them
+  evidence:
+  - doc_id: brightcart/v1/accounts/password-reset
+    text: If a reset email does not arrive, verify the email address, spam folder, and account status. Do not manually set a password on behalf of the customer.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q055
+  question: when will the v1 api be deprecated
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q056
+  question: international parcel, a customs hold message arrived on day 8 after the last scan. can we call it lost on day 10
+  evidence:
+  - doc_id: brightcart/v1/shipping/lost-packages
+    text: A domestic package can be treated as lost after 5 consecutive calendar days with no new carrier scan. An international package uses a 10 calendar day no scan threshold because customs movement can be slower. An explicit carrier lost status overrides these waiting periods.
+  - doc_id: brightcart/v1/shipping/lost-packages
+    text: '- A customs hold message is a scan and resets the international no movement clock.'
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q057
+  question: checkout payments are down, how soon do we page the incident commander
+  evidence:
+  - doc_id: brightcart/v2/structured/support/support-escalation-sla
+    text: '| payment outage affecting checkout | severity SEV-1 | 10 minutes | page incident commander and payments on-call | Incident Management |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+  note: The SEV-1 timing differs between this table (10 minutes), the v1 incident article (15 minutes) and the production incident handbook (5 minutes). Logged as a corpus conflict.
+- id: q058
+  question: someone is buying gift cards like crazy, 12 in the last hour
+  evidence:
+  - doc_id: brightcart/v2/structured/security/fraud-review-matrix
+    text: '| gift card velocity | customer buys more than ten gift cards in one hour | high risk | pause gift-card issuance and review funding source | Gift Card Risk |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q059
+  question: can i pay with bitcoin
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - terse-query
+  - module-04
+- id: q060
+  question: what is the maximum order value for ach payments
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The ACH article says very large transfers may need finance approval, with no amount.
+- id: q061
+  question: can customers pick up orders in store
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q062
+  question: how many points to hit gold tier
+  evidence:
+  - doc_id: brightcart/v3/handbooks/loyalty-program-handbook
+    text: Gold tier starts at 5,000 qualifying points earned in a rolling 12-month window.
+  - doc_id: brightcart/v3/csv/tier-thresholds
+    text: Gold,5000,rolling 12 months,free expedited shipping
+  answerable: true
+  tags:
+  - long-form
+  - terse-query
+  - multi-evidence
+  - module-02
+  note: The tier thresholds csv states the same.
+- id: q063
+  question: do we accept returns on custom engraved items
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The corpus covers final sale and defective items, not custom engraved items.
+- id: q064
+  question: what uptime percentage does the public api promise
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q065
+  question: customer thinks every purchase starts a new 12 month points clock
+  evidence:
+  - doc_id: brightcart/v3/handbooks/loyalty-program-handbook
+    text: BrightPoints expire after 12 months of account inactivity, not 12 months after each purchase.
+  - doc_id: brightcart/v3/lang/puntos-spanglish
+    text: BrightPoints expiran después de 12 meses de inactividad de la cuenta, not twelve months after each purchase.
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q066
+  question: how long can an annual premium member pause for
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-pause-limits
+    text: '| annual premium plan | account in good standing | 90 days maximum | allow one pause per rolling twelve months | Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+  note: The v1 pause article says annual plans cannot be paused. This table covers the annual premium plan, so the two sources differ for that plan.
+- id: q067
+  question: how many support agents are on shift on weekends
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q068
+  question: split tender refund allocation, which tender gets the leftover cent
+  evidence:
+  - doc_id: brightcart/v2/code/payments/split-tender-refund
+    text: |2-
+          """Allocate a refund back to the original tenders without converting gift-card value.
+
+          Refunds are returned in the **same proportions as the original payment**.  Gift-card
+          value must go back to ``gift_card`` and may never be moved to cash or a bank card.
+          The final tender receives any one-cent rounding remainder so allocations sum exactly
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q069
+  question: do webhook deliveries eat into the customers api quota
+  evidence:
+  - doc_id: brightcart/v1/api/rate-limits
+    text: '- Webhook delivery does not consume the client''s inbound API quota.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q070
+  question: how many days did us customers have to return electronics in 2025
+  evidence:
+  - doc_id: brightcart/v3/policy/returns/electronics-return-window/2025.1
+    text: 'The rule for this edition is: **14 calendar days**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: A question about a past period. The retired 2025.1 edition says 14 calendar days.
+- id: q071
+  question: notice period to cancel an eu enterprise contract signed after sept 2026
+  evidence:
+  - doc_id: brightcart/v3/policy/subscriptions/enterprise-cancellation/2026.3
+    text: 'The rule for this edition is: **30 days notice for EU enterprise contracts signed after 2026-09-01**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+- id: q072
+  question: what happened to FAKE_REFUND_8821 in the refund worker log
+  evidence:
+  - doc_id: generated/logs/refund-worker-2026-10-02
+    text: 2026-10-04T10:21:05.443Z ERROR refund worker exhausted retry for FAKE_REFUND_8821; next_action=PAYMENT_OPS_REVIEW; idempotency_key=FAKE_IDEMP_aa81
+  answerable: true
+  tags:
+  - logs
+  - exact-name
+  - module-02
+- id: q073
+  question: max file size for uploads to POST /v1/files
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - exact-name
+  - module-04
+  note: The rate limit table lists POST /v1/files at 30 requests per minute. No size limit is stated.
+- id: q074
+  question: business paying by ach, how many days till it clears
+  evidence:
+  - doc_id: brightcart/v1/payments/bank-transfer
+    text: Approved business customers can pay by ACH. ACH payments normally take 2 to 3 business days to clear. Orders that require cleared funds are not released until the payment reaches cleared status.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q075
+  question: an associate marked a swollen battery return as cosmetic damage. is that still how we do it
+  evidence:
+  - doc_id: brightcart/v3/handbooks/warehouse-exception-runbook
+    text: Battery swelling or leakage sends the item to HAZMAT_QUARANTINE and no restock action is allowed.
+  - doc_id: brightcart/v3/csv/inspection-reason-codes
+    text: BATTERY_SWELL,swelling or leakage,HAZMAT_QUARANTINE,3
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+  note: A matching email, Slack thread, ticket and call carry the same wording plus a stale note. They are not evidence.
+- id: q076
+  question: customer got a tax exemption approved after buying. can we take the tax off the finished order
+  evidence:
+  - doc_id: brightcart/v3/html/tax-exemption-help
+    text: <main><h1>Tax Exemption Help</h1><p>This page is the current operational guidance.</p><section><h2>Rule</h2><p>A verified tax exemption applies only to future orders; support does not retroactively remove tax from a completed order.</p></section>
+  answerable: true
+  tags:
+  - format-aware
+  - html
+  - module-02
+- id: q077
+  question: who is allowed to lift a legal hold
+  evidence:
+  - doc_id: brightcart/v3/handbooks/legal-hold-and-discovery-handbook
+    text: Only Legal Operations may release a hold; system owners cannot release one from a support ticket.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q078
+  question: multi item order, can we cancel only one of the items
+  evidence:
+  - doc_id: brightcart/v1/orders/order-cancellation
+    text: '- Partial cancellation is allowed only for order lines not already packed.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q079
+  question: what should a replay worker use as its idempotency key on retries
+  evidence:
+  - doc_id: brightcart/v3/handbooks/batch-processing-runbook
+    text: Replay workers must use event_id as the idempotency key and must not generate a new key for retries.
+  - doc_id: brightcart/v3/json/replay-limits
+    text: '      "idempotency_key": "event_id"'
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The replay limits json states the same key.
+- id: q080
+  question: average hold time when customers call support
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q081
+  question: enterprise dns txt token for domain verification, how long is it good
+  evidence:
+  - doc_id: brightcart/v3/html/domain-verification-help
+    text: <main><h1>Enterprise Domain Verification</h1><p>This page is the current operational guidance.</p><section><h2>Rule</h2><p>DNS TXT verification tokens expire after 72 hours and a new token invalidates the previous one.</p></section>
+  answerable: true
+  tags:
+  - format-aware
+  - html
+  - module-02
+- id: q082
+  question: sev1 just started, who do we name and what gets opened
+  evidence:
+  - doc_id: brightcart/v1/support/incident-response
+    text: A SEV 1 incident should be acknowledged within 15 minutes. The response assigns an incident commander, opens a shared incident channel, tracks customer impact, and records major decisions. A written postmortem is required within 5 business days after a SEV 1 or qualifying SEV 2 incident is resolved.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+  note: The production incident handbook says an incident commander acknowledges a SEV 1 within 5 minutes. The v1 article says 15 minutes. The acknowledgement time is not asked here because the two sources disagree.
+- id: q083
+  question: does guest checkout make a full account
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-creation
+    text: '- Guest checkout does not automatically create a full account.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - module-03
+- id: q084
+  question: reserve percent and hold period for a high risk us seller
+  evidence:
+  - doc_id: brightcart/v3/policy/marketplace/seller-reserve/2026.3
+    text: 'The rule for this edition is: **20 percent for 90 days**.'
+  - doc_id: brightcart/v3/csv/seller-payout-calendar
+    text: high-risk,Every other Friday,20,90,Finance Risk approval required
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - multi-evidence
+  - module-03
+  note: The merchant settlement handbook says 20 percent and biweekly payout for high risk sellers but gives no period. The 2026.3 edition and the payout calendar give 90 days.
+- id: q085
+  question: default page size for list endpoints in the api
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q086
+  question: customer deleted the gift card email, can we send the code again
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-security
+    text: BrightCart may replace a lost digital gift card only when the claimant can verify the original purchase or recipient information and the remaining balance has not been spent. Gift cards are not redeemable for cash and spent balances are not restored merely because the code was shared with another person.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q087
+  question: package came smashed, how long does the customer have to tell us
+  evidence:
+  - doc_id: brightcart/v1/returns/damaged-items
+    text: Customers should report visible delivery damage within 7 calendar days of delivery. Support should request clear photos of the item and shipping package when practical. The customer should not ship the damaged item back until BrightCart provides return instructions or confirms that no return is required.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q088
+  question: p3 enterprise ticket, how fast do we have to respond
+  evidence:
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P3,8 business hours,contracted hours,none
+  answerable: true
+  tags:
+  - format-aware
+  - csv
+  - module-02
+- id: q089
+  question: user is changing their email and their payout bank in the same login. what extra check do we ask for
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/account-verification-thresholds
+    text: '| email change plus payout destination change | changes requested within same session | step-up verification | require password plus verified one-time code | Identity Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q090
+  question: postmortem deadline after a sev1
+  evidence:
+  - doc_id: brightcart/v1/support/incident-response
+    text: A SEV 1 incident should be acknowledged within 15 minutes. The response assigns an incident commander, opens a shared incident channel, tracks customer impact, and records major decisions. A written postmortem is required within 5 business days after a SEV 1 or qualifying SEV 2 incident is resolved.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+  note: Same line as the acknowledgement rule. The line holds both facts.
+- id: q091
+  question: what format is the customer data export file
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The data export article covers timing and link expiry, not the file format.
+- id: q092
+  question: customer cant finish signup, how long is the sms code good for
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-creation
+    text: '- The phone verification code expires after 10 minutes.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q093
+  question: how long do api tokens last before refresh
+  evidence:
+  - doc_id: brightcart/v1/api/api-auth
+    text: Server integrations use OAuth 2.0 client credentials to obtain an access token. Access tokens are valid for 60 minutes. Client secrets must be stored securely and must not be sent as query parameters or written to application logs.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q094
+  question: what is the sales tax rate in texas
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q095
+  question: approved a card refund, counting our own processing and the banks, how long can the customer end up waiting
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-policy
+    text: Once BrightCart approves a refund, the refund is sent back to the original payment method. BrightCart normally issues the refund within 5 business days after the return is accepted or the cancellation is confirmed. Bank processing time can add additional days after BrightCart sends the money.
+  - doc_id: brightcart/v1/refunds/refund-timelines
+    text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q096
+  question: limited edition sku, which team approves a bulk order of it
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| limited edition product | bulk quantity requested for controlled release SKU | 5 units | cap quantity and reject excess regardless of account type | Merchandising |'
+  - doc_id: brightcart/v2/code/orders/bulk-approval
+    text: '    Controlled-release or limited-edition SKUs require review when quantity is **more'
+  answerable: true
+  tags:
+  - table
+  - multi-evidence
+  - module-02
+  note: The table caps quantity at 5 units and the code docstring requires merchandising approval above 2 units. The two sources disagree on the number, so the question asks only about the approving team (merchandising in both).
+- id: q097
+  question: extra fee for selling to a buyer abroad, as a us seller
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| cross-border sale | seller is domestic and buyer is international | 2% cross-border fee | deduct cross-border fee in addition to category commission | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q098
+  question: gift card refund went onto the wrong card because of our mapping bug. can anyone undo it
+  evidence:
+  - doc_id: brightcart/v2/structured/gift-cards/gift-card-reversal
+    text: When a gift card refund was posted to the wrong card because of an internal mapping error, this policy applies even if a nearby article appears to offer a simpler path. payments operations may reverse the mistaken credit.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q099
+  question: do federal holidays count as business days for refunds
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-policy
+    text: '- Business days exclude weekends and United States federal holidays.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q100
+  question: standard shipping inside the us, how many days
+  evidence:
+  - doc_id: brightcart/v1/shipping/domestic-shipping
+    text: Standard domestic shipping normally arrives in 3 to 5 business days after the order ships. The estimate begins when the carrier accepts the package, not when the customer places the order. Processing time before shipment is separate.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q101
+  question: does the delivery clock start when the label is printed
+  evidence:
+  - doc_id: brightcart/v1/shipping/domestic-shipping
+    text: Standard domestic shipping normally arrives in 3 to 5 business days after the order ships. The estimate begins when the carrier accepts the package, not when the customer places the order. Processing time before shipment is separate.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q102
+  question: checkout is down for everyone and there is no workaround. what severity
+  evidence:
+  - doc_id: brightcart/v1/support/severity
+    text: SEV 1 is used for a widespread outage, major security exposure, or critical business function unavailable with no practical workaround. SEV 2 is used for major degradation or significant customer impact with a workaround or limited scope. SEV 3 covers moderate issues, and SEV 4 covers low impact defects or questions.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q103
+  question: approvals_required for a 35 percent price cut, how many approvals
+  evidence:
+  - doc_id: brightcart/v3/code/catalog/price_guard.py
+    text: |-
+      def approvals_required(old_price, new_price):
+          decrease = (old_price - new_price) / old_price * 100
+          if decrease >= DUAL_APPROVAL_DECREASE_PCT:
+              return 2
+          if decrease > DIRECTOR_APPROVAL_DECREASE_PCT:
+              return 1
+          return 0
+  - doc_id: brightcart/v3/code/catalog/test_price_guard.py
+    text: |-
+      def test_35_percent_cut_needs_director():
+          assert approvals_required(100,65) == 1
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - exact-name
+  - multi-evidence
+  - module-02
+- id: q104
+  question: card got declined, how many retries should we tell them to try
+  evidence:
+  - doc_id: brightcart/v1/payments/payment-declines
+    text: After a card decline, the customer may retry once after checking the billing address, expiration date, and available funds. Repeated rapid retries should be avoided because they can trigger issuer fraud controls. BrightCart cannot see the issuer's private decline reason beyond the processor code returned to us.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q105
+  question: what price change needs two approvals and how far ahead can one be scheduled
+  evidence:
+  - doc_id: brightcart/v3/json/price-change-controls
+    text: |2-
+          "dual_approval_decrease_pct": 60,
+          "max_scheduled_days": 30
+  answerable: true
+  tags:
+  - format-aware
+  - json
+  - module-02
+- id: q106
+  question: when do annual members get a heads up before their plan renews
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-renewal
+    text: BrightCart Plus subscriptions renew automatically unless canceled. For annual plans, BrightCart sends a renewal reminder 7 days before the renewal date to the account email address. The reminder includes the scheduled renewal date and the current renewal price.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q107
+  question: how many months can a plus member pause for
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-pause
+    text: A monthly BrightCart Plus subscription can be paused for 1, 2, or 3 full billing months. Annual plans cannot be paused. During a pause, recurring charges stop and membership benefits are inactive. The subscription resumes automatically after the selected pause period.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q108
+  question: a high risk refund was not approved within its window. how long is the window and what happens on expiry
+  evidence:
+  - doc_id: brightcart/v2/code/refunds/refund-guardrails
+    text: |2-
+          The current rule keys on *risk tier*, not a tool name.  Any high-risk money-moving
+          action of **$10,000 or more** must pause before execution and wait for someone in
+          ``finance-approvers``.  The approval request expires after 60 minutes.  Expiry is
+          fail-closed: the action is rejected rather than executed automatically.
+
+          Lower amounts and non-high-risk actions continue through the normal workflow.
+  - doc_id: brightcart/v2/structured/refunds/refund-approval-config
+    text: |2-
+            limit_usd: 10000
+            reviewers: finance-approvers
+            expires_after_min: 60
+            audit_log: required
+  - doc_id: brightcart/v3/json/credit-risk-limits
+    text: |2-
+          "finance_approval_usd": 10000,
+          "on_approval_expiry": "reject"
+  answerable: true
+  tags:
+  - multi-evidence
+  - code
+  - module-02
+  note: 'The example question from the course notes. The code docstring, the config and the credit risk json agree: 60 minutes, rejected on expiry.'
+- id: q109
+  question: does deleting an account wipe the tax and invoice records too
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-deletion
+    text: After identity verification, BrightCart schedules account deletion and completes the customer facing deletion within 30 days. Certain transaction, tax, fraud, and legal records can be retained when required by law or legitimate business obligations even after the account is no longer active.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q110
+  question: gift card order refund, can support put the whole thing back on the customers visa
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-refunds
+    text: An amount originally paid by BrightCart gift card is refunded back to that gift card. For mixed payment orders, the refund is returned proportionally to the original payment methods until each method has received its share. Support cannot choose to move the entire refund to a credit card for convenience.
+  - doc_id: brightcart/v2/structured/gift-cards/gift-card-refund-routing
+    text: '| mixed card and gift card order | refund is partial and gift card funded 40 percent | 40% to gift card | return each portion to its original tender | Payments Operations |'
+  - doc_id: brightcart/v2/code/payments/split-tender-refund
+    text: |2-
+          """Allocate a refund back to the original tenders without converting gift-card value.
+
+          Refunds are returned in the **same proportions as the original payment**.  Gift-card
+          value must go back to ``gift_card`` and may never be moved to cash or a bank card.
+          The final tender receives any one-cent rounding remainder so allocations sum exactly
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - module-03
+- id: q111
+  question: how long does a retired sku page keep redirecting
+  evidence:
+  - doc_id: brightcart/v3/handbooks/catalog-change-runbook
+    text: Retired SKU pages may redirect for 180 days but must not accept new orders.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q112
+  question: annual member wants a cheaper plan six weeks in, do they get money back
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-proration-matrix
+    text: '| annual plan downgrade | downgrade requested after day 30 | next renewal | do not issue midterm cash credit; apply lower price at renewal | Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q113
+  question: what info do i gather before escalating a failed refund
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-status
+    text: Before escalating, capture the order ID, refund ID, processor message, payment method, and timestamps for both attempts. Duplicate refund creation is considered a payment incident.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q114
+  question: extra handling fee for a really long box going to the far zones
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-surcharge-matrix
+    text: '| continental oversized parcel | zone 5 to 8 and package exceeds 48 inches on longest side | $25 | add oversized handling surcharge before label purchase | Fulfillment |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q115
+  question: how soon is a data export ready
+  evidence:
+  - doc_id: brightcart/v1/privacy/data-export
+    text: A verified customer data export is normally prepared within 24 hours. When the export is ready, BrightCart sends a download link that remains valid for 48 hours. The link requires the customer to sign in again before download.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q116
+  question: agent wants to add a restocking fee, none is published. allowed?
+  evidence:
+  - doc_id: brightcart/v1/refunds/partial-refunds
+    text: '- Agents cannot invent a restocking fee when no published fee applies.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q117
+  question: why was FAKE_EVT_10028 skipped by the replay worker
+  evidence:
+  - doc_id: generated/logs/replay-worker-2026-10-04
+    text: 2026-10-04T10:21:05.443Z WARN duplicate event skipped event_id=FAKE_EVT_10028 replay_id=FAKE_RPL_33 reason=idempotency_match
+  answerable: true
+  tags:
+  - logs
+  - exact-name
+  - module-02
+- id: q118
+  question: three customers hit the same checkout error in ten minutes, do we send each one to level 2
+  evidence:
+  - doc_id: brightcart/v1/support/escalation
+    text: '- A broad outage should not be handled as dozens of unrelated tickets.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q119
+  question: weight limit for expedited shipping
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: Only an Alaska oversized surcharge mentions a weight (50 lb).
+- id: q120
+  question: seller changed their bank account right before payout day
+  evidence:
+  - doc_id: brightcart/v2/structured/security/fraud-review-matrix
+    text: '| payout bank change | seller changes bank account shortly before scheduled payout | high risk | hold payout until bank-change verification completes | Marketplace Security |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q121
+  question: what triggers an exec escalation on an enterprise p2
+  evidence:
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P2,1 hour,contracted hours,after 2 missed updates
+  answerable: true
+  tags:
+  - format-aware
+  - csv
+  - module-02
+- id: q122
+  question: customer refunded to visa, when will it show up on their statement
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-timelines
+    text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q123
+  question: how much can someone top up a gift card in one go, verified us account
+  evidence:
+  - doc_id: brightcart/v2/structured/gift-cards/gift-card-balance-limits
+    text: '| single gift card reload | verified US account | $500 per reload | allow reload if rolling daily cap also remains under limit | Payments Risk |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q124
+  question: parcel has been in customs 5 days, what status is the case in
+  evidence:
+  - doc_id: brightcart/v3/handbooks/international-customs-runbook
+    text: A parcel held by customs for fewer than 7 calendar days stays in MONITOR status.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q125
+  question: what do sellers pay each week to keep stock in our warehouse
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| storage fee | seller inventory remains in fulfillment center beyond free window | $0.75 per cubic foot weekly | deduct storage fee from next settlement | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q126
+  question: in the refund code what flips a card refund to ach fallback and what has to be true before it is sent
+  evidence:
+  - doc_id: brightcart/v3/code/refunds/policy.py
+    text: |2-
+          if order.payment_method == "CARD" and return_record.card_closed:
+              return "ACH_FALLBACK"
+  - doc_id: brightcart/v3/code/refunds/service.py
+    text: |2-
+          if route == "ACH_FALLBACK":
+              if not return_record.identity_verified:
+                  raise ValueError("identity verification required")
+              if not return_record.supervisor_approved:
+                  raise PermissionError("supervisor approval required")
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q127
+  question: cuantos dias para devolver un electronico en estados unidos segun la politica actual
+  evidence:
+  - doc_id: brightcart/v3/lang/devoluciones-electronica-es
+    text: Los productos electrónicos estándar pueden devolverse dentro de 30 días naturales en la política actual de Estados Unidos.
+  - doc_id: brightcart/v3/policy/returns/electronics-return-window/2026.3
+    text: 'The rule for this edition is: **30 calendar days**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - multilingual
+  - multi-evidence
+  - module-03
+  note: 'Spanish question. Same conflict as the English electronics question: v1 says 14 days.'
+- id: q128
+  question: monthly cost of the pro marketplace plan
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| subscription fee | seller is enrolled in professional marketplace plan | $39 monthly | deduct monthly subscription fee independent of sales commission | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q129
+  question: customer wants to fix the apt number, warehouse already picking. can we still edit
+  evidence:
+  - doc_id: brightcart/v1/orders/order-modification
+    text: A shipping address or item quantity can be changed only while the order is in received status and before fulfillment starts. Once the order moves to picking or packed status, item and address changes are not allowed. The customer can then use cancellation or return options if eligible.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q130
+  question: how do we work out available to promise stock
+  evidence:
+  - doc_id: brightcart/v3/handbooks/catalog-change-runbook
+    text: Available-to-promise inventory is calculated from on-hand minus reservations minus safety stock.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q131
+  question: one item in a split shipment was cancelled before it was picked and the rest shipped. what do we refund
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/split-shipment-refund
+    text: When one line in a split shipment is canceled before fulfillment while other lines ship, this policy applies even if a nearby article appears to offer a simpler path. refund only the canceled line and its attributable tax.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q132
+  question: six wrong passwords inside 15 min, how long do we lock the account
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/account-lockout-duration
+    text: '| six failed password attempts | attempts occur inside 15 minutes | 30 minutes | lock account and suppress further password checks | Identity Operations |'
+  answerable: true
+  tags:
+  - table
+  - authority-conflict
+  - module-02
+  note: The v1 lockout policy covers 5 failed attempts and a 15 minute lock. This table row covers six attempts inside 15 minutes.
+- id: q133
+  question: can i unlock an angry customer early
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-lockout
+    text: After 5 consecutive failed sign in attempts, the consumer account is locked for 15 minutes. A successful sign in resets the failed attempt counter. Support cannot shorten the automatic lock simply because the customer is in a hurry.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q134
+  question: ddp order and the carrier is asking for duty again. do we pay
+  evidence:
+  - doc_id: brightcart/v3/handbooks/international-customs-runbook
+    text: DDP orders are not charged a second duty by BrightCart even if a carrier message asks for payment.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q135
+  question: they returned something they bought with a percentage coupon, refund full price or less
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/coupon-refund-policy
+    text: When a percentage coupon covered part of a returned item, this policy applies even if a nearby article appears to offer a simpler path. refund the customer only the amount actually paid for that item.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q136
+  question: typical delivery time for overseas orders
+  evidence:
+  - doc_id: brightcart/v1/shipping/international-shipping
+    text: International orders normally arrive in 7 to 14 business days after shipment. Import duties, taxes, and customs fees are the customer responsibility unless checkout explicitly states that duties are prepaid. Customs processing can add time outside BrightCart control.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q137
+  question: FAKE_USER_882 session revoke timed out. when was login disabled and when did revocation finish
+  evidence:
+  - doc_id: brightcart/v3/code/scim/incident_stacktrace.txt
+    text: 'Follow-up: login was disabled at 04:11; session revocation completed at 04:19.'
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+- id: q138
+  question: how many days after the promised date can someone open a claim for a lost us parcel
+  evidence:
+  - doc_id: brightcart/v3/html/carrier-claim-portal
+    text: <main><h1>Carrier Claim Portal</h1><p>This page is the current operational guidance.</p><section><h2>Rule</h2><p>Claims for lost domestic parcels must be opened within 30 calendar days of the promised delivery date.</p></section>
+  answerable: true
+  tags:
+  - format-aware
+  - html
+  - module-02
+- id: q139
+  question: sev1 paging channels and which role takes command
+  evidence:
+  - doc_id: brightcart/v2/structured/support/incident-routing-config
+    text: |2-
+            page_within_minutes: 10
+            channels: [pagerduty, slack]
+            commander_role: incident_commander
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+  note: Paging time (10 minutes here) differs from the 15 minute acknowledgement in v1 and the 5 minute figure in the production incident handbook, so the question asks about channels and role.
+- id: q140
+  question: buyer says they will do a same day wire, does that count as ach
+  evidence:
+  - doc_id: brightcart/v1/payments/bank-transfer
+    text: '- Same day wire transfers are handled manually by finance and are not ACH.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q141
+  question: when does money show on the gift card after a refund
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-refunds
+    text: '- A gift card refund is normally available the same day it is issued.'
+  - doc_id: brightcart/v1/refunds/refund-timelines
+    text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  answerable: true
+  tags:
+  - everyday-policy
+  - multi-evidence
+  - authority-conflict
+  - module-03
+  note: The refund timelines article states the same rule for all payment methods.
+- id: q142
+  question: which http status do we return when refund already fully refunded
+  evidence:
+  - doc_id: brightcart/v1/api/error-codes
+    text: Use 400 for malformed requests, 401 for missing or invalid authentication, 403 for authenticated clients without permission, 404 for missing resources, 409 for state conflicts, 422 for valid syntax with invalid business data, 429 for rate limits, 500 for unexpected server errors, and 503 for temporary service unavailability.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q143
+  question: how many days do we have to send evidence for a visa fraud dispute
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/chargeback-evidence-sla
+    text: '| Visa fraud dispute | representment evidence is requested | 7 calendar days | submit evidence package before network cutoff | Disputes Team |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q144
+  question: how do we mask phone numbers and card numbers in logs
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/pii-masking-config
+    text: |2-
+            email: MASK_LOCAL_PART
+            phone: KEEP_LAST_4
+            credit_card: KEEP_LAST_4
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q145
+  question: customer asks for the legal entity name and company registration number
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q146
+  question: abandoned cart telemetry, how many days till it is deleted
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| shopping cart telemetry | cart abandoned without purchase | 90 days | delete event-level cart telemetry after analytics window | Analytics |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q147
+  question: primera respuesta p1 empresarial, cuanto tiempo
+  evidence:
+  - doc_id: brightcart/v3/lang/p1-soporte-es
+    text: Los casos empresariales P1 tienen un objetivo de primera respuesta de 15 minutos, las 24 horas del día.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P1,15 minutes,24x7,after 4 hours unmitigated
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: Enterprise P1 cases have a 15-minute first-response target, 24 hours a day.
+  answerable: true
+  tags:
+  - format-aware
+  - multilingual
+  - terse-query
+  - multi-evidence
+  - module-03
+- id: q148
+  question: backordered item on an order, do we charge the card now or when it ships
+  evidence:
+  - doc_id: brightcart/v1/orders/backorders
+    text: A backordered item is not captured on a standard card until it ships. The order page shows an estimated availability date. If the estimate changes, BrightCart updates the order and sends a notice when the change is significant.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q149
+  question: los puntos brightpoints se vencen cuando, despues de cada compra o por inactividad
+  evidence:
+  - doc_id: brightcart/v3/lang/puntos-spanglish
+    text: BrightPoints expiran después de 12 meses de inactividad de la cuenta, not twelve months after each purchase.
+  - doc_id: brightcart/v3/handbooks/loyalty-program-handbook
+    text: BrightPoints expire after 12 months of account inactivity, not 12 months after each purchase.
+  answerable: true
+  tags:
+  - format-aware
+  - multilingual
+  - multi-evidence
+  - module-03
+- id: q150
+  question: in the cancel code which order states count as cancellable
+  evidence:
+  - doc_id: brightcart/v2/code/orders/cancellation-workflow
+    text: |2-
+          Orders in ``CREATED``, ``PAID``, or ``ALLOCATED`` can be cancelled normally.  Once
+          the warehouse reports ``PICKED``, ordinary cancellation is no longer allowed.  If
+          carrier intercept is available, return ``REQUEST_INTERCEPT``; otherwise return
+          ``DENY_CANCELLATION`` and direct the customer to the return workflow after delivery.
+          Shipped orders follow the same return-after-delivery rule.
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+- id: q151
+  question: seller inventory sat over 180 days, what storage charge applies
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| long-term storage | inventory remains beyond 180 days | $2.50 per cubic foot monthly | deduct long-term storage surcharge | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q152
+  question: ach payment bounced back, what happens to that business account
+  evidence:
+  - doc_id: brightcart/v1/payments/bank-transfer
+    text: '- Returned ACH payments place the account on payment review.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q153
+  question: swollen battery in a return, where does it go
+  evidence:
+  - doc_id: brightcart/v3/handbooks/warehouse-exception-runbook
+    text: Battery swelling or leakage sends the item to HAZMAT_QUARANTINE and no restock action is allowed.
+  - doc_id: brightcart/v3/csv/inspection-reason-codes
+    text: BATTERY_SWELL,swelling or leakage,HAZMAT_QUARANTINE,3
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The inspection reason codes csv states the same.
+- id: q154
+  question: which card brands do we accept at checkout
+  evidence:
+  - doc_id: brightcart/v1/payments/card-payments
+    text: '- Visa, Mastercard, American Express, and Discover are supported for standard consumer checkout.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q155
+  question: retention on authenticated site search history
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| search query logs | customer uses site search while authenticated | 180 days | delete or aggregate raw query history after product-analysis window | Search Platform |'
+  answerable: true
+  tags:
+  - table
+  - terse-query
+  - module-02
+- id: q156
+  question: expedited parcel arrived late because we handed it to the carrier late. what is the customer owed
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/expedited-guarantee
+    text: When an expedited parcel misses the promised date because BrightCart tendered it late, this policy applies even if a nearby article appears to offer a simpler path. the customer is eligible for a shipping-fee refund.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q157
+  question: german customer, order says duties already paid. should we ever chase them for customs money
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/international-duty-matrix
+    text: '| DDP order to Germany | checkout explicitly marked duties prepaid | BrightCart pays | do not collect customs reimbursement from customer | International Ops |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q158
+  question: preorder paid with a gift card, is the value held straight away
+  evidence:
+  - doc_id: brightcart/v1/orders/preorders
+    text: '- Gift cards can reserve value immediately because they do not use card authorization holds.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q159
+  question: during a sev1 who owns the messages to customers
+  evidence:
+  - doc_id: brightcart/v3/handbooks/production-incident-handbook
+    text: The incident commander coordinates; the operations lead executes changes; the communications lead owns external updates.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q160
+  question: refund api limit for enterprise keys right now
+  evidence:
+  - doc_id: brightcart/v3/policy/api/refund-rate-limit/2026.3
+    text: 'The rule for this edition is: **120 requests per minute with enterprise key**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: Editions 2025.1 (30 per minute) and 2026.1 (60 per minute) are retired. Only the enterprise tier has an active edition.
+- id: q161
+  question: scim deprovision happened, how fast must login stop and sessions die
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-identity-runbook
+    text: A SCIM deprovision event disables interactive login within 5 minutes and revokes active sessions within 15 minutes.
+  - doc_id: brightcart/v3/yaml/scim-controls
+    text: |2-
+        disable_login_minutes: 5
+        revoke_sessions_minutes: 15
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The SCIM controls yaml states the same two times.
+- id: q162
+  question: default api limit per client?
+  evidence:
+  - doc_id: brightcart/v1/api/rate-limits
+    text: The default public API limit is 600 requests per minute per client. When the limit is exceeded, the API returns HTTP 429 and includes a Retry After value. Clients should wait for the indicated period and use backoff instead of immediately retrying in a tight loop.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+  note: The 2025 archive says 300 and some noise copies say 601 or 1200. The current page says 600. The v2 rate limiter code has a default of 120 for an endpoint rule, which is a different thing.
+- id: q163
+  question: what does evaluate_card_velocity do when a customer hits the order count
+  evidence:
+  - doc_id: brightcart/v2/code/payments/payment-velocity
+    text: |2-
+          """Evaluate the production card-order velocity rule.
+
+          Count authorized or captured orders for the same customer in the rolling **10 minute**
+          window ending at ``now``.  When the count reaches **5 orders**, do not decline the
+          payment automatically.  Return ``MANUAL_REVIEW`` so Risk can inspect the pattern.
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+- id: q164
+  question: expedited cutoff time in the shipping routing config, and what happens after it
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-service-routing
+    text: |2-
+            cutoff_ct: "14:00"
+            carrier_service: UPS_2DAY
+            after_cutoff: NEXT_BUSINESS_DAY
+  - doc_id: brightcart/v1/shipping/expedited-shipping
+    text: Eligible expedited orders placed before 2:00 PM Central Time on a business day are expected to ship the same day and arrive within 2 business days after carrier acceptance. Orders placed after the cutoff are processed the next business day.
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - multi-evidence
+  - authority-conflict
+  - module-02
+- id: q165
+  question: opened big appliance, customer just changed their mind. restocking fee?
+  evidence:
+  - doc_id: brightcart/v2/structured/returns/return-restocking-fees
+    text: '| opened large appliance returned for preference | item complete and returned within 30 days | 15% | deduct the restocking fee before refund | Returns Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q166
+  question: refund ui got rate limited, how many automatic retries does it do
+  evidence:
+  - doc_id: brightcart/v2/code/frontend/refund-client
+    text: |2-
+         * Refund creation must send the caller-provided idempotency key in the
+         * `Idempotency-Key` header.  The client retries HTTP 429 at most two times and
+         * honors the server's `Retry-After` value before each retry.  Other 4xx errors
+         * are returned to the caller without automatic retry.
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q167
+  question: what percent off is the student discount
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The refund adjustment table has a row for a failed education discount (up to $80) but no discount rate.
+- id: q168
+  question: account reset its password and asked for a payout 10 minutes later
+  evidence:
+  - doc_id: brightcart/v2/structured/security/fraud-review-matrix
+    text: '| password reset then payout | account resets password and requests payout within fifteen minutes | high risk | hold payout and require identity verification | Account Security |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q169
+  question: p1 still not mitigated after 4 hours, what gets added
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: An executive escalation is added when a P1 remains unmitigated for 4 hours.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P1,15 minutes,24x7,after 4 hours unmitigated
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The SLA csv states escalation after 4 hours unmitigated.
+- id: q170
+  question: mid cycle upgrade proration, what day count do we divide by
+  evidence:
+  - doc_id: brightcart/v2/code/subscriptions/proration
+    text: |2-
+          BrightCart uses a fixed **30-day denominator** for this product family so results do
+          not change with calendar-month length.  The additional charge equals the positive
+          price difference multiplied by ``days_remaining / 30`` and is rounded to the nearest
+          cent using ``ROUND_HALF_UP``.  Downgrades do not create a negative immediate charge.
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q171
+  question: sales deck says new sellers always get full payouts, finance disagrees
+  evidence:
+  - doc_id: brightcart/v3/handbooks/merchant-settlement-handbook
+    text: New sellers keep a 10 percent rolling reserve for 60 days.
+  - doc_id: brightcart/v3/csv/seller-payout-calendar
+    text: new,Tuesday,10,60,rolling reserve applies
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q172
+  question: global enterprise cancellation notice in early 2026
+  evidence:
+  - doc_id: brightcart/v3/policy/subscriptions/enterprise-cancellation/2026.1
+    text: 'The rule for this edition is: **45 days notice**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: A question about a past period. The retired 2026.1 edition (effective 2026-01-01) is the answer.
+- id: q173
+  question: can a customer turn on mfa with sms or only an app
+  evidence:
+  - doc_id: brightcart/v1/security/mfa
+    text: Customers may enable MFA using an authenticator app or SMS. Internal administrator accounts must use MFA and cannot disable it. Recovery codes are generated when authenticator based MFA is enabled and should be stored by the user in a safe place.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q174
+  question: which photos are needed when inspecting expensive electronics returns
+  evidence:
+  - doc_id: brightcart/v3/handbooks/warehouse-exception-runbook
+    text: 'High-value electronics require three inspection photos: package, serial label, and item condition.'
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q175
+  question: do we keep the cvv after the payment is authorized
+  evidence:
+  - doc_id: brightcart/v1/payments/payment-security
+    text: BrightCart systems must not store card CVV values after authorization. Support staff must never ask customers to send a full card number, CVV, or card image through chat or email. Payment pages use tokenized references so internal systems can identify a payment without storing the raw card details.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q176
+  question: customer already got one goodwill credit and now the carrier lost their parcel. can tier 2 refund it without finance, and is there a code to note
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| manual refund after a carrier loss | verified customer with one prior concession | $250 | issue refund without finance approval; log reason code R17 | Support Tier 2 |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q177
+  question: what is the most a finance approver can approve and do they need mfa
+  evidence:
+  - doc_id: brightcart/v2/structured/security/rbac-finance-tools
+    text: |2-
+            can_approve: [issue_refund, issue_credit]
+            max_approval_usd: 50000
+            mfa_required: true
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q178
+  question: which day do marketplace sellers get their payout
+  evidence:
+  - doc_id: brightcart/v3/handbooks/merchant-settlement-handbook
+    text: Standard marketplace sellers are paid every Tuesday for transactions cleared through the previous Friday.
+  - doc_id: brightcart/v3/csv/seller-payout-calendar
+    text: standard,Tuesday,0,0,transactions cleared through previous Friday
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The payout calendar csv states the same.
+- id: q179
+  question: how many days after delivery can someone ask for their money back
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-eligibility
+    text: Most unused physical items are eligible for a refund when the return is requested within 30 calendar days of delivery. Final sale items are not refundable. The item must include the parts and accessories that were shipped with it unless the item arrived damaged or incomplete.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q180
+  question: customer returned something they earned points on, when are the points taken back
+  evidence:
+  - doc_id: brightcart/v3/handbooks/loyalty-program-handbook
+    text: Points earned on a refunded item are reversed when the refund reaches ISSUED status.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q181
+  question: an enterprise p1 has been open 5 hours with no mitigation. what has to happen
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: An executive escalation is added when a P1 remains unmitigated for 4 hours.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P1,15 minutes,24x7,after 4 hours unmitigated
+  answerable: true
+  tags:
+  - multi-evidence
+  - long-form
+  - module-03
+- id: q182
+  question: is a sev1 covered at 3am on a sunday
+  evidence:
+  - doc_id: brightcart/v1/support/service-hours
+    text: Standard customer support is staffed from 8:00 AM to 8:00 PM Central Time, Monday through Friday, excluding company holidays. SEV 1 incident response is available 24 hours a day through the on call process. Routine billing and product questions submitted after hours wait for the next staffed period.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q183
+  question: system owner asks if deleting the hold row in the db releases a legal hold
+  evidence:
+  - doc_id: brightcart/v3/handbooks/legal-hold-and-discovery-handbook
+    text: Only Legal Operations may release a hold; system owners cannot release one from a support ticket.
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - module-03
+- id: q184
+  question: drop off locations for returns without a label
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+- id: q185
+  question: mastercard dispute evidence deadline
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - terse-query
+  - module-04
+  note: The chargeback evidence table has a row for a Visa fraud dispute only.
+- id: q186
+  question: should_delete with an active legal hold, what does it return
+  evidence:
+  - doc_id: brightcart/v3/code/privacy/delete_job.py
+    text: |2-
+          if record.legal_hold_active:
+              return False
+  - doc_id: brightcart/v3/code/privacy/test_delete_job.py
+    text: |-
+      def test_legal_hold_overrides_deletion():
+          assert True  # synthetic fixture: legal hold returns False from should_delete
+  - doc_id: brightcart/v3/handbooks/legal-hold-and-discovery-handbook
+    text: An active legal hold overrides normal deletion and retention schedules.
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - exact-name
+  - multi-evidence
+  - module-02
+- id: q187
+  question: is it ok to fund a new gift card order with an old one
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-purchase
+    text: A single BrightCart gift card can be purchased in an amount from $10 through $500. Digital delivery usually occurs within 15 minutes after payment approval. Gift cards cannot be purchased using another gift card.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q188
+  question: order total needed for free standard shipping
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: Shipping articles give delivery times and surcharges, with no free shipping threshold.
+- id: q189
+  question: how many loyalty points do you earn per dollar spent
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The corpus gives a redemption rate (100 points = $1) and tier thresholds, not an earn rate.
+- id: q190
+  question: renewal went through by accident yesterday, can we give it back
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-refunds
+    text: An accidental subscription renewal can be refunded when the customer requests the refund within 48 hours of the renewal charge and has not used a paid membership benefit after that renewal. When approved, the subscription is canceled and the latest renewal charge is refunded.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q191
+  question: which http methods does the client retry automatically and what jitter does it use
+  evidence:
+  - doc_id: brightcart/v3/yaml/client-retry-policy
+    text: |2-
+        safe_methods:
+        - GET
+        - HEAD
+        max_attempts: 4
+  answerable: true
+  tags:
+  - format-aware
+  - yaml
+  - module-02
+  note: The v2 api-retry-policy config lists retry statuses and attempts but not methods or jitter. The two files differ on base delay (500 ms in v2, 250 ms in v3), so the question avoids the delay.
+- id: q192
+  question: which sso providers does enterprise support, okta or azure ad
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q193
+  question: incident chat had updates but the public status page didnt. is that ok in a sev1
+  evidence:
+  - doc_id: brightcart/v3/handbooks/production-incident-handbook
+    text: For SEV-1, the public status page is updated at least every 30 minutes until mitigation.
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - module-03
+- id: q194
+  question: who is the vp of customer support
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q195
+  question: client keeps getting 429, retry right away or wait
+  evidence:
+  - doc_id: brightcart/v1/api/error-codes
+    text: '- A 429 should follow the Retry After guidance rather than generic immediate retries.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q196
+  question: how long is a password reset email link valid
+  evidence:
+  - doc_id: brightcart/v1/accounts/password-reset
+    text: A password reset link is valid for 30 minutes and can be used only once. Requesting a new reset link invalidates the previous unused link. After a successful reset, all older reset links are invalid.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q197
+  question: how do i appeal a permanently closed seller account
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+- id: q198
+  question: headphones, customer just prefers another colour, box opened. can they send them back and who would pay postage
+  evidence:
+  - doc_id: brightcart/v1/returns/electronics-returns
+    text: Electronics may be returned within 14 calendar days of delivery. Opened electronics are not returnable for preference changes, but defective electronics can still be returned or replaced during the 14 day period. Unopened electronics can be returned for any standard eligible reason.
+  - doc_id: brightcart/v1/returns/return-shipping
+    text: BrightCart pays return shipping when the item is defective, damaged in transit, or different from what the customer ordered. For preference returns such as size, color, or changed mind, the customer pays the return shipping charge unless a promotion explicitly provides free returns.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q199
+  question: reused the same key on a different refund body, what happens
+  evidence:
+  - doc_id: brightcart/v1/api/idempotency
+    text: '- Using the same key for different request bodies can return a conflict error.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q200
+  question: 400 vs 422 whats the difference
+  evidence:
+  - doc_id: brightcart/v1/api/error-codes
+    text: Use 400 for malformed requests, 401 for missing or invalid authentication, 403 for authenticated clients without permission, 404 for missing resources, 409 for state conflicts, 422 for valid syntax with invalid business data, 429 for rate limits, 500 for unexpected server errors, and 503 for temporary service unavailability.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q201
+  question: generated privacy export, how long until it expires
+  evidence:
+  - doc_id: brightcart/v3/handbooks/privacy-request-handbook
+    text: Generated privacy exports expire 7 days after creation.
+  - doc_id: brightcart/v3/yaml/retention-jobs
+    text: '  privacy_exports_days: 7'
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The v3 retention yaml states 7 days for privacy exports.
+- id: q202
+  question: case flagged safety risk, which oncall queue and how quickly must they ack
+  evidence:
+  - doc_id: brightcart/v2/code/support/escalation-router
+    text: |2-
+          Any explicit safety risk goes directly to ``trust-safety-oncall`` with a **10 minute**
+          acknowledgement target.  A ``SEV-1`` operational case routes to ``incident-oncall``
+          with a **15 minute** target.  Confirmed payment loss of $10,000 or more routes to
+          ``payments-lead`` with a **30 minute** target even when the incoming severity label
+          was lower.  Other cases stay in the ordinary support queue.
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q203
+  question: card velocity config - how many orders in how many minutes triggers manual review
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/payment-velocity-config
+    text: |2-
+            max_orders: 5
+            window_minutes: 10
+            action: MANUAL_REVIEW
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q204
+  question: what time is the same day metro delivery cutoff
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The shipping surcharge matrix has a same day metro fee and says before cutoff, but gives no time.
+- id: q205
+  question: friday after 2pm central two day order, when does processing start
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/expedited-cutoff-matrix
+    text: '| two-day order placed Friday | order submitted after 2:00 PM Central | next business day | start processing Monday when Monday is not a holiday | Fulfillment |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q206
+  question: internal admin says mfa is annoying, can they switch it off
+  evidence:
+  - doc_id: brightcart/v1/security/mfa
+    text: Customers may enable MFA using an authenticator app or SMS. Internal administrator accounts must use MFA and cannot disable it. Recovery codes are generated when authenticator based MFA is enabled and should be stored by the user in a safe place.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q207
+  question: what fields do i compare to decide if a charge is a real duplicate
+  evidence:
+  - doc_id: brightcart/v1/payments/duplicate-charges
+    text: '- Compare transaction IDs, status, amount, and order reference.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q208
+  question: max number of seats in one enterprise tenant
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q209
+  question: POST /v3/admin/refunds - what header is required and when does it return 409
+  evidence:
+  - doc_id: brightcart/v3/openapi/refund-admin-api
+    text: |2-
+            summary: Refund creation requires Idempotency-Key and returns 409 when the key
+              was already used with different parameters.
+  answerable: true
+  tags:
+  - format-aware
+  - openapi
+  - exact-name
+  - module-02
+- id: q210
+  question: what hash is used to sign webhooks
+  evidence:
+  - doc_id: brightcart/v1/api/webhooks
+    text: BrightCart signs webhook requests with HMAC SHA 256 using the integration webhook secret. Receivers must verify the signature before processing the event. Failed deliveries are retried after approximately 1, 5, 15, and 60 minutes before the event is marked undelivered.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q211
+  question: reused an idempotency key with a different payload, what http status comes back from the store
+  evidence:
+  - doc_id: brightcart/v2/code/api/idempotency-store
+    text: |2-
+          An idempotency record remains valid for **24 hours**.  Repeating the same key with
+          the same payload hash returns the stored response and must not execute the side
+          effect again.  Reusing a live key with a *different* payload is a conflict and the
+          API returns **HTTP 409**.  Once the record has expired, the key may be used again.
+  answerable: true
+  tags:
+  - code
+  - module-02
+  note: The v1 idempotency article says a conflict error. Only the code gives the number 409.
+- id: q212
+  question: how many days do we have to finish a verified data access request
+  evidence:
+  - doc_id: brightcart/v3/handbooks/privacy-request-handbook
+    text: Verified data access requests are completed within 30 calendar days unless a lawful extension is recorded.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q213
+  question: the extra accessory in the box was dead but the product itself is fine, what is our refund cap
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| damaged accessory | primary product works but included accessory arrived unusable | up to $75 | refund accessory value or ship replacement according to customer choice | Support |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q214
+  question: how does the replay worker skip duplicate events
+  evidence:
+  - doc_id: brightcart/v3/code/replay/dedupe.py
+    text: |-
+      def seen(event_id):
+          if event_id in SEEN:
+              return True
+          SEEN.add(event_id)
+          return False
+  - doc_id: brightcart/v3/code/replay/worker.py
+    text: |2-
+              if seen(event["event_id"]):
+                  continue
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q215
+  question: what are the dates of this years holiday return extension
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The return window article says holiday extensions can be announced in a dated notice. No such notice exists in the corpus.
+- id: q216
+  question: max gift cards on a single order
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-redemption
+    text: Customers can apply up to 3 BrightCart gift cards to one order. Any unused balance remains on the card for future use. If the gift card total is less than the order total, the customer can pay the remainder with another supported payment method.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q217
+  question: prod lockout config - how many failures inside what window, and how long is the lock
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/account-lockout-config
+    text: |2-
+            failed_attempts: 6
+            window_minutes: 15
+            lock_minutes: 30
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - authority-conflict
+  - module-02
+  note: The v1 lockout policy says 5 failures and a 15 minute lock. The v2 config (effective 2026-10-01) says 6 failures in 15 minutes and a 30 minute lock.
+- id: q218
+  question: what do we charge a seller when a buyer dispute means we have to put together evidence
+  evidence:
+  - doc_id: brightcart/v2/code/marketplace/seller-fees
+    text: '    """A marketplace chargeback that needs an evidence package carries a $15 fee."""'
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| chargeback administration | buyer dispute requires marketplace evidence package | $15 per case | deduct administration fee unless dispute is won under protection policy | Marketplace Finance |'
+  answerable: true
+  tags:
+  - code
+  - multi-evidence
+  - module-02
+- id: q219
+  question: circuit breaker, how many failures to open and how long before it tries again
+  evidence:
+  - doc_id: brightcart/v2/code/reliability/circuit-breaker
+    text: |2-
+          The breaker opens after **5 consecutive failures**.  While open, requests fail fast.
+          After a **60-second cooldown**, one probe is allowed in ``HALF_OPEN`` state.  A
+          successful probe should reset the failure counter; another failure reopens the
+          circuit and restarts the cooldown.
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q220
+  question: member upgrades from monthly standard to monthly premium midway, what do we bill
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/billing-proration-policy
+    text: When a customer upgrades from monthly standard to monthly premium mid-cycle, this policy applies even if a nearby article appears to offer a simpler path. charge only the prorated difference for the remaining days.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q221
+  question: do gift cards expire and after how long
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: Gift card articles say nothing about expiry. Promotional credits have separate expiration rules that are not stated.
+- id: q222
+  question: minimum password length for a customer account
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The account creation article requires a password that meets the current password policy but does not state the policy.
+- id: q223
+  question: what encryption is used to store card tokens
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q224
+  question: enterprise p1 - what is the first response target
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: Enterprise P1 cases have a 15-minute first-response target, 24 hours a day.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P1,15 minutes,24x7,after 4 hours unmitigated
+  - doc_id: brightcart/v3/lang/p1-soporte-es
+    text: Los casos empresariales P1 tienen un objetivo de primera respuesta de 15 minutos, las 24 horas del día.
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The SLA csv and the Spanish note state the same target.
+- id: q225
+  question: customer cancelled plus this week and now also wants this months charge back
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-cancellation
+    text: A cancellation takes effect at the end of the current paid billing period. The customer keeps subscription benefits until that date and the plan does not renew. Cancellation by itself does not create a refund for the current period.
+  - doc_id: brightcart/v1/subscriptions/subscription-refunds
+    text: An accidental subscription renewal can be refunded when the customer requests the refund within 48 hours of the renewal charge and has not used a paid membership benefit after that renewal. When approved, the subscription is canceled and the latest renewal charge is refunded.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q226
+  question: url of the public status page
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - terse-query
+  - module-04
+- id: q227
+  question: what does redact() replace in text
+  evidence:
+  - doc_id: brightcart/v3/code/security/redactor.py
+    text: |-
+      FAKE_SECRET = re.compile(r"FAKE_SECRET_[A-Z0-9_]+")
+      FAKE_EMAIL = re.compile(r"FAKE_[^\s]+@example\.test")
+  - doc_id: brightcart/v3/code/security/redactor.py
+    text: |-
+      def redact(text):
+          text = FAKE_SECRET.sub("[REDACTED_SECRET]", text)
+          return FAKE_EMAIL.sub("[REDACTED_EMAIL]", text)
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - terse-query
+  - multi-evidence
+  - module-02
+- id: q228
+  question: which carrier handles standard ground shipping
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The shipping routing config names UPS_2DAY for expedited service only.
+- id: q229
+  question: who pays import duties on an order going to france
+  evidence:
+  - doc_id: brightcart/v1/shipping/international-shipping
+    text: International orders normally arrive in 7 to 14 business days after shipment. Import duties, taxes, and customs fees are the customer responsibility unless checkout explicitly states that duties are prepaid. Customs processing can add time outside BrightCart control.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q230
+  question: someone is buying over 100 digital gift cards in one go
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| gift card bulk purchase | order includes more than 100 digital gift cards | risk review | hold issuance until gift-card risk approves funding source | Gift Card Risk |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q231
+  question: smallest and biggest amount someone can buy as a gift card
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-purchase
+    text: A single BrightCart gift card can be purchased in an amount from $10 through $500. Digital delivery usually occurs within 15 minutes after payment approval. Gift cards cannot be purchased using another gift card.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q232
+  question: what is the support phone number customers can call
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q233
+  question: how many loyalty points equal one dollar when redeeming
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/loyalty-points-conversion
+    text: '| standard member redemption | redeeming against merchandise subtotal | 100 points = $1 | apply points before tax and shipping | Loyalty Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q234
+  question: do we ship to brazil
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The international shipping article says the destination must be supported at checkout and lists no countries.
+- id: q235
+  question: how much clock drift do we allow when checking a webhook signature
+  evidence:
+  - doc_id: brightcart/v2/code/api/webhook-security
+    text: |2-
+          """Verify a production webhook using HMAC-SHA256 and a five-minute clock window.
+
+          The sender signs ``<unix_timestamp>.<raw_body>`` with **HMAC-SHA256**.  Verification
+          uses ``hmac.compare_digest`` to avoid timing leaks.  Even a cryptographically valid
+          signature is rejected when its timestamp differs from ``now_epoch`` by more than
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q236
+  question: can the customer drop just the backordered line and keep the rest
+  evidence:
+  - doc_id: brightcart/v1/orders/backorders
+    text: '- Customers can cancel an unshipped backordered line.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q237
+  question: was the expedited fee refundable for us customers in 2025
+  evidence:
+  - doc_id: brightcart/v3/policy/shipping/expedited-refund/2025.1
+    text: 'The rule for this edition is: **fee is not refundable**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: A question about a past period. The retired 2025.1 edition is the answer.
+- id: q238
+  question: at what deduction amount do i need a supervisor
+  evidence:
+  - doc_id: brightcart/v1/refunds/partial-refunds
+    text: '- Any proposed deduction above $100 requires a supervisor review.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q239
+  question: return accepted today. how long till we have to issue the refund
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-policy
+    text: Once BrightCart approves a refund, the refund is sent back to the original payment method. BrightCart normally issues the refund within 5 business days after the return is accepted or the cancellation is confirmed. Bank processing time can add additional days after BrightCart sends the money.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q240
+  question: opened headphones, they just dont like the colour. can they return it
+  evidence:
+  - doc_id: brightcart/v1/returns/electronics-returns
+    text: Electronics may be returned within 14 calendar days of delivery. Opened electronics are not returnable for preference changes, but defective electronics can still be returned or replaced during the 14 day period. Unopened electronics can be returned for any standard eligible reason.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q241
+  question: gift card code was pasted into a case note, is that fine
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-security
+    text: Never paste complete gift card codes into general support notes. Record masked identifiers and the replacement decision.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q242
+  question: broken product, outside our return period but the manufacturer warranty is still valid
+  evidence:
+  - doc_id: brightcart/v2/structured/returns/warranty-exception-policy
+    text: When a defective product is outside the normal return window but still inside manufacturer warranty, this policy applies even if a nearby article appears to offer a simpler path. the normal return window no longer controls the remedy.
+  - doc_id: brightcart/v1/refunds/refund-eligibility
+    text: '- Defective items can qualify under a product warranty even after the normal return window.'
+  - doc_id: brightcart/v1/returns/return-window
+    text: '- Warranty claims are not limited by the normal return window.'
+  answerable: true
+  tags:
+  - boundary-policy
+  - multi-evidence
+  - module-02
+  note: Two v1 bullets state the same idea in fewer words.
+- id: q243
+  question: webhook endpoint - respond 2xx before or after accepting the event
+  evidence:
+  - doc_id: brightcart/v1/api/webhooks
+    text: '- The endpoint should return a successful 2xx response only after accepting the event.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q244
+  question: monthly cancel came in after the renewal already settled. until when is the plan active
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-cancel-timing
+    text: When a monthly subscription cancellation is submitted after the renewal charge has already settled, this policy applies even if a nearby article appears to offer a simpler path. the current paid period remains active through its end date.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q245
+  question: old replay script generated a random uuid for each retry. ok?
+  evidence:
+  - doc_id: brightcart/v3/handbooks/batch-processing-runbook
+    text: Replay workers must use event_id as the idempotency key and must not generate a new key for retries.
+  - doc_id: brightcart/v3/json/replay-limits
+    text: '      "idempotency_key": "event_id"'
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q246
+  question: returned device serial doesnt match the order. do we just reject it
+  evidence:
+  - doc_id: brightcart/v3/handbooks/warehouse-exception-runbook
+    text: A serial-number mismatch routes the return to MANUAL_IDENTITY_REVIEW rather than immediate rejection.
+  - doc_id: brightcart/v3/csv/inspection-reason-codes
+    text: SERIAL_MISMATCH,serial differs from shipment,MANUAL_IDENTITY_REVIEW,2
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The inspection reason codes csv states the same.
+- id: q247
+  question: someone in chat said we can just give store credit when the card is closed
+  evidence:
+  - doc_id: brightcart/v3/handbooks/returns-to-refund-operations-handbook
+    text: If the original card is closed, Payment Operations may issue an ACH fallback only after identity verification and supervisor approval.
+  - doc_id: brightcart/v3/code/refunds/service.py
+    text: |2-
+          if route == "ACH_FALLBACK":
+              if not return_record.identity_verified:
+                  raise ValueError("identity verification required")
+              if not return_record.supervisor_approved:
+                  raise PermissionError("supervisor approval required")
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q248
+  question: SLA_MINUTES for p1 p2 p3 in the support sla module
+  evidence:
+  - doc_id: brightcart/v3/code/support/sla.py
+    text: 'SLA_MINUTES = {"P1": 15, "P2": 60, "P3": 480}'
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P3,8 business hours,contracted hours,none
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - multi-evidence
+  - module-02
+  note: The csv gives P3 as 8 business hours and the code gives 480 minutes. That is the same duration.
+- id: q249
+  question: order was part gift card part visa, how is the refund split
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-refunds
+    text: An amount originally paid by BrightCart gift card is refunded back to that gift card. For mixed payment orders, the refund is returned proportionally to the original payment methods until each method has received its share. Support cannot choose to move the entire refund to a credit card for convenience.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q250
+  question: customer wants a new delivery address but the carrier already has the parcel
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/address-change-after-ship
+    text: When a customer requests an address change after carrier acceptance, this policy applies even if a nearby article appears to offer a simpler path. BrightCart cannot edit the shipment address in the order system.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q251
+  question: does the refund api support partial refunds in a single call across multiple orders
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The refund admin API documents creating one refund with an Idempotency-Key.
+- id: q252
+  question: when does bc retry a failed webhook
+  evidence:
+  - doc_id: brightcart/v1/api/webhooks
+    text: BrightCart signs webhook requests with HMAC SHA 256 using the integration webhook secret. Receivers must verify the signature before processing the event. Failed deliveries are retried after approximately 1, 5, 15, and 60 minutes before the event is marked undelivered.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q253
+  question: what chunk size and overlap is the knowledge indexing config set to for markdown
+  evidence:
+  - doc_id: brightcart/v2/structured/api/search-indexing-config
+    text: |2-
+            chunk_size_tokens: 500
+            chunk_overlap_tokens: 50
+            preserve_blocks: [table, fenced_code]
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q254
+  question: order paid half gift card half visa, 50 dollar partial refund. how is it split and when does each part land
+  evidence:
+  - doc_id: brightcart/v1/gift-cards/gift-card-refunds
+    text: An amount originally paid by BrightCart gift card is refunded back to that gift card. For mixed payment orders, the refund is returned proportionally to the original payment methods until each method has received its share. Support cannot choose to move the entire refund to a credit card for convenience.
+  - doc_id: brightcart/v1/refunds/refund-timelines
+    text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q255
+  question: carrier says package is lost and nobody sent a replacement. what is the max we can refund
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| lost parcel confirmed | carrier investigation closed as lost and no replacement was sent | order value up to $500 | issue refund after carrier loss case closes and store investigation number | Logistics Support |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q256
+  question: big freight delivery and the site has no dock, is there an extra fee
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-surcharge-matrix
+    text: '| liftgate required | heavy freight destination lacks loading dock | $85 | add liftgate fee and schedule freight appointment | Freight Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q257
+  question: what was the refund api rate limit for standard customers in spring 2026
+  evidence:
+  - doc_id: brightcart/v3/policy/api/refund-rate-limit/2026.1
+    text: 'The rule for this edition is: **60 requests per minute**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: A question about a past period. The retired 2026.1 edition (effective 2026-05-01) is the answer.
+- id: q258
+  question: customer picks saturday delivery, what extra do we add
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-surcharge-matrix
+    text: '| Saturday requested | customer selects Saturday delivery and destination supports option | $20 | add weekend delivery surcharge and retain requested date | Fulfillment |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q259
+  question: 'scim sync log for FAKE_user17: how long did login disable and session revoke take'
+  evidence:
+  - doc_id: generated/logs/scim-sync-2026-10-03
+    text: 2026-10-04T10:21:05.443Z INFO deprovision user=FAKE_user17@example.test login_disabled_ms=141000 sessions_revoked_ms=612000 result=SUCCESS
+  answerable: true
+  tags:
+  - logs
+  - exact-name
+  - module-02
+- id: q260
+  question: when do brightpoints expire
+  evidence:
+  - doc_id: brightcart/v3/handbooks/loyalty-program-handbook
+    text: BrightPoints expire after 12 months of account inactivity, not 12 months after each purchase.
+  - doc_id: brightcart/v3/lang/puntos-spanglish
+    text: BrightPoints expiran después de 12 meses de inactividad de la cuenta, not twelve months after each purchase.
+  answerable: true
+  tags:
+  - long-form
+  - terse-query
+  - multi-evidence
+  - module-02
+  note: The mixed language note states the same rule.
+- id: q261
+  question: which endpoint do i poll for an export job and how long does the download link live
+  evidence:
+  - doc_id: brightcart/v3/html/job-export-api
+    text: <main><h1>Job Export API</h1><p>This page is the current operational guidance.</p><section><h2>Rule</h2><p>The export job status endpoint is GET /v3/exports/{job_id}; completed download links expire after 15 minutes.</p></section>
+  answerable: true
+  tags:
+  - format-aware
+  - html
+  - exact-name
+  - module-02
+- id: q262
+  question: package arrived crushed with a leaking battery. how long to report it and where does the item go
+  evidence:
+  - doc_id: brightcart/v1/returns/damaged-items
+    text: Customers should report visible delivery damage within 7 calendar days of delivery. Support should request clear photos of the item and shipping package when practical. The customer should not ship the damaged item back until BrightCart provides return instructions or confirms that no return is required.
+  - doc_id: brightcart/v1/returns/damaged-items
+    text: '- Safety issues such as leaking batteries should be escalated immediately.'
+  - doc_id: brightcart/v3/handbooks/warehouse-exception-runbook
+    text: Battery swelling or leakage sends the item to HAZMAT_QUARANTINE and no restock action is allowed.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q263
+  question: how long are privileged admin audit events kept
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| employee admin audit log | privileged support action executed | 7 years | retain immutable admin audit event | Security Compliance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q264
+  question: what reserve does a new seller carry and for how long
+  evidence:
+  - doc_id: brightcart/v3/handbooks/merchant-settlement-handbook
+    text: New sellers keep a 10 percent rolling reserve for 60 days.
+  - doc_id: brightcart/v3/csv/seller-payout-calendar
+    text: new,Tuesday,10,60,rolling reserve applies
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - multi-evidence
+  - module-03
+  note: The 2025.1 edition (15 percent for 90 days) is retired. The 2026.1 edition (10 percent for 60 days) is also retired but matches the handbook and the payout calendar. The active 2026.3 edition covers the high risk tier.
+- id: q265
+  question: warehouse delay notification channel and delay before it fires
+  evidence:
+  - doc_id: brightcart/v3/yaml/notification-routing
+    text: |2-
+        warehouse_delay:
+          channel: slack
+          team: warehouse-ops
+          after_minutes: 30
+  answerable: true
+  tags:
+  - format-aware
+  - yaml
+  - module-02
+- id: q266
+  question: formal privacy deletion request, what is the target completion time
+  evidence:
+  - doc_id: brightcart/v1/privacy/privacy-deletion
+    text: BrightCart verifies the requester before processing a privacy deletion request and targets completion within 30 days. Data required for tax, fraud prevention, legal claims, or other mandatory retention can be kept in restricted systems for the required period.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q267
+  question: consumer account orders 100 units at once, who has to approve
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| single order with 100 units | consumer account with normal history | manager approval | hold fulfillment until operations manager approves | Order Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q268
+  question: gift card reload limits, per load and per day, and what happens over the limit
+  evidence:
+  - doc_id: brightcart/v2/structured/gift-cards/gift-card-risk-config
+    text: |2-
+            single_load_usd: 500
+            daily_load_usd: 1000
+            over_limit: REJECT
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q269
+  question: dev put client secret in the url query string, is that allowed
+  evidence:
+  - doc_id: brightcart/v1/api/api-auth
+    text: Server integrations use OAuth 2.0 client credentials to obtain an access token. Access tokens are valid for 60 minutes. Client secrets must be stored securely and must not be sent as query parameters or written to application logs.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q270
+  question: customer clicked reset twice, does the first link still work
+  evidence:
+  - doc_id: brightcart/v1/accounts/password-reset
+    text: A password reset link is valid for 30 minutes and can be used only once. Requesting a new reset link invalidates the previous unused link. After a successful reset, all older reset links are invalid.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q271
+  question: refund anomaly sql, what count and amount in 24 hours makes it REVIEW
+  evidence:
+  - doc_id: brightcart/v2/code/analytics/refund-anomaly
+    text: '            when refund_count_24h >= 4 and refund_amount_24h >= 1000 then ''REVIEW'''
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q272
+  question: how long is the export download link good for
+  evidence:
+  - doc_id: brightcart/v1/privacy/data-export
+    text: A verified customer data export is normally prepared within 24 hours. When the export is ready, BrightCart sends a download link that remains valid for 48 hours. The link requires the customer to sign in again before download.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q273
+  question: what happens in send_refund if there is no idempotency key
+  evidence:
+  - doc_id: brightcart/v3/code/refunds/payments.py
+    text: |2-
+          if not idempotency_key:
+              raise ValueError("idempotency key required")
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - exact-name
+  - module-02
+- id: q274
+  question: admin thought sessions would die instantly after the scim deprovision
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-identity-runbook
+    text: A SCIM deprovision event disables interactive login within 5 minutes and revokes active sessions within 15 minutes.
+  - doc_id: brightcart/v3/yaml/scim-controls
+    text: |2-
+        disable_login_minutes: 5
+        revoke_sessions_minutes: 15
+  - doc_id: brightcart/v3/code/scim/config.yaml
+    text: |2-
+        login_disable_sla_minutes: 5
+        session_revoke_sla_minutes: 15
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q275
+  question: is there a buy now pay later option like klarna or affirm
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q276
+  question: when someone asks for privacy deletion, do backups get wiped right away
+  evidence:
+  - doc_id: brightcart/v1/privacy/privacy-deletion
+    text: '- Backups can age out according to the backup retention schedule rather than immediate live deletion.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q277
+  question: final sale lamp, customer wants a refund
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-eligibility
+    text: Most unused physical items are eligible for a refund when the return is requested within 30 calendar days of delivery. Final sale items are not refundable. The item must include the parts and accessories that were shipped with it unless the item arrived damaged or incomplete.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q278
+  question: inspection service handled FAKE_RMA_712, what reason code, next state and photo count
+  evidence:
+  - doc_id: generated/logs/inspection-service-2026-10-04
+    text: 2026-10-04T10:21:05.443Z INFO item=FAKE_RMA_712 reason=BATTERY_SWELL next_state=HAZMAT_QUARANTINE photo_count=3
+  answerable: true
+  tags:
+  - logs
+  - exact-name
+  - module-02
+- id: q279
+  question: where is the us east returns warehouse
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The warehouse routing config covers us_central only.
+- id: q280
+  question: new email verify code expiry?
+  evidence:
+  - doc_id: brightcart/v1/accounts/email-change
+    text: '- The verification code expires after 15 minutes.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q281
+  question: mfa recovery codes - can they be used more than once
+  evidence:
+  - doc_id: brightcart/v1/security/mfa
+    text: '- Recovery codes are single use.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q282
+  question: user asked to delete account, how many days till its actually done
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-deletion
+    text: After identity verification, BrightCart schedules account deletion and completes the customer facing deletion within 30 days. Certain transaction, tax, fraud, and legal records can be retained when required by law or legitimate business obligations even after the account is no longer active.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q283
+  question: intl customer paid import duty straight to customs and wants it back from us
+  evidence:
+  - doc_id: brightcart/v2/structured/returns/international-return-duties
+    text: When an international customer paid import duty directly to customs, this policy applies even if a nearby article appears to offer a simpler path. BrightCart does not reimburse government duties that were not collected by BrightCart.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q284
+  question: refund failed on the first go, does the system try again
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-status
+    text: Refunds move through pending, issued, or failed status. A failed refund is retried automatically one time. If the retry also fails, the case must be sent to payment operations for manual review. Support must not create a second independent refund.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q285
+  question: consumer session idle timeout
+  evidence:
+  - doc_id: brightcart/v3/json/session-controls
+    text: |2-
+          "consumer": {
+            "idle_minutes": 30,
+            "absolute_hours": 24
+          },
+  answerable: true
+  tags:
+  - format-aware
+  - json
+  - terse-query
+  - module-02
+- id: q286
+  question: how long does the api remember an idempotency key
+  evidence:
+  - doc_id: brightcart/v1/api/idempotency
+    text: Clients should send an Idempotency Key header on supported POST payment and refund requests. BrightCart remembers the result for 24 hours. Repeating the same request with the same key during that period returns the original operation result instead of creating a second payment or refund.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q287
+  question: someone pays for 2 day shipping at 3 in the afternoon central, when does it leave the warehouse
+  evidence:
+  - doc_id: brightcart/v1/shipping/expedited-shipping
+    text: Eligible expedited orders placed before 2:00 PM Central Time on a business day are expected to ship the same day and arrive within 2 business days after carrier acceptance. Orders placed after the cutoff are processed the next business day.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q288
+  question: approved wholesale customer orders 150 units, does that need an approval
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| single order with 150 units | approved wholesale account | auto approve within contract | route through wholesale fulfillment workflow | B2B Ops |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q289
+  question: what is the gift wrap price
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - terse-query
+  - module-04
+- id: q290
+  question: how much is the white glove assembly add-on
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-surcharge-matrix
+    text: '| white glove assembly | eligible furniture order includes assembly service | $199 | add white-glove service and route to specialty carrier | Specialty Delivery |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q291
+  question: how long do we keep support transcripts for eu consumers
+  evidence:
+  - doc_id: brightcart/v3/policy/privacy/support-transcript-retention/2026.3
+    text: 'The rule for this edition is: **180 days for EU consumer support transcripts**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: The global figures disagree across documents (730 days, 365 days, 24 months). Only the EU edition is unambiguous.
+- id: q292
+  question: is one failed login enough to call it an account takeover
+  evidence:
+  - doc_id: brightcart/v1/security/suspicious-login
+    text: '- A failed login attempt alone is not proof of takeover.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q293
+  question: agent assumed the p1 clock stops overnight for an enterprise customer
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: Enterprise P1 cases have a 15-minute first-response target, 24 hours a day.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P1,15 minutes,24x7,after 4 hours unmitigated
+  answerable: true
+  tags:
+  - human-source
+  - messy-input
+  - multi-evidence
+  - module-03
+- id: q294
+  question: refund failed because the card is closed. do we just retry it
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-status
+    text: Refunds move through pending, issued, or failed status. A failed refund is retried automatically one time. If the retry also fails, the case must be sent to payment operations for manual review. Support must not create a second independent refund.
+  - doc_id: brightcart/v3/handbooks/returns-to-refund-operations-handbook
+    text: If the original card is closed, Payment Operations may issue an ACH fallback only after identity verification and supervisor approval.
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - module-03
+- id: q295
+  question: wrong password over and over, how long are they locked out
+  evidence:
+  - doc_id: brightcart/v2/structured/accounts/account-lockout-duration
+    text: '| six failed password attempts | attempts occur inside 15 minutes | 30 minutes | lock account and suppress further password checks | Identity Operations |'
+  - doc_id: brightcart/v2/structured/accounts/account-lockout-config
+    text: |2-
+            failed_attempts: 6
+            window_minutes: 15
+            lock_minutes: 30
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - multi-evidence
+  - module-03
+  note: The v1 article (effective 2026-09-01) says 5 failures and a 15 minute lock. The v2 table and config (effective 2026-10-01) say 6 failures in 15 minutes and a 30 minute lock. The later edition is the current rule, so v1 is not evidence.
+- id: q296
+  question: how many agent trace rows does the purge job delete in one batch
+  evidence:
+  - doc_id: brightcart/v2/code/privacy/retention-jobs
+    text: |2-
+          ``prod_agent_traces`` are retained for **30 days**.  The worker deletes no more than
+          **500 records per batch** so the privacy job does not create a large database lock.
+          Rows on or newer than the cutoff remain.  Legal-hold rows are always skipped even
+          when their creation time is older than the ordinary retention window.
+  answerable: true
+  tags:
+  - code
+  - module-02
+  note: The retention days for agent traces differ between documents (30 in code and v3 yaml, 90 in the v2 retention table), so the question asks about the batch size.
+- id: q297
+  question: customer says battery inside is leaking, what do i do
+  evidence:
+  - doc_id: brightcart/v1/returns/damaged-items
+    text: '- Safety issues such as leaking batteries should be escalated immediately.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q298
+  question: what did the sla diff change for p1 first response
+  evidence:
+  - doc_id: brightcart/v3/code/support/sla_change.diff
+    text: |-
+      - SLA_MINUTES = {"P1": 30, "P2": 120}
+      + SLA_MINUTES = {"P1": 15, "P2": 60, "P3": 480}
+      + EXEC_ESCALATION_HOURS = {"P1": 4}
+  answerable: true
+  tags:
+  - code
+  - module-02
+- id: q299
+  question: partial refund, do we give the shipping fee back too
+  evidence:
+  - doc_id: brightcart/v1/refunds/partial-refunds
+    text: '- Shipping fees are refunded only when the shipping service itself failed or the return was caused by BrightCart.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q300
+  question: electronics return window for an eu customer
+  evidence:
+  - doc_id: brightcart/v3/policy/returns/electronics-return-window/2026.3-eu
+    text: 'The rule for this edition is: **30 calendar days, except statutory rights may extend eligibility**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+- id: q301
+  question: how long do we keep call recordings
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/privacy-retention-table
+    text: '| voice call recording | support call recorded with notice | 12 months | delete audio after QA period unless escalated case requires preservation | Support Operations |'
+  answerable: true
+  tags:
+  - table
+  - terse-query
+  - module-02
+- id: q302
+  question: what hours is support open, and what about the weekend
+  evidence:
+  - doc_id: brightcart/v1/support/service-hours
+    text: Standard customer support is staffed from 8:00 AM to 8:00 PM Central Time, Monday through Friday, excluding company holidays. SEV 1 incident response is available 24 hours a day through the on call process. Routine billing and product questions submitted after hours wait for the next staffed period.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q303
+  question: enterprise p2 response time
+  evidence:
+  - doc_id: brightcart/v3/handbooks/enterprise-support-handbook
+    text: Enterprise P2 cases have a 1-hour first-response target during contracted support hours.
+  - doc_id: brightcart/v3/csv/enterprise-sla-matrix
+    text: P2,1 hour,contracted hours,after 2 missed updates
+  answerable: true
+  tags:
+  - long-form
+  - terse-query
+  - multi-evidence
+  - module-02
+- id: q304
+  question: how long does it take to review a tax exemption certificate
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The tax exemption help page says an exemption applies to future orders and gives no review time.
+- id: q305
+  question: charged twice for the same package, what is the most support is allowed to give back
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| duplicate shipment billed twice | customer has two captured charges tied to one fulfillment | up to $300 | refund the duplicate charge after payment ledger verification and record duplicate-charge reason | Payments Support |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q306
+  question: daily cap on how much a seller can withdraw
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The payout calendar gives payout day and reserve, with no withdrawal cap.
+- id: q307
+  question: customer wants a different product on the same order, edit the line?
+  evidence:
+  - doc_id: brightcart/v1/orders/order-modification
+    text: '- Changing to a different product creates a new order rather than editing the original line.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q308
+  question: replay of more than a million events in prod, who signs off
+  evidence:
+  - doc_id: brightcart/v3/handbooks/batch-processing-runbook
+    text: A replay above 1 million events in production requires two approvers from Data Platform.
+  - doc_id: brightcart/v3/json/replay-limits
+    text: |2-
+            "approval_threshold_events": 1000000,
+            "required_approvers": 2,
+            "idempotency_key": "event_id"
+  answerable: true
+  tags:
+  - long-form
+  - multi-evidence
+  - module-02
+  note: The replay limits json states the same threshold and approver count.
+- id: q309
+  question: one high value customer is shouting, does that make it sev1
+  evidence:
+  - doc_id: brightcart/v1/support/severity
+    text: '- A single high value customer does not automatically make an issue SEV 1.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q310
+  question: what does it cost a seller when we process a return for them
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| return processing | customer return uses marketplace fulfillment service | $4 per unit | deduct return-processing fee when return is received | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q311
+  question: we shipped the wrong colour backpack. who pays to send it back
+  evidence:
+  - doc_id: brightcart/v1/returns/return-shipping
+    text: BrightCart pays return shipping when the item is defective, damaged in transit, or different from what the customer ordered. For preference returns such as size, color, or changed mind, the customer pays the return shipping charge unless a promotion explicitly provides free returns.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q312
+  question: restocking fee for an opened small electronics item
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+  note: The restocking fee table covers an opened large appliance. Small electronics are not listed.
+- id: q313
+  question: payment failure alert, who gets paged and how soon
+  evidence:
+  - doc_id: brightcart/v3/yaml/notification-routing
+    text: |2-
+        payment_failure:
+          channel: pager
+          team: payments-oncall
+          after_minutes: 5
+  answerable: true
+  tags:
+  - format-aware
+  - yaml
+  - module-02
+- id: q314
+  question: someone changed the email on an account, does the old address get warned
+  evidence:
+  - doc_id: brightcart/v1/accounts/email-change
+    text: To change the account email, the customer must enter the current password and verify the new email address. BrightCart sends a security notice to the old email address after the change. The new email becomes the sign in identifier only after verification succeeds.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q315
+  question: ach refund landing time
+  evidence:
+  - doc_id: brightcart/v1/refunds/refund-timelines
+    text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - authority-conflict
+  - module-03
+- id: q316
+  question: closed card, identity verified but no supervisor sign off. what does process_refund raise
+  evidence:
+  - doc_id: brightcart/v3/code/refunds/service.py
+    text: |2-
+              if not return_record.supervisor_approved:
+                  raise PermissionError("supervisor approval required")
+  - doc_id: brightcart/v3/code/refunds/test_service.py
+    text: |
+      def test_closed_card_requires_identity_and_supervisor(order, return_record):
+          return_record.card_closed = True
+          return_record.identity_verified = True
+          return_record.supervisor_approved = False
+          try:
+              process_refund(order, return_record)
+              assert False
+          except PermissionError as exc:
+              assert "supervisor approval" in str(exc)
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - exact-name
+  - multi-evidence
+  - module-02
+- id: q317
+  question: annual member wants to pause, possible?
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-pause
+    text: '- Annual plans can be canceled but not paused.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - module-03
+- id: q318
+  question: tracking has not moved for a week after the date it was due. treat as lost
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/lost-package-eligibility
+    text: When tracking has shown no movement for seven calendar days after the expected delivery date, this policy applies even if a nearby article appears to offer a simpler path. support may treat the parcel as presumptively lost after carrier trace is opened.
+  answerable: true
+  tags:
+  - boundary-policy
+  - authority-conflict
+  - module-02
+  note: 'The v1 lost packages article uses a different clock: 5 days (domestic) or 10 days (international) with no carrier scan. The question uses the v2 wording, seven days after the expected delivery date.'
+- id: q319
+  question: retention job for support chat, how many days are kept and what is the schedule
+  evidence:
+  - doc_id: brightcart/v2/structured/privacy/retention-job-config
+    text: |2-
+            days: 730
+            legal_hold_bypass: false
+            job_schedule: "0 3 * * *"
+            audit_log: required
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - authority-conflict
+  - module-02
+  note: The v3 yaml retention-jobs file says support_transcripts_days 365. The v2 table and this config say 24 months and 730 days. See the edition questions.
+- id: q320
+  question: 'subscription renewal webhook: timeout, retries and the dead letter queue'
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-webhook-config
+    text: |2-
+            timeout_seconds: 8
+            max_retries: 3
+            dead_letter_queue: subscription-renewal-dlq
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q321
+  question: can the same email be used on two consumer accounts
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-creation
+    text: A customer account requires a unique email address, a password that meets the current password policy, and a verified phone number. One email address can be associated with only one active consumer account.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - module-03
+- id: q322
+  question: customer wants to delete their account and also has a plus subscription
+  evidence:
+  - doc_id: brightcart/v1/accounts/account-deletion
+    text: '- Active subscription renewal should be canceled before the account is closed.'
+  - doc_id: brightcart/v1/subscriptions/subscription-cancellation
+    text: '- Account deletion does not replace the need to cancel a subscription before deletion.'
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - module-03
+- id: q323
+  question: return policy for perishable grocery items
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - near-miss
+  - module-04
+- id: q324
+  question: customer cancelled their plan mid month, when do benefits actually end
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-cancellation
+    text: A cancellation takes effect at the end of the current paid billing period. The customer keeps subscription benefits until that date and the plan does not renew. Cancellation by itself does not create a refund for the current period.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q325
+  question: we sent the wrong item. do we refund the shipping and who covers the way back
+  evidence:
+  - doc_id: brightcart/v1/returns/return-shipping
+    text: BrightCart pays return shipping when the item is defective, damaged in transit, or different from what the customer ordered. For preference returns such as size, color, or changed mind, the customer pays the return shipping charge unless a promotion explicitly provides free returns.
+  - doc_id: brightcart/v1/refunds/partial-refunds
+    text: '- Shipping fees are refunded only when the shipping service itself failed or the return was caused by BrightCart.'
+  answerable: true
+  tags:
+  - multi-evidence
+  - everyday-policy
+  - module-03
+- id: q326
+  question: legacy grandfathered subscriber wants to upgrade, can they go back to the old price later
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-proration-matrix
+    text: '| grandfathered plan upgrade | legacy subscriber leaves retired grandfathered tier | irreversible | warn customer that retired price cannot be restored after upgrade | Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q327
+  question: customer opened a chargeback on the order, can support still send a refund too
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-after-chargeback
+    text: When a customer has an open chargeback for the same transaction, this policy applies even if a nearby article appears to offer a simpler path. support must not issue a separate refund while the chargeback remains open.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q328
+  question: idle timeout and max session length for enterprise admins
+  evidence:
+  - doc_id: brightcart/v3/json/session-controls
+    text: |2-
+          "enterprise_admin": {
+            "idle_minutes": 15,
+            "absolute_hours": 8,
+            "mfa_required": true
+          }
+  answerable: true
+  tags:
+  - format-aware
+  - json
+  - module-02
+- id: q329
+  question: cuantos dias tiene el cliente para elegir reembolso o reenvio si el paquete esta retenido en aduana
+  evidence:
+  - doc_id: brightcart/v3/lang/envios-internacionales-es
+    text: Los paquetes retenidos en aduana durante 14 días naturales permiten al cliente elegir entre reembolso o reenvío.
+  - doc_id: brightcart/v3/handbooks/international-customs-runbook
+    text: At 7 calendar days, the case is assigned to the customs broker queue; at 14 days, the customer may choose refund or reshipment.
+  answerable: true
+  tags:
+  - format-aware
+  - multilingual
+  - multi-evidence
+  - module-03
+  note: Spanish question. The Spanish note and the English customs runbook state the same rule.
+- id: q330
+  question: 220 units, customer isnt on the wholesale list. what happens
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| single order with 220 units | customer is not on approved wholesale list | manager approval | hold fulfillment until commercial manager approves | Order Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q331
+  question: customer cancelled but their bank still shows the amount pending, is that normal
+  evidence:
+  - doc_id: brightcart/v1/payments/card-payments
+    text: '- A bank can continue showing a released authorization as pending for several days.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q332
+  question: electronics return window for a us customer
+  evidence:
+  - doc_id: brightcart/v3/policy/returns/electronics-return-window/2026.3
+    text: 'The rule for this edition is: **30 calendar days**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+  note: 'CONFLICT: the v1 electronics returns article says 14 calendar days and is also effective 2026-09-01. The v3 2026.3 US edition and the Spanish note say 30. The corpus author should confirm which is intended. Logged in CONFLICTS.'
+- id: q333
+  question: which http statuses does the public api client retry and how many attempts
+  evidence:
+  - doc_id: brightcart/v2/structured/api/api-retry-policy
+    text: |2-
+            retry_statuses: [429, 502, 503, 504]
+            max_attempts: 4
+            base_delay_ms: 500
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q334
+  question: late delivery courtesy credit limit
+  evidence:
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| late delivery courtesy | shipment arrived more than three business days after promised date | up to $40 | issue courtesy adjustment but do not mark order as product refund | Support |'
+  answerable: true
+  tags:
+  - table
+  - terse-query
+  - module-02
+- id: q335
+  question: saw a cheaper price on our own site after buying, how many days do we have to match it
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/price-match-window
+    text: When a customer finds a lower BrightCart price after purchase, this policy applies even if a nearby article appears to offer a simpler path. a price match is allowed within seven calendar days of the order date.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q336
+  question: custodians have how long to acknowledge a new hold
+  evidence:
+  - doc_id: brightcart/v3/handbooks/legal-hold-and-discovery-handbook
+    text: Named custodians must acknowledge a new legal hold within 3 business days.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q337
+  question: why is legacy_tool_name_gate still in the refund code
+  evidence:
+  - doc_id: brightcart/v2/code/refunds/refund-guardrails
+    text: |2-
+          """Legacy compatibility helper. Do not use for new approval decisions.
+
+          INC-112 showed why matching only ``issue_refund`` was unsafe: a new money-moving
+          tool named ``issue_credit`` bypassed the old gate.  The function remains so old
+  answerable: true
+  tags:
+  - code
+  - exact-name
+  - module-02
+- id: q338
+  question: no scan for a week on a us parcel, can we treat it as lost
+  evidence:
+  - doc_id: brightcart/v1/shipping/lost-packages
+    text: A domestic package can be treated as lost after 5 consecutive calendar days with no new carrier scan. An international package uses a 10 calendar day no scan threshold because customs movement can be slower. An explicit carrier lost status overrides these waiting periods.
+  answerable: true
+  tags:
+  - everyday-policy
+  - authority-conflict
+  - module-03
+- id: q339
+  question: who has to approve a high risk refund of 10k or more and how long does the approval last
+  evidence:
+  - doc_id: brightcart/v2/code/refunds/refund-guardrails
+    text: |2-
+          The current rule keys on *risk tier*, not a tool name.  Any high-risk money-moving
+          action of **$10,000 or more** must pause before execution and wait for someone in
+          ``finance-approvers``.  The approval request expires after 60 minutes.  Expiry is
+          fail-closed: the action is rejected rather than executed automatically.
+
+          Lower amounts and non-high-risk actions continue through the normal workflow.
+  - doc_id: brightcart/v2/structured/refunds/refund-approval-config
+    text: |2-
+            limit_usd: 10000
+            reviewers: finance-approvers
+            expires_after_min: 60
+            audit_log: required
+  answerable: true
+  tags:
+  - code
+  - multi-evidence
+  - module-02
+- id: q340
+  question: scim deprovision constants, what are the login and session sla minutes in code
+  evidence:
+  - doc_id: brightcart/v3/code/scim/deprovision.py
+    text: |-
+      LOGIN_DISABLE_SLA_MIN = 5
+      SESSION_REVOKE_SLA_MIN = 15
+  - doc_id: brightcart/v3/code/scim/config.yaml
+    text: |2-
+        login_disable_sla_minutes: 5
+        session_revoke_sla_minutes: 15
+  answerable: true
+  tags:
+  - code
+  - call-chain
+  - multi-evidence
+  - module-02
+- id: q341
+  question: how often does the status page get an update in a sev1
+  evidence:
+  - doc_id: brightcart/v3/handbooks/production-incident-handbook
+    text: For SEV-1, the public status page is updated at least every 30 minutes until mitigation.
+  answerable: true
+  tags:
+  - long-form
+  - module-02
+- id: q342
+  question: customer changed their card on file, does the renewal date move
+  evidence:
+  - doc_id: brightcart/v1/subscriptions/subscription-renewal
+    text: '- Updating the payment method does not change the renewal date.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q343
+  question: what is the refund policy for prescription or pharmacy items
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q344
+  question: seller got a customer refund after their payout already went out. who eats it
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| refund after payout | customer refund posts after seller already received settlement | seller debit | debit future seller balance according to refund allocation | Marketplace Finance |'
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| refund before payout | customer refund posts before seller settlement closes | reverse commission | remove sale and commission from pending payout | Marketplace Finance |'
+  answerable: true
+  tags:
+  - multi-evidence
+  - table
+  - module-02
+- id: q345
+  question: when do we call a shipment late
+  evidence:
+  - doc_id: brightcart/v1/shipping/delayed-packages
+    text: A package is considered delayed when it is more than 2 business days past the latest promised delivery date and tracking does not show delivery. Before that point, support should provide the current tracking status unless there is evidence of loss or damage.
+  - doc_id: brightcart/v1/shipping/domestic-shipping
+    text: Support should quote the tracking based estimate when available. If the shipment is more than two business days beyond the promised date, use the delayed package runbook.
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - multi-evidence
+  - authority-conflict
+  - module-03
+- id: q346
+  question: expedited shipping fee refund for an enterprise customer, carrier delay
+  evidence:
+  - doc_id: brightcart/v3/policy/shipping/expedited-refund/2026.3
+    text: 'The rule for this edition is: **fee is refundable for carrier-caused delay over 24 hours**.'
+  answerable: true
+  tags:
+  - authority-conflict
+  - edition
+  - module-03
+- id: q347
+  question: us central returns, where do they overflow and at what fill percent
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/warehouse-routing-config
+    text: |2-
+            primary: DFW-RET-1
+            overflow: PHX-RET-2
+            overflow_at_percent: 85
+  answerable: true
+  tags:
+  - format-aware
+  - config
+  - module-02
+- id: q348
+  question: oversized freight item being returned, can i just print a normal label
+  evidence:
+  - doc_id: brightcart/v1/returns/return-shipping
+    text: '- Oversize freight returns require logistics review instead of a standard label.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q349
+  question: preorder - when is the card actually charged
+  evidence:
+  - doc_id: brightcart/v1/orders/preorders
+    text: For a standard card preorder, BrightCart may verify the card when the order is placed but captures the charge only when the preorder ships. The expected ship date is an estimate and can change if the supplier schedule changes.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q350
+  question: member moves from monthly to the annual plan. what happens to their unused monthly money
+  evidence:
+  - doc_id: brightcart/v2/structured/subscriptions/subscription-proration-matrix
+    text: '| monthly to annual | subscriber converts monthly plan to annual | unused monthly value | apply remaining monthly value to annual purchase at conversion | Subscriptions |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q351
+  question: says they were billed twice but one line is pending. do we refund
+  evidence:
+  - doc_id: brightcart/v1/payments/duplicate-charges
+    text: Before refunding a reported duplicate charge, verify whether both entries are captured transactions. A pending authorization next to one settled charge is usually not a duplicate payment. If two captured charges exist for the same order and amount, payments should void or refund the extra capture.
+  answerable: true
+  tags:
+  - everyday-policy
+  - module-03
+- id: q352
+  question: what kind of key do you need to hit the admin credits endpoint
+  evidence:
+  - doc_id: brightcart/v2/structured/api/api-rate-limit-table
+    text: '| POST /v1/admin/credits | privileged internal service key | 20 requests per minute | throttle and require privileged scope on every request | Admin API |'
+  - doc_id: brightcart/v2/code/api/rate-limiter
+    text: '    credit endpoint is much tighter at **5 requests per minute** and requires a'
+  answerable: true
+  tags:
+  - table
+  - exact-name
+  - multi-evidence
+  - module-02
+  note: Both sources require a privileged internal service key. They disagree on the limit (table 20 per minute, code docstring 5), so the question asks about the key, not the limit.
+- id: q353
+  question: does brightcart take apple pay or google pay at checkout
+  evidence: []
+  answerable: false
+  tags:
+  - unanswerable
+  - absent-topic
+  - module-04
+- id: q354
+  question: can hazmat or big items go expedited
+  evidence:
+  - doc_id: brightcart/v1/shipping/expedited-shipping
+    text: '- Oversize items and hazardous materials are not eligible.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - terse-query
+  - module-03
+- id: q355
+  question: what cut do we take from a regular seller on jewelry sales
+  evidence:
+  - doc_id: brightcart/v2/structured/payments/marketplace-seller-fees
+    text: '| jewelry marketplace sale | seller is on standard tier | 18% | deduct category commission from seller payout | Marketplace Finance |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q356
+  question: can an agent ask the customer to paste their full card number to verify
+  evidence:
+  - doc_id: brightcart/v1/payments/payment-security
+    text: BrightCart systems must not store card CVV values after authorization. Support staff must never ask customers to send a full card number, CVV, or card image through chat or email. Payment pages use tokenized references so internal systems can identify a payment without storing the raw card details.
+  - doc_id: brightcart/v1/payments/payment-declines
+    text: '- Do not ask the customer to send a full card number in chat or email.'
+  answerable: true
+  tags:
+  - everyday-policy
+  - multi-evidence
+  - module-03
+  note: Two active primary articles state the rule. Both are evidence.
+- id: q357
+  question: one buyer keeps sending 40 piece orders back to back, how do we treat them
+  evidence:
+  - doc_id: brightcart/v2/structured/orders/bulk-order-approval-matrix
+    text: '| repeated 40-unit orders | same consumer account places three orders in one hour | aggregate review | combine quantities for approval decision before release | Order Operations |'
+  answerable: true
+  tags:
+  - table
+  - module-02
+- id: q358
+  question: alaska parcel over 50 lb, extra charge?
+  evidence:
+  - doc_id: brightcart/v2/structured/shipping/shipping-surcharge-matrix
+    text: '| Alaska oversized parcel | zone AK and package over 50 lb | $45 | add oversized remote-zone surcharge | Fulfillment |'
+  - doc_id: brightcart/v2/code/shipping/shipping-surcharges
+    text: '    A parcel going to **Alaska (AK)** that is oversized receives a **$45.00** surcharge.'
+  answerable: true
+  tags:
+  - table
+  - terse-query
+  - multi-evidence
+  - module-02
+  note: The table row and the shipping surcharge code docstring both say $45.
+- id: q359
+  question: item came from a marketplace seller, whose return window do we follow
+  evidence:
+  - doc_id: brightcart/v2/structured/returns/marketplace-return-policy
+    text: When an item was sold and fulfilled by a marketplace seller, this policy applies even if a nearby article appears to offer a simpler path. the seller-specific return policy controls the return window and restocking terms.
+  answerable: true
+  tags:
+  - boundary-policy
+  - module-02
+- id: q360
+  question: agent wants to refund to a card that wasnt used on the order
+  evidence:
+  - doc_id: brightcart/v2/structured/security/fraud-review-matrix
+    text: '| refund to alternate tender | agent attempts refund to payment method not used on order | critical risk | block action and require finance-security review | Payments Security |'
+  answerable: true
+  tags:
+  - table
+  - module-02

@@ -11,7 +11,8 @@ ifdef CONFIG
 export RAG_CONFIG := $(CONFIG)
 endif
 
-.PHONY: show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-calibrate dashboard compare test
+
+.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-calibrate dashboard compare test
 
 # Create a local virtual environment and install the generator's dependencies.
 $(PY):
@@ -65,13 +66,19 @@ show-chunk: $(PY)
 	@test -n "$(DOC)" -a -n "$(N)" || (echo 'Usage: make show-chunk DOC=book/v1/Ch02 N=0'; exit 1)
 	@SYSTEM=$(SYSTEM) $(PY) lessons/module-00/runs/0.1/show_chunks.py $(DOC) $(N)
 
+# Check eval/golden/golden.yaml: ids, counts, and that every evidence passage appears word for word in its document.
+#   make golden-check   |   make golden-check SYSTEM=app   |   make golden-check GOLDEN=<another golden file>
+golden-check: $(PY)
+	$(PY) eval/golden/validate.py --system $(SYSTEM) $(if $(GOLDEN),--golden $(GOLDEN))
+
 # ---- Eval harness ----
 
 # Score a system on the golden questions in eval/golden/golden.yaml and write eval/runs/<run id>/.
+#   make eval LABEL="what changed"  (a note saved in the run record)   |   make eval BUILDS=10  (more index builds, for a wider noise band; the default is 3)
 #   make eval   |   make eval SYSTEM=app   |   make eval SYSTEM=app KS=2,7,15,20,30  (more cut offs, for the K curve)   |   make eval SYSTEM=app BASE=<older run id>  (adds deltas to the dashboard)
 # Retrieval metrics only for now. No API key needed, no cost. Also builds the dashboard.
 eval: $(PY)
-	$(PY) -m eval.run --system $(SYSTEM) $(if $(KS),--ks $(KS))
+	$(PY) -m eval.run --system $(SYSTEM) $(if $(KS),--ks $(KS)) $(if $(BUILDS),--builds $(BUILDS)) $(if $(LABEL),--label "$(LABEL)") $(if $(GOLDEN),--golden $(GOLDEN)) $(if $(RESCORE),--rescore $(RESCORE)) $(if $(COVER),--min-cover $(COVER)) $(if $(NOREBUILD),--no-rebuild)
 	$(PY) -m dashboard.build $(if $(BASE),--baseline $(BASE))
 
 # Score the ANSWERS: faithfulness of each answer to the chunks it was given (Module 4). Needs ANTHROPIC_API_KEY and costs model calls.
