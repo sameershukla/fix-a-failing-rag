@@ -1,0 +1,32 @@
+# Experiment m2-2-tables250. Same as app/config.yaml except chunking.
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+  structure:
+    tables: true
+    config: false
+    code: false
+    headings: false
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  k: 5
+  mode: vector
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

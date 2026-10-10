@@ -5,8 +5,8 @@ No citations, no refusal rule, no grounding check, no guardrails.
 
 import sys
 
-from baseline.common import load_config
-from baseline.retrieval.search import search
+from app.common import load_config
+from app.retrieval.search import search
 
 SYSTEM = "You are a helpful assistant for an AI platform team."
 PROMPT = "Answer the question using this context.\n\nContext:\n{context}\n\nQuestion: {question}"

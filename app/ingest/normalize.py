@@ -10,7 +10,7 @@ from pathlib import Path
 
 import yaml
 
-from baseline.common import CORPUS, NORMALIZED, ROOT, load_config
+from app.common import CORPUS, NORMALIZED, ROOT, load_config
 
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 # Plain text readers only. Scanned PDFs are left out on purpose: they need OCR, which the baseline does not have.
@@ -45,6 +45,7 @@ def normalize_file(path: Path) -> dict:
             key, value = line.split(": ", 1)
             metadata[key.lstrip("#/- ").strip()] = value.strip()
     doc_id = metadata.get("doc_id") or doc_id_for(path)  # corpus docs carry their own doc_id
+    metadata.pop("retrieval_hazard", None)   # an authoring note about why a doc is hard: never part of the indexed record
     metadata["source"] = source_for(doc_id)
     if metadata["source"] == "repo":
         metadata["program"] = path.parent.name

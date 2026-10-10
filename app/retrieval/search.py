@@ -2,7 +2,7 @@
 
 import sys
 
-from baseline.common import INDEX_DIR, collection_name, load_config
+from app.common import INDEX_DIR, collection_name, load_config
 
 _cache = {}
 

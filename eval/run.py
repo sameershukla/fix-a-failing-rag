@@ -64,8 +64,8 @@ def main():
     ks = sorted({int(k) for k in args.ks.split(",")})
     guard_system(args.system)
 
-    config_path = ROOT / args.system / "config.yaml"
-    config_text = yaml.safe_dump(yaml.safe_load(config_path.read_text()), sort_keys=True)
+    import importlib
+    config_text = yaml.safe_dump(importlib.import_module(f"{args.system}.common").load_config(), sort_keys=True)
     cfg_hash = sha(config_text)
     golden_path = ROOT / args.golden
     golden = yaml.safe_load(golden_path.read_text(encoding="utf-8"))
@@ -168,6 +168,9 @@ def main():
         "unstable_questions": [g["id"] for g in answerable if not all(bd["per_q"][g["id"]]["metrics"][k]["hit"] == builds[0]["per_q"][g["id"]]["metrics"][k]["hit"] for bd in builds for k in ks)],
         "config": yaml.safe_load(config_text),
     }
+    stats_file = importlib.import_module(f"{args.system}.common").chunks_path(importlib.import_module(f"{args.system}.common").load_config()).parent / "stats.json"
+    if stats_file.exists():
+        record["chunk_stats"] = json.loads(stats_file.read_text())
     (out_dir / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False))
     with (ROOT / "eval" / "runs" / "index.jsonl").open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({"run_id": run_id, "created_at": record["created_at"], "system": args.system, "label": args.label,

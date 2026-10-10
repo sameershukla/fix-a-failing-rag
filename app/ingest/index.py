@@ -4,7 +4,7 @@ Embeds every chunk and stores it in Chroma. The index is disposable: it is dropp
 rebuilt from the chunks each time. Metadata is stored but never used for filtering.
 """
 
-from baseline.common import INDEX_DIR, chunks_path, collection_name, load_config, read_jsonl
+from app.common import INDEX_DIR, chunks_path, collection_name, load_config, read_jsonl
 
 BATCH = 256
 

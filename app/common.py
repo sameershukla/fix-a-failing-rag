@@ -1,7 +1,8 @@
-"""Shared paths and config loading. Identical in baseline/ and app/; data goes to data/<system>/."""
+"""Shared paths and config loading. data goes to data/<system>/. app/ also honors CONFIG= for experiment configs."""
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import yaml
@@ -13,7 +14,8 @@ DATA = ROOT / "data" / SYSTEM
 NORMALIZED = DATA / "normalized" / "docs.jsonl"
 CHUNKS_DIR = DATA / "chunks"
 INDEX_DIR = DATA / "index"      # Chroma persist directory
-CONFIG_PATH = Path(__file__).resolve().parent / "config.yaml"
+_override = os.environ.get("RAG_CONFIG")   # make ... CONFIG=config/experiments/<file>.yaml sets this
+CONFIG_PATH = (ROOT / _override) if _override else Path(__file__).resolve().parent / "config.yaml"
 
 
 def load_config() -> dict:
