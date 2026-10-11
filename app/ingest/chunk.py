@@ -302,6 +302,7 @@ def main():
     cfg = config["chunking"]
     tokenizer = AutoTokenizer.from_pretrained(cfg["tokenizer"])
     cnt = Counter(tokenizer)
+    window = cfg.get("window_tokens", WINDOW)   # set it when the embedding model reads a different number of tokens
     out = chunks_path(config)
     out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -325,9 +326,9 @@ def main():
                 strategies[c["strategy"]] = strategies.get(c["strategy"], 0) + 1
                 n = cnt.n(text)
                 tokens_total += n
-                if n > WINDOW:
+                if n > window:
                     n_over += 1
-                    tokens_cut += n - WINDOW
+                    tokens_cut += n - window
 
     stats = {"chunks": count, "by_strategy": strategies, "chunks_over_window": n_over,
              "share_chunks_over_window": round(n_over / count, 3), "tokens": tokens_total,

@@ -1,0 +1,36 @@
+# Experiment m3-7x-e5-small-vector-only. The e5 embedding model used alone: no BM25, no reranker, no filter. A side test for lesson 3.7.
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: intfloat/e5-small-v2
+  unit: tokens
+  window_tokens: 510
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: intfloat/e5-small-v2
+  normalize: true
+  provider: sentence-transformers
+  query_prefix: 'query: '
+  passage_prefix: 'passage: '
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  mode: vector
+  k: 5
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

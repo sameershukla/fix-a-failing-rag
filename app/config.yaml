@@ -1,5 +1,6 @@
-# App config: the end state of the last lesson. Module 2 end state: fixed chunks fit to the embedder window,
-# with table aware and config aware chunks and the document title in front of every remaining window.
+# App config: the end state of the last lesson. Module 3 stack so far: 250 token chunks with title prefix, table and config
+# aware chunks (Module 2), hybrid search (BM25 weight 2) over the top 50 of each, a cross encoder reranking the top 20,
+# and a filter that keeps only active, authoritative documents.
 # Every setting here contributes to the config hash. Experiments live in config/experiments/.
 
 corpus:
@@ -28,8 +29,23 @@ vector_store:
   collection: auto
   distance: cosine
 retrieval:
-  mode: vector
+  bm25_weight: 2.0
+  candidates: 50
   k: 5
+  mode: hybrid
+  rerank:
+    enabled: true
+    model: cross-encoder/ms-marco-MiniLM-L-6-v2
+    top_n: 20
+  rrf_k: 60
+  vector_weight: 1.0
+  filters:
+    status:
+    - active
+    authority:
+    - primary
+    - implementation
+    - observational
 llm:
   provider: anthropic
   model: claude-sonnet-5-5

@@ -1,0 +1,34 @@
+# Experiment m3-3-bm25. Module 2 end state with keyword search only (reference, not a candidate).
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  k: 5
+  mode: bm25
+  candidates: 50
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

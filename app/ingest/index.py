@@ -1,7 +1,7 @@
 """data/<system>/chunks/<hash>/chunks.jsonl -> data/<system>/index (Chroma)
 
 Embeds every chunk and stores it in Chroma. The index is disposable: it is dropped and
-rebuilt from the chunks each time. Metadata is stored but never used for filtering.
+rebuilt from the chunks each time. Metadata is stored so retrieval can filter on it (config retrieval.filters).
 """
 
 from app.common import INDEX_DIR, chunks_path, collection_name, load_config, read_jsonl
@@ -28,6 +28,7 @@ def main():
     chunks = list(read_jsonl(chunks_path(config)))
 
     model = SentenceTransformer(config["embedding"]["model"])
+    passage_prefix = config["embedding"].get("passage_prefix", "")
     client = chromadb.PersistentClient(path=str(INDEX_DIR))
     name = collection_name(config)
     if name in [c.name for c in client.list_collections()]:
@@ -36,7 +37,7 @@ def main():
 
     for i in range(0, len(chunks), BATCH):
         batch = chunks[i:i + BATCH]
-        embeddings = model.encode([c["text"] for c in batch],
+        embeddings = model.encode([passage_prefix + c["text"] for c in batch],
                                   normalize_embeddings=config["embedding"]["normalize"])
         collection.add(
             ids=[c["chunk_id"] for c in batch],

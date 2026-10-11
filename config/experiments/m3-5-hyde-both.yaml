@@ -1,0 +1,47 @@
+# Experiment m3-5-hyde-both. HyDE on both sides, on the 3.4 stack: the passage replaces the question for embedding search and is added to the question for keyword search.
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  bm25_weight: 2.0
+  candidates: 50
+  k: 5
+  mode: hybrid
+  rerank:
+    enabled: true
+    model: cross-encoder/ms-marco-MiniLM-L-6-v2
+    top_n: 20
+  rrf_k: 60
+  vector_weight: 1.0
+  rewrite:
+    enabled: true
+    model: claude-haiku-5-5
+    max_tokens: 300
+    apply_to: both
+    replace: true
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

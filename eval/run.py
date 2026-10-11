@@ -78,8 +78,17 @@ def main():
     answerable = [g for g in golden if g["answerable"]]
     passages = {g["id"]: relevance.locate_evidence(docs, g["evidence"]) for g in answerable}
 
+    source_record = None
+    if args.rescore:   # a rescored run keeps the config of the run whose retrieved lists it reuses
+        source_record = json.loads((ROOT / "eval" / "runs" / args.rescore / "run.json").read_text())
+        cfg_hash = source_record["config_hash"]
+        config_text = yaml.safe_dump(source_record["config"], sort_keys=True)
     now = datetime.now(timezone.utc)
-    run_id = f"{now:%Y%m%d-%H%M%S}-{args.system}-{cfg_hash[:6]}"
+    base_id = f"{now:%Y%m%d-%H%M%S}-{args.system}-{cfg_hash[:6]}"
+    run_id, n = base_id, 1
+    while (ROOT / "eval" / "runs" / run_id).exists():
+        n += 1
+        run_id = f"{base_id}-{n}"
     out_dir = ROOT / "eval" / "runs" / run_id
     out_dir.mkdir(parents=True)
 
@@ -139,6 +148,18 @@ def main():
                 vals = [over_questions(bd, ids, m, k) for bd in builds]
                 slices[tag][f"{ALIAS.get(m, m)}@{k}"] = {"mean": mean(vals), "min": min(vals), "max": max(vals)}
 
+    subsets = {}
+    sub_dir = ROOT / "eval" / "golden" / "subsets"
+    for f in sorted(sub_dir.glob("*.yaml")) if sub_dir.exists() else []:
+        ids = [i for i in (yaml.safe_load(f.read_text()) or {}).get("ids", []) if i in passages]
+        if not ids:
+            continue
+        subsets[f.stem] = {"n": len(ids)}
+        for m in METRICS:
+            for k in ks:
+                vals = [over_questions(bd, ids, m, k) for bd in builds]
+                subsets[f.stem][f"{ALIAS.get(m, m)}@{k}"] = {"mean": mean(vals), "min": min(vals), "max": max(vals)}
+
     unans = [g for g in golden if not g["answerable"]]
     top1 = lambda bd, ids: mean([bd["retrieved"][i][0]["score"] for i in ids])
     descriptive = {
@@ -164,13 +185,17 @@ def main():
         "git": git_state(), "config_hash": cfg_hash, "golden": {"path": args.golden, "hash": golden_hash, "questions": len(golden),
         "answerable": len(answerable), "unanswerable": len(unans)},
         "relevance_rule": {"min_cover": args.min_cover}, "rescored_from": args.rescore or None, "ks": ks, "builds": args.builds, "timings": timings,
-        "one_question_is_worth": 1 / len(answerable), "metrics": metrics, "slices": slices, "descriptive": descriptive,
+        "one_question_is_worth": 1 / len(answerable), "metrics": metrics, "slices": slices, "subsets": subsets, "descriptive": descriptive,
         "unstable_questions": [g["id"] for g in answerable if not all(bd["per_q"][g["id"]]["metrics"][k]["hit"] == builds[0]["per_q"][g["id"]]["metrics"][k]["hit"] for bd in builds for k in ks)],
         "config": yaml.safe_load(config_text),
     }
-    stats_file = importlib.import_module(f"{args.system}.common").chunks_path(importlib.import_module(f"{args.system}.common").load_config()).parent / "stats.json"
-    if stats_file.exists():
-        record["chunk_stats"] = json.loads(stats_file.read_text())
+    if source_record is not None:
+        if "chunk_stats" in source_record:
+            record["chunk_stats"] = source_record["chunk_stats"]
+    else:
+        stats_file = importlib.import_module(f"{args.system}.common").chunks_path(importlib.import_module(f"{args.system}.common").load_config()).parent / "stats.json"
+        if stats_file.exists():
+            record["chunk_stats"] = json.loads(stats_file.read_text())
     (out_dir / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False))
     with (ROOT / "eval" / "runs" / "index.jsonl").open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({"run_id": run_id, "created_at": record["created_at"], "system": args.system, "label": args.label,
@@ -196,6 +221,9 @@ def main():
         print(f"{'slice':<20}{'n':>4}  {'Hit@5':>6} {'Recall@5':>9} {'Prec@5':>7} {'MRR@5':>6}")
         for tag, s in sorted(slices.items(), key=lambda ts: -ts[1]["hit@5"]["mean"]):
             print(f"{tag:<20}{s['n']:>4}  {s['hit@5']['mean']:>6.3f} {s['recall@5']['mean']:>9.3f} {s['precision@5']['mean']:>7.3f} {s['mrr@5']['mean']:>6.3f}")
+    for name, s in subsets.items():
+        if "hit@5" in s:
+            print(f"subset {name:<8} n={s['n']:>3}  Hit@5 {s['hit@5']['mean']:.3f} [{s['hit@5']['min']:.3f}-{s['hit@5']['max']:.3f}]  Recall@5 {s['recall@5']['mean']:.3f}  MRR@5 {s['mrr@5']['mean']:.3f}")
     print(f"unstable questions across builds: {len(record['unstable_questions'])}" + (f" ({', '.join(record['unstable_questions'])})" if record['unstable_questions'] else ""))
     print(f"mean top 1 score: answerable {descriptive['top1_score_answerable']:.3f}, unanswerable {descriptive['top1_score_unanswerable']:.3f}")
     print(f"saved eval/runs/{run_id}/")

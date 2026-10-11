@@ -1,0 +1,33 @@
+# Experiment m3-1-size400. Module 2 end state with chunk size 400 tokens and 10% overlap.
+chunking:
+  overlap_tokens: 40
+  size_tokens: 400
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  k: 5
+  mode: vector
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma
