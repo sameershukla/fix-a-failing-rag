@@ -2,6 +2,20 @@
 
 Every change to `golden.yaml` gets an entry here and its own commit. The set changes only when a lesson deliberately adds questions, or when the missing label check finds another passage that also answers a question. It never changes to make a metric pass.
 
+## 2026-10-10 (Module 3, lesson 3.8): six `missing-label:` additions, golden set 1.1
+
+No question was added or removed. Six questions gained one evidence passage each. The passages were found by `eval/golden/missing_labels.py` run on the final Module 3 stack at K = 20 (99 candidates, all read by hand; these six answer the question, the other 93 do not). Each passage is copied word for word from the normalized document, and `make golden-check` passes.
+
+- `missing-label:` `q033`, `q110`, `q249`, `q254` (refund of an order paid partly by gift card): added the row `gift card plus card split` in `brightcart/v2/structured/refunds/refund-adjustment-limits`. It says each portion is returned to its original tender and gift card value never moves to cash. It answers the same question as the existing evidence.
+- `missing-label:` `q242` (defective product, outside the return window, manufacturer warranty valid): added the bullet "Manufacturer warranty support may apply after the BrightCart return window." in `brightcart/v1/returns/electronics-returns`.
+- `missing-label:` `q277` (final sale item): added the bullet "Final sale merchandise remains nonrefundable unless it arrived damaged or the wrong item was shipped." in `brightcart/v1/refunds/refund-eligibility`. The existing evidence says only that final sale items are not refundable.
+
+`q033`, `q110`, `q249`, `q254`, `q242` and `q277` were already multi evidence or became so (the tag was added where missing). The set now has 75 multi evidence questions (was 72).
+
+The 93 rejected candidates were mostly generic bullets that share words with the evidence without answering, and about eight were the first half of an evidence passage that the 250 token chunker split across two chunks (a chunking effect, not a missing label).
+
+All Module 3 runs were scored again against this version of the set (the runs say "golden set 1.1" in their label). The effect of the six additions is reported in Module 3.
+
 ## 2026-10-10: first version, 360 questions
 
 **What was added.** 360 questions: 314 answerable and 46 unanswerable. Ids `q001` to `q009` are the nine questions written for Module 0 (unchanged wording). The other ids follow a fixed shuffle (seed 360), so slices are mixed through the file.

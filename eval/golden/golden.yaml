@@ -420,9 +420,12 @@
   evidence:
   - doc_id: brightcart/v2/structured/gift-cards/gift-card-refund-routing
     text: '| mixed card and gift card order | refund is partial and gift card funded 40 percent | 40% to gift card | return each portion to its original tender | Payments Operations |'
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| gift card plus card split | refund spans gift card and card tender on same order | original tender proportions | return each portion to its original tender and never move gift-card value to cash | Payments Support |'
   answerable: true
   tags:
   - table
+  - multi-evidence
   - module-02
 - id: q034
   question: trial user cancels before they convert to paid, any charge
@@ -1259,6 +1262,8 @@
           Refunds are returned in the **same proportions as the original payment**.  Gift-card
           value must go back to ``gift_card`` and may never be moved to cash or a bank card.
           The final tender receives any one-cent rounding remainder so allocations sum exactly
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| gift card plus card split | refund spans gift card and card tender on same order | original tender proportions | return each portion to its original tender and never move gift-card value to cash | Payments Support |'
   answerable: true
   tags:
   - multi-evidence
@@ -2682,6 +2687,8 @@
     text: '- Defective items can qualify under a product warranty even after the normal return window.'
   - doc_id: brightcart/v1/returns/return-window
     text: '- Warranty claims are not limited by the normal return window.'
+  - doc_id: brightcart/v1/returns/electronics-returns
+    text: '- Manufacturer warranty support may apply after the BrightCart return window.'
   answerable: true
   tags:
   - boundary-policy
@@ -2769,9 +2776,12 @@
   evidence:
   - doc_id: brightcart/v1/gift-cards/gift-card-refunds
     text: An amount originally paid by BrightCart gift card is refunded back to that gift card. For mixed payment orders, the refund is returned proportionally to the original payment methods until each method has received its share. Support cannot choose to move the entire refund to a credit card for convenience.
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| gift card plus card split | refund spans gift card and card tender on same order | original tender proportions | return each portion to its original tender and never move gift-card value to cash | Payments Support |'
   answerable: true
   tags:
   - everyday-policy
+  - multi-evidence
   - module-03
 - id: q250
   question: customer wants a new delivery address but the carrier already has the parcel
@@ -2821,6 +2831,8 @@
     text: An amount originally paid by BrightCart gift card is refunded back to that gift card. For mixed payment orders, the refund is returned proportionally to the original payment methods until each method has received its share. Support cannot choose to move the entire refund to a credit card for convenience.
   - doc_id: brightcart/v1/refunds/refund-timelines
     text: After a refund is issued, card refunds usually appear within 3 to 5 business days, ACH refunds usually appear within 5 to 7 business days, and gift card refunds are normally available the same day. These are posting estimates after BrightCart has issued the refund.
+  - doc_id: brightcart/v2/structured/refunds/refund-adjustment-limits
+    text: '| gift card plus card split | refund spans gift card and card tender on same order | original tender proportions | return each portion to its original tender and never move gift-card value to cash | Payments Support |'
   answerable: true
   tags:
   - multi-evidence
@@ -3077,10 +3089,13 @@
   evidence:
   - doc_id: brightcart/v1/refunds/refund-eligibility
     text: Most unused physical items are eligible for a refund when the return is requested within 30 calendar days of delivery. Final sale items are not refundable. The item must include the parts and accessories that were shipped with it unless the item arrived damaged or incomplete.
+  - doc_id: brightcart/v1/refunds/refund-eligibility
+    text: '- Final sale merchandise remains nonrefundable unless it arrived damaged or the wrong item was shipped.'
   answerable: true
   tags:
   - everyday-policy
   - authority-conflict
+  - multi-evidence
   - module-03
 - id: q278
   question: inspection service handled FAKE_RMA_712, what reason code, next state and photo count
