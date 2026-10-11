@@ -129,8 +129,13 @@ def trend_table(current):
     for r in reversed(rows):
         mark = " class=cur" if r["run_id"] == current["run_id"] else ""
         note = "" if r["golden_hash"] == current["golden"]["hash"] and r["min_cover"] == current["relevance_rule"]["min_cover"] else " different golden set or rule"
-        body.append(f"<tr{mark}><td>{e(r['run_id'])}</td><td>{e(r['label'] or '')}{e(note)}</td><td>{r['hit@5']:.3f}</td><td>{r['recall@5']:.3f}</td><td>{r['mrr@5']:.3f}</td></tr>")
-    return f'<div class="scroll"><table><thead><tr><th>run</th><th>label</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th></tr></thead><tbody>{"".join(body)}</tbody></table></div>'
+        sv = "-"
+        try:   # runs made before Lesson 8.1 have no system version
+            sv = json.loads((ROOT / "eval" / "runs" / r["run_id"] / "run.json").read_text()).get("system_version") or "-"
+        except (OSError, ValueError):
+            pass
+        body.append(f"<tr{mark}><td>{e(r['run_id'])}</td><td>{e(sv)}</td><td>{e(r['label'] or '')}{e(note)}</td><td>{r['hit@5']:.3f}</td><td>{r['recall@5']:.3f}</td><td>{r['mrr@5']:.3f}</td></tr>")
+    return f'<div class="scroll"><table><thead><tr><th>run</th><th>system version</th><th>label</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th></tr></thead><tbody>{"".join(body)}</tbody></table></div>'
 
 
 CSS = """
@@ -201,6 +206,18 @@ def cost_latency_panel():
     return "\n".join(html)
 
 
+def changes_box(rec, base):
+    """Lesson 8.1/8.3: what changed in the SYSTEM between the two runs, from the manifests. Runs without a manifest can only show the config hash."""
+    if not base:
+        return ""
+    if rec.get("manifest") and base.get("manifest"):
+        pa, pb = base["manifest"]["parts"], rec["manifest"]["parts"]
+        changed = sorted(k for k in set(pa) | set(pb) if pa.get(k) != pb.get(k))
+        what = ", ".join(changed) if changed else "nothing (same behavior inputs)"
+        return f'<div class="warn"><b>What changed in the system:</b> {e(what)}. System version {e(base["system_version"])} to {e(rec["system_version"])}.</div>'
+    return '<div class="warn"><b>What changed in the system:</b> unknown. One or both runs were made before system versions existed (Lesson 8.1), so only the config hash is known. A prompt, judge or golden set change would not show.</div>'
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run")
@@ -228,7 +245,7 @@ def main():
 <div><span>golden set</span><b>{rec['golden']['answerable']} answerable of {rec['golden']['questions']} (hash {e(rec['golden']['hash'])})</b></div>
 <div><span>index builds</span><b>{rec['builds']} (headline = mean, band = min to max)</b></div>
 <div><span>relevance rule</span><b>chunk covers at least {rec['relevance_rule']['min_cover']:.0%} of the passage</b></div>
-<div><span>one question is worth</span><b>{100/n_ans:.2f} points</b></div></div>{warn}
+<div><span>one question is worth</span><b>{100/n_ans:.2f} points</b></div></div>{warn}{changes_box(rec, base)}
 
 <h2>1. Gate status</h2><p class="pending">No thresholds are set yet. The gate arrives in Module 7. Until then nothing here passes or fails.</p>
 

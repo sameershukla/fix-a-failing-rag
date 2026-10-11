@@ -80,7 +80,8 @@ def main():
     cache_dir = DATA / "llm_cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
     cfg_hash = hashlib.sha1(yaml.safe_dump(cfg, sort_keys=True).encode()).hexdigest()[:6]
-    run_id = f"gen-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{cfg_hash}"
+    from ops.versioning import manifest
+    run_id = f"gen-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{manifest()['system_version'][:6]}"   # the id names the SYSTEM version (Lesson 8.1), not only the config
     out_dir = ROOT / "eval" / "runs" / run_id
     out_dir.mkdir(parents=True)
 
@@ -121,6 +122,8 @@ def main():
         record["latency_ms"] = {"median": statistics.median(lat), "p95": lat[min(len(lat) - 1, round(0.95 * (len(lat) - 1)))], "mean": statistics.mean(lat)}
         record["tokens_per_answer"] = {"input_mean": statistics.mean(r["input_tokens"] for r in measured), "output_mean": statistics.mean(r["output_tokens"] for r in measured)}
         record["cost_per_answer"] = None if None in costs else {"mean": statistics.mean(costs), "currency": pricing.get("currency"), "prices_as_of": pricing.get("as_of")}
+    from ops.versioning import stamp
+    stamp(record)
     (out_dir / "record.json").write_text(json.dumps(record, indent=2))
     print(f"\nrun {run_id}: {len(rows)} answers ({record['answerable']} answerable, {record['unanswerable']} unanswerable), "
           f"{calls} model calls, {truncated} hit the output token limit")

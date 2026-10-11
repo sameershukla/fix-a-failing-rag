@@ -25,7 +25,9 @@ def main():
     from sentence_transformers import SentenceTransformer
 
     config = load_config()
-    chunks = list(read_jsonl(chunks_path(config)))
+    from app.ingest.overlay import apply_overlay
+
+    chunks = apply_overlay(read_jsonl(chunks_path(config)), (config.get("corpus") or {}).get("overlay"))   # Lesson 8.4: empty unless a drift world is being built
 
     model = SentenceTransformer(config["embedding"]["model"])
     passage_prefix = config["embedding"].get("passage_prefix", "")

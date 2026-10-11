@@ -12,7 +12,7 @@ export RAG_CONFIG := $(CONFIG)
 endif
 
 
-.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet eval-cache eval-latency eval-security judge-run cite-check judge-compare judge-calibrate dashboard compare test
+.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet promote drift-check trace compare-runs eval-cache eval-latency eval-security judge-run cite-check judge-compare judge-calibrate dashboard compare test
 
 # Create a local virtual environment and install the generator's dependencies.
 $(PY):
@@ -86,6 +86,25 @@ eval: $(PY)
 # Compare two of these runs with make compare, the same as for retrieval runs.
 eval-gen: $(PY)
 	$(PY) -m eval.generate --system $(SYSTEM) $(if $(SUBSET),--subset $(SUBSET)) $(if $(LIMIT),--limit $(LIMIT)) $(if $(NOCACHE),--no-cache)
+
+# Module 8: promote bad traces to REVIEWED golden cases. Never writes golden.yaml.
+#   make promote ARGS="flag <trace id> <reason>"  |  make promote ARGS="candidates"  |  make promote ARGS="check eval/golden/candidates/<file>.yaml"   (add --traces <file> to read a different trace file)
+promote: $(PY)
+	$(PY) -m ops.promote $(ARGS)
+
+# Module 8: label health. Which golden questions point at documents that are missing or retired in the index the config selects? No retrieval, no model call.
+#   make drift-check [GOLDEN=eval/golden/golden.yaml] [CONFIG=config/experiments/d-before.yaml]
+drift-check: $(PY)
+	$(PY) -m ops.drift $(if $(GOLDEN),--golden $(GOLDEN)) $(if $(LIST),--list)
+
+# Module 8: read the request traces. make trace lists the last 10; make trace ID=<trace id> shows one in the order things happened.
+trace: $(PY)
+	$(PY) -m app.trace $(if $(ID),show $(ID),list)
+
+# Module 8: compare two runs of the same kind (retrieval, generation, security, latency): what changed in the system, then the paired result.
+#   make compare-runs A=<run id> B=<run id>
+compare-runs: $(PY)
+	$(PY) -m ops.compare $(A) $(B)
 
 # Module 6: time the retrieval side of a request stage by stage (no model call). LIMIT=60 questions by default.
 #   make eval-latency [LIMIT=60] [CONFIG=...]

@@ -1,0 +1,54 @@
+# Experiment: Lesson 8.2 demo. s-5-1-injection-nofilter (injection filter on, authority filter off) plus tracing. Older experiment configs have no tracing block, so tracing defaults to off there.
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+generation:
+  prompt: plain
+llm:
+  max_tokens: 1000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  bm25_weight: 2.0
+  candidates: 50
+  filters:
+    status:
+    - active
+  k: 5
+  mode: hybrid
+  rerank:
+    enabled: true
+    model: cross-encoder/ms-marco-MiniLM-L-6-v2
+    top_n: 20
+  rrf_k: 60
+  vector_weight: 1.0
+security:
+  acl: false
+  caller: staff-all
+  injection_filter: true
+  redact: false
+tracing:
+  enabled: true
+  store_prompt: true
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

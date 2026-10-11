@@ -32,7 +32,7 @@ def judge_run(run):
         out.append({"id": r["id"], "answerable": r["answerable"], "verdict": j["verdict"], "problem": j.get("problem"), "refused": bool(REFUSE.search(r["answer"][:500])),
                     "truncated": r["stop_reason"] == "max_tokens", "output_tokens": r["output_tokens"],
                     "unsupported": [c["claim"] for c in j["claims"] if not c["supported"]]})
-    (ROOT / "eval/runs" / run / "judged.json").write_text(json.dumps({"judge": cfg["prompt_version"], "model": cfg["model"], "calibrated": False, "answers": out}, indent=1, ensure_ascii=False))
+    (ROOT / "eval/runs" / run / "judged.json").write_text(json.dumps(__import__("ops.versioning", fromlist=["stamp"]).stamp({"judge": cfg["prompt_version"], "model": cfg["model"], "calibrated": False, "answers": out}), indent=1, ensure_ascii=False))
     return out
 
 

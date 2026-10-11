@@ -1,0 +1,34 @@
+# DRAFT drift questions, evidence as of the after world (edition 2026.3 published). Written by Claude, to be reviewed by the author.
+- id: d01
+  question: how many days does a us customer have to return electronics
+  evidence:
+  - doc_id: brightcart/v3/policy/returns/electronics-return-window/2026.3
+    text: 'The rule for this edition is: **30 calendar days**.'
+  answerable: true
+  tags:
+  - drift
+  - edition
+  - draft
+  note: DRAFT by Claude, not reviewed. Evidence for the after world.
+- id: d02
+  question: how much notice does an enterprise customer in the eu have to give to cancel
+  evidence:
+  - doc_id: brightcart/v3/policy/subscriptions/enterprise-cancellation/2026.3
+    text: 'The rule for this edition is: **30 days notice for EU enterprise contracts signed after 2026-09-01**.'
+  answerable: true
+  tags:
+  - drift
+  - edition
+  - draft
+  note: DRAFT by Claude, not reviewed. Evidence for the after world.
+- id: d03
+  question: how long do we keep an eu consumer's support chat transcripts
+  evidence:
+  - doc_id: brightcart/v3/policy/privacy/support-transcript-retention/2026.3
+    text: 'The rule for this edition is: **180 days for EU consumer support transcripts**.'
+  answerable: true
+  tags:
+  - drift
+  - edition
+  - draft
+  note: DRAFT by Claude, not reviewed. Evidence for the after world.

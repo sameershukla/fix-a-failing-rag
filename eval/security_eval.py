@@ -56,7 +56,8 @@ def main():
         results.append(r)
 
     cfg_hash = hashlib.sha1(yaml.safe_dump(cfg, sort_keys=True).encode()).hexdigest()[:6]
-    run_id = f"sec-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{cfg_hash}"
+    from ops.versioning import manifest
+    run_id = f"sec-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{manifest()['system_version'][:6]}"
     out = ROOT / "eval/runs" / run_id; out.mkdir(parents=True)
     sec = cfg.get("security", {})
     attack = [r for r in results if not r["category"].startswith("control")]
@@ -66,6 +67,8 @@ def main():
               "authority_filter": (cfg["retrieval"].get("filters") or {}).get("authority"), "attacks": len(attack),
               "leak": cnt["LEAK"], "blocked": cnt["blocked"], "not_reached": cnt["not reached"],
               "controls": len(ctrl), "controls_failed": sum(r["status"] == "FAILED" for r in ctrl)}
+    from ops.versioning import stamp
+    stamp(record)
     (out / "record.json").write_text(json.dumps(record, indent=1)); (out / "results.jsonl").write_text("\n".join(json.dumps(r) for r in results))
 
     print(f"run {run_id}  security controls: acl={sec.get('acl')} redact={sec.get('redact')} injection_filter={sec.get('injection_filter')}  authority filter: {record['authority_filter']}")

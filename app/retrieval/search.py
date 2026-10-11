@@ -33,7 +33,8 @@ def _load():
 def _chunks():
     state = _load()
     if state["chunks"] is None:
-        chunks = list(read_jsonl(chunks_path(state["config"])))
+        from app.ingest.overlay import apply_overlay
+        chunks = apply_overlay(read_jsonl(chunks_path(state["config"])), (state["config"].get("corpus") or {}).get("overlay"))   # same overlay as the indexer
         state["chunks"] = chunks
         state["by_id"] = {c["chunk_id"]: i for i, c in enumerate(chunks)}
         state["bm25"] = BM25([c["text"] for c in chunks])

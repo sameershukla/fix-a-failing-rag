@@ -30,6 +30,10 @@ def main():
     if not chunks_file.exists() or not common.NORMALIZED.exists():
         sys.exit(f"missing chunks or normalized docs for {args.system}. Run: make ingest SYSTEM={args.system}")
     n_chunks = sum(1 for _ in chunks_file.open(encoding="utf-8"))
+    overlay = (config.get("corpus") or {}).get("overlay")
+    if overlay:   # Lesson 8.4: the indexer drops or changes documents named by the overlay, so count what it actually indexed
+        from app.ingest.overlay import apply_overlay
+        n_chunks = len(apply_overlay(common.read_jsonl(chunks_file), overlay))
     n_indexed = search._load()["collection"].count()
     if n_chunks != n_indexed:
         sys.exit(f"stale index: {n_indexed} chunks indexed, {n_chunks} in {chunks_file.name}. Run: make ingest SYSTEM={args.system}")

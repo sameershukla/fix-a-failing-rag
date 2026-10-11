@@ -196,6 +196,8 @@ def main():
         stats_file = importlib.import_module(f"{args.system}.common").chunks_path(importlib.import_module(f"{args.system}.common").load_config()).parent / "stats.json"
         if stats_file.exists():
             record["chunk_stats"] = json.loads(stats_file.read_text())
+    from ops.versioning import stamp
+    stamp(record)   # Lesson 8.1: system_version and the behavior parts behind it
     (out_dir / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False))
     with (ROOT / "eval" / "runs" / "index.jsonl").open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({"run_id": run_id, "created_at": record["created_at"], "system": args.system, "label": args.label,

@@ -51,7 +51,8 @@ def main():
             print(f"  {r['base']}: paraphrase {r['paraphrase_sim']:.3f}  near miss {r['near_miss_sim']:.3f}")
     run_id = f"cache-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}"
     out = ROOT / "eval/runs" / run_id; out.mkdir(parents=True)
-    (out / "record.json").write_text(json.dumps({"run_id": run_id, "kind": "cache-eval", "model_calls": 0, "pairs": len(rows), "embedder": load_config()["embedding"]["model"], "rows": rows}, indent=1))
+    from ops.versioning import stamp
+    (out / "record.json").write_text(json.dumps(stamp({"run_id": run_id, "kind": "cache-eval", "model_calls": 0, "pairs": len(rows), "embedder": load_config()["embedding"]["model"], "rows": rows}), indent=1))
     print(f"\nsaved eval/runs/{run_id}/")
 
 

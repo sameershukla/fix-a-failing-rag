@@ -50,9 +50,10 @@ def main():
     cfg = load_config()
     run_id = f"lat-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}"
     out = ROOT / "eval/runs" / run_id; out.mkdir(parents=True)
-    (out / "record.json").write_text(json.dumps({"run_id": run_id, "kind": "latency", "model_calls": 0, "questions": len(rows), "warmup_calls_not_counted": args.warmup,
+    from ops.versioning import stamp
+    (out / "record.json").write_text(json.dumps(stamp({"run_id": run_id, "kind": "latency", "model_calls": 0, "questions": len(rows), "warmup_calls_not_counted": args.warmup,
                                                  "import_ms": import_ms, "cold_first_call_ms": cold["total_ms"], "security": cfg.get("security"),
-                                                 "retrieval": {k: cfg["retrieval"].get(k) for k in ("mode", "k", "candidates")}, "rerank": cfg["retrieval"].get("rerank")}, indent=1))
+                                                 "retrieval": {k: cfg["retrieval"].get(k) for k in ("mode", "k", "candidates")}, "rerank": cfg["retrieval"].get("rerank")}), indent=1))
     (out / "calls.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
     print(f"run {run_id}  retrieval side only, no model call. {len(warm)} warm calls measured ({args.warmup} warm up calls not counted)")
     print(f"import {import_ms:.0f} ms; first call in a fresh process (cold start) {cold['total_ms']:.0f} ms")

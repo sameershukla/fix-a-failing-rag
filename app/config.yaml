@@ -62,3 +62,6 @@ cache:
     enabled: false    # Lesson 6.3: reuse a stored answer for a close question, inside the same scope (caller, security, prompt, model, retrieval)
     threshold: 0.96   # cosine similarity of the question embeddings. Chosen with make eval-cache: the lowest value with no false hit on the 26 pairs. See the lesson.
     ttl_days: 7
+tracing:
+  enabled: true       # Lesson 8.2: one trace per request in data/app/traces/traces.jsonl
+  store_prompt: true  # the prompt as the model saw it (after access control and redaction)
