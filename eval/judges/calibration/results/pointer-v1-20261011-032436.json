@@ -1,0 +1,646 @@
+{
+ "split": "pointer",
+ "prompt_version": "v1",
+ "model": "claude-sonnet-5-5",
+ "agreement": 0.2857142857142857,
+ "kappa": 0.0,
+ "recall": 1.0,
+ "precision": 0.2857142857142857,
+ "counts": {
+  "tp": 4,
+  "fn": 0,
+  "fp": 10,
+  "tn": 0
+ },
+ "items": [
+  {
+   "id": "P01",
+   "question_id": "q085",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't say the default page size for list endpoints",
+     "supported": true,
+     "evidence": "Context covers rate limits, error codes, export job; no mention of pagination or page size."
+    },
+    {
+     "claim": "Context covers rate limits, error codes, and export job behavior but nothing about pagination",
+     "supported": true,
+     "evidence": "Chunks cover API Rate Limits, Common API Error Codes, Job Export API; none mention pagination."
+    },
+    {
+     "claim": "GET /v1/customers is throttled at 300 requests per minute",
+     "supported": true,
+     "evidence": "| GET /v1/customers | standard merchant production key | 300 requests per minute |"
+    },
+    {
+     "claim": "GET /v1/webhooks is throttled at 240 requests per minute",
+     "supported": true,
+     "evidence": "| GET /v1/webhooks | standard merchant production key | 240 requests per minute |"
+    },
+    {
+     "claim": "The default public API limit is 600 requests per minute per client",
+     "supported": true,
+     "evidence": "The default public API limit is 600 requests per minute per client."
+    },
+    {
+     "claim": "Page size can be found in the API's pagination documentation or OpenAPI spec, with parameters like limit, per_page, page_size",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P02",
+   "question_id": "q119",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context gives no weight limit for expedited shipping.",
+     "supported": true,
+     "evidence": "Context lists only 'Oversize items and hazardous materials are not eligible' with no numeric limit."
+    },
+    {
+     "claim": "The Expedited Shipping article lists exclusions under exceptions and edge cases.",
+     "supported": true,
+     "evidence": "## Exceptions and edge cases - Oversize items and hazardous materials are not eligible."
+    },
+    {
+     "claim": "Oversize items and hazardous materials are not eligible.",
+     "supported": true,
+     "evidence": "Oversize items and hazardous materials are not eligible."
+    },
+    {
+     "claim": "The context does not define oversize by weight or dimensions, and no other section sets a numeric limit.",
+     "supported": true,
+     "evidence": "No definition of 'oversize' appears in any chunk."
+    },
+    {
+     "claim": "To get the exact threshold, check warehouse or carrier eligibility rules or ask the shipping/fulfillment policy owner.",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "The item must be in stock at a warehouse that supports expedited service.",
+     "supported": true,
+     "evidence": "The item must be in stock at a warehouse that supports expedited service."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P03",
+   "question_id": "q300",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "For EU standard-tier customers, the electronics return window is 30 calendar days, and statutory rights may extend eligibility",
+     "supported": true,
+     "evidence": "The rule for this edition is: **30 calendar days, except statutory rights may extend eligibility**."
+    },
+    {
+     "claim": "This comes from the Electronics Return Window 2026.3-eu edition",
+     "supported": true,
+     "evidence": "Electronics Return Window - 2026.3-eu ... applies in region **EU** to customer tier **standard**"
+    },
+    {
+     "claim": "The edition applies only if region is EU, tier is standard, and date is on or after 2026-09-01",
+     "supported": true,
+     "evidence": "This edition applies in region **EU** to customer tier **standard** starting **2026-09-01**."
+    },
+    {
+     "claim": "The question doesn't give a date",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "The context doesn't include an EU edition for cases before 2026-09-01",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "The general Electronics Return Rules article sets a 14-day window from delivery",
+     "supported": true,
+     "evidence": "Electronics may be returned within 14 calendar days of delivery."
+    },
+    {
+     "claim": "Context doesn't confirm the general article is the right fallback for EU cases",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "The context doesn't cover EU customers outside the standard tier",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "US edition is 30 days with no statutory extension",
+     "supported": true,
+     "evidence": "applies in region **US** ... The rule for this edition is: **30 calendar days**."
+    },
+    {
+     "claim": "Don't use the US edition because it is for a different region",
+     "supported": true,
+     "evidence": "Use the edition whose effective date, region, and customer tier match the case."
+    },
+    {
+     "claim": "The context doesn't say how long a statutory extension runs",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "Check consumer-law guidance or escalate statutory extension cases",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P04",
+   "question_id": "q215",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't give the dates of this year's holiday return extension.",
+     "supported": true,
+     "evidence": "Holiday extensions may be announced in a dated seasonal notice. (no dates given in context)"
+    },
+    {
+     "claim": "The Standard Return Window policy says holiday extensions may be announced in a dated seasonal notice.",
+     "supported": true,
+     "evidence": "Holiday extensions may be announced in a dated seasonal notice."
+    },
+    {
+     "claim": "The seasonal notice or specific dates are not included in the context.",
+     "supported": true,
+     "evidence": "No seasonal notice or dates appear in any chunk."
+    },
+    {
+     "claim": "The Return Restocking Fee Matrix has a 'holiday exception' row covering something different.",
+     "supported": true,
+     "evidence": "| holiday exception | federal holiday impacts timing | next business day | shift operational clock only | Operations |"
+    },
+    {
+     "claim": "When a federal holiday affects timing, the operational clock shifts to the next business day.",
+     "supported": true,
+     "evidence": "federal holiday impacts timing | next business day | shift operational clock only"
+    },
+    {
+     "claim": "The holiday exception row is not a return window extension.",
+     "supported": true,
+     "evidence": "shift operational clock only"
+    },
+    {
+     "claim": "Standard items default to 30 calendar days from the carrier-confirmed delivery date.",
+     "supported": true,
+     "evidence": "The standard return window is 30 calendar days from the carrier confirmed delivery date."
+    },
+    {
+     "claim": "Electronics default to 14 calendar days from delivery.",
+     "supported": true,
+     "evidence": "Electronics may be returned within 14 calendar days of delivery."
+    },
+    {
+     "claim": "The dated seasonal notice is where holiday extensions are announced, so check it for the actual dates.",
+     "supported": true,
+     "evidence": "Holiday extensions may be announced in a dated seasonal notice."
+    },
+    {
+     "claim": "The returns operations team can also confirm the dates.",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P05",
+   "question_id": "q061",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context does not say whether customers can pick up orders in store",
+     "supported": true,
+     "evidence": "None of the chunks mention store pickup."
+    },
+    {
+     "claim": "The three policies (Canceling, Changing, Backordered Items) do not mention store pickup",
+     "supported": true,
+     "evidence": "The context covers cancellation, changing orders, and backordered items, with no mention of store pickup."
+    },
+    {
+     "claim": "Cancellation is allowed while an order is in received or picking status",
+     "supported": true,
+     "evidence": "A customer can cancel an order while it is in received or picking status if the warehouse can still stop fulfillment."
+    },
+    {
+     "claim": "Once packed, support can't promise cancellation",
+     "supported": true,
+     "evidence": "If the order had already changed to packed, support would not promise cancellation."
+    },
+    {
+     "claim": "Address and quantity changes are allowed only in received status",
+     "supported": true,
+     "evidence": "A shipping address or item quantity can be changed only while the order is in received status and before fulfillment starts."
+    },
+    {
+     "claim": "Backordered items ship separately",
+     "supported": true,
+     "evidence": "In stock items on the same order can ship separately."
+    },
+    {
+     "claim": "The card is captured when the backordered item ships",
+     "supported": true,
+     "evidence": "A backordered item is not captured on a standard card until it ships."
+    },
+    {
+     "claim": "For store pickup eligibility, check with the team that owns fulfillment or pickup policy",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P06",
+   "question_id": "q221",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't say that gift cards expire",
+     "supported": true,
+     "evidence": "No chunk mentions gift card expiration; only promotional credits are said to have expiration rules."
+    },
+    {
+     "claim": "The Redeeming Gift Cards section states \"gift cards remain valid.\"",
+     "supported": true,
+     "evidence": "gift cards remain valid."
+    },
+    {
+     "claim": "The context gives no expiration period for gift cards",
+     "supported": true,
+     "evidence": "No expiration period for gift cards appears in any chunk."
+    },
+    {
+     "claim": "Promotional credits can have separate expiration rules",
+     "supported": true,
+     "evidence": "Promotional credits can have separate expiration rules."
+    },
+    {
+     "claim": "The context doesn't specify the promotional credit rules or how long they last",
+     "supported": true,
+     "evidence": "The chunks only say \"Promotional credits can have separate expiration rules\" and give no details."
+    },
+    {
+     "claim": "For promotional credit questions, check with the relevant policy owner or the promotion's terms",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P07",
+   "question_id": "q223",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Context doesn't specify what encryption is used to store card tokens",
+     "supported": true,
+     "evidence": "Context mentions tokenized references but contains no encryption algorithm, key management, or storage details."
+    },
+    {
+     "claim": "Payment pages use tokenized references so internal systems can identify a payment without storing raw card details",
+     "supported": true,
+     "evidence": "Payment pages use tokenized references so internal systems can identify a payment without storing the raw card details."
+    },
+    {
+     "claim": "Context doesn't name an algorithm, key management approach, or storage method",
+     "supported": true,
+     "evidence": "No such details appear in any chunk."
+    },
+    {
+     "claim": "Approved processors handle raw card data within their compliant environment",
+     "supported": true,
+     "evidence": "Approved payment processors can handle raw card data within their compliant environment."
+    },
+    {
+     "claim": "Check with the payment security or platform team, or the processor's documentation, for encryption details",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P08",
+   "question_id": "q304",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context does not say how long it takes to review a tax exemption certificate.",
+     "supported": true,
+     "evidence": "Tax Exemption Help page contains only a rule about future orders and a generic example; no review timing is given."
+    },
+    {
+     "claim": "The Tax Exemption Help page only covers how an exemption applies.",
+     "supported": true,
+     "evidence": "A verified tax exemption applies only to future orders; support does not retroactively remove tax from a completed order."
+    },
+    {
+     "claim": "A verified exemption applies to future orders, not completed ones.",
+     "supported": true,
+     "evidence": "A verified tax exemption applies only to future orders; support does not retroactively remove tax from a completed order."
+    },
+    {
+     "claim": "Agents should confirm the object identifier and current status before applying the rule.",
+     "supported": true,
+     "evidence": "Always confirm the object identifier and current status before applying the rule."
+    },
+    {
+     "claim": "For review timing, check the internal tax or support process or ask the team that handles exemption verification.",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P09",
+   "question_id": "q189",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't state how many points are earned per dollar spent",
+     "supported": true,
+     "evidence": "No chunk states an earn rate; only the redemption rate (100 points = $1) and tier thresholds appear."
+    },
+    {
+     "claim": "Redemption rate is 100 points = $1 against merchandise subtotal",
+     "supported": true,
+     "evidence": "standard member redemption | redeeming against merchandise subtotal | 100 points = $1"
+    },
+    {
+     "claim": "Points are applied before tax and shipping",
+     "supported": true,
+     "evidence": "apply points before tax and shipping"
+    },
+    {
+     "claim": "Gold tier starts at 5,000 qualifying points earned in a rolling 12-month window",
+     "supported": true,
+     "evidence": "Gold tier starts at 5,000 qualifying points earned in a rolling 12-month window."
+    },
+    {
+     "claim": "The context gives no per-dollar earn figure",
+     "supported": true,
+     "evidence": "No earn figure appears in any chunk."
+    },
+    {
+     "claim": "The Loyalty Points Conversion Matrix page is the primary BrightCart source for points conversion",
+     "supported": true,
+     "evidence": "This page is the primary BrightCart source for points conversion."
+    },
+    {
+     "claim": "The user should check the current version of the page or the Handbook for the earn rate",
+     "supported": false,
+     "evidence": "The context says to check the current rule rather than copy old numbers, but it never says the Handbook contains the earn rate."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P10",
+   "question_id": "q208",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context does not state a maximum number of seats per enterprise tenant",
+     "supported": true,
+     "evidence": "No chunk mentions a seat cap or limit for an enterprise tenant."
+    },
+    {
+     "claim": "No seat cap or limit appears anywhere in the material",
+     "supported": true,
+     "evidence": "The only seat-related content is the business plan seat decrease row in the proration matrix."
+    },
+    {
+     "claim": "A verified domain can belong to only one enterprise tenant at a time",
+     "supported": true,
+     "evidence": "A verified domain can belong to only one enterprise tenant at a time."
+    },
+    {
+     "claim": "The verified-domain rule limits domain ownership, not seats",
+     "supported": true,
+     "evidence": "A verified domain can belong to only one enterprise tenant at a time."
+    },
+    {
+     "claim": "On a business plan, seats removed mid-cycle stay paid through the cycle and quantity is reduced on the next invoice",
+     "supported": true,
+     "evidence": "retain paid seats through cycle and reduce quantity next invoice"
+    },
+    {
+     "claim": "Seat decrease rule covers billing for seat changes, not a maximum",
+     "supported": true,
+     "evidence": "business plan removes seats mid-cycle | next invoice | retain paid seats through cycle"
+    },
+    {
+     "claim": "To get the limit, check the current enterprise plan or contract terms",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "B2B Subscriptions is an owner to ask about seats or the subscription",
+     "supported": true,
+     "evidence": "seat decrease business ... | B2B Subscriptions"
+    },
+    {
+     "claim": "Don't infer a number from an old ticket or a similar account",
+     "supported": true,
+     "evidence": "BrightCart teams should not copy a number from an old ticket, Slack message, or customer case without checking the current rule."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P11",
+   "question_id": "q184",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Context does not say where customers can drop off returns without a label",
+     "supported": true,
+     "evidence": "No chunk mentions drop-off locations or label-free returns."
+    },
+    {
+     "claim": "Context covers who pays return shipping",
+     "supported": true,
+     "evidence": "BrightCart pays return shipping when the item is defective, damaged in transit, or different from what the customer ordered."
+    },
+    {
+     "claim": "Context covers when a prepaid label is issued",
+     "supported": true,
+     "evidence": "A prepaid label can be issued when BrightCart is responsible."
+    },
+    {
+     "claim": "Oversize freight returns need logistics review instead of a standard label",
+     "supported": true,
+     "evidence": "Oversize freight returns require logistics review instead of a standard label."
+    },
+    {
+     "claim": "Context does not list drop-off locations or describe a no-label return process",
+     "supported": true,
+     "evidence": "No chunk contains drop-off locations or a no-label return process."
+    },
+    {
+     "claim": "Returns Ops is the owner of the return label deduction process",
+     "supported": true,
+     "evidence": "| return label deduction | customer-paid return is outside free-return policy | $9 | deduct return label fee from refund after first carrier scan | Returns Ops |"
+    },
+    {
+     "claim": "The current returns policy is available in the help center",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P12",
+   "question_id": "q189",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context does not state how many points are earned per dollar spent",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "Standard member redemption is 100 points = $1 against the merchandise subtotal",
+     "supported": true,
+     "evidence": "standard member redemption | redeeming against merchandise subtotal | 100 points = $1"
+    },
+    {
+     "claim": "Points are applied before tax and shipping",
+     "supported": true,
+     "evidence": "apply points before tax and shipping"
+    },
+    {
+     "claim": "The relevant policy or registry is one that Loyalty Operations maintains",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Operational thresholds are maintained in a policy or registry, not in older tickets or chat messages",
+     "supported": true,
+     "evidence": "Operational thresholds are maintained in the policy or registry named in the procedure. Historical notes are useful for diagnosis, but they are not authority for a current action."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P13",
+   "question_id": "q353",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't say whether BrightCart accepts Apple Pay or Google Pay",
+     "supported": true,
+     "evidence": "Context lists only Visa, Mastercard, American Express, Discover; no mention of Apple Pay or Google Pay."
+    },
+    {
+     "claim": "Card payment article lists Visa, Mastercard, American Express, and Discover as supported for standard consumer checkout",
+     "supported": true,
+     "evidence": "Visa, Mastercard, American Express, and Discover are supported for standard consumer checkout."
+    },
+    {
+     "claim": "Gift card article mentions paying the remainder with another supported payment method without saying which",
+     "supported": true,
+     "evidence": "the customer can pay the remainder with another supported payment method."
+    },
+    {
+     "claim": "A Payments Integration Guide on the internal wiki exists",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "The Payments Integration Guide lists Apple Pay and Google Pay as supported",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "P14",
+   "question_id": "q222",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't specify a minimum password length.",
+     "supported": true,
+     "evidence": "Context only says \"a password that meets the current password policy\" with no length stated."
+    },
+    {
+     "claim": "A customer account requires a password that meets the current password policy.",
+     "supported": true,
+     "evidence": "A customer account requires a unique email address, a password that meets the current password policy, and a verified phone number."
+    },
+    {
+     "claim": "A password reset must also meet the password policy.",
+     "supported": true,
+     "evidence": "The new password must meet the active password policy."
+    },
+    {
+     "claim": "The exact length requirement is in section 4 of the Account Security Handbook.",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  }
+ ]
+}

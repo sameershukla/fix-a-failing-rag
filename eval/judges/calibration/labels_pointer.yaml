@@ -1,0 +1,425 @@
+# DRAFT pointer labels (Lesson 4.4). Written by Claude. NOT human labels: labeled_by is claude-draft on every item.
+# Purpose: check that judge prompt v2 follows the pointer rule below. They cannot calibrate a judge.
+# Rule: a generic suggestion to consult another source is not a claim. A pointer that names a specific document, page or team, or says something is found there, is a claim and needs support in the chunks.
+# These questions do not appear in labels.yaml. A person should relabel them blind before any result from them is quoted as more than a rule check.
+- id: P01
+  question_id: q085
+  question: default page size for list endpoints in the api
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v2/code/api/rate-limiter::3
+  - brightcart/v1/api/rate-limits::0
+  - brightcart/v1/api/error-codes::0
+  - brightcart/v2/structured/api/api-rate-limit-table::5
+  - brightcart/v3/html/job-export-api::0
+  answer: 'The provided context doesn''t say what the default page size is for list endpoints. It covers rate limits, error codes, and
+    export job behavior, but nothing about pagination or page size.
+
+
+    The closest related details are these:
+
+    - `GET /v1/customers` and `GET /v1/webhooks` are throttled at 300 and 240 requests per minute respectively. These are rate limits,
+    not page sizes.
+
+    - The default public API limit is 600 requests per minute per client.
+
+
+    To find the page size, check the API''s pagination documentation or the OpenAPI spec for the list endpoints, which would list parameters
+    like `limit`, `per_page`, or `page_size`. If you can share that documentation, I can help pull out the answer.'
+  verdict: faithful
+  reason: Generic pointer to documentation. Parameter names are offered as examples of what such docs might list. The rate limits quoted
+    are in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P02
+  question_id: q119
+  question: weight limit for expedited shipping
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v1/shipping/expedited-shipping::0
+  - brightcart/v1/shipping/expedited-shipping::1
+  - brightcart/v3/policy/shipping/expedited-refund/2026.3::0
+  - brightcart/v2/structured/shipping/expedited-guarantee::0
+  - brightcart/v2/structured/refunds/refund-adjustment-limits::4
+  answer: 'The context doesn''t give a weight limit for expedited shipping.
+
+
+    The closest relevant information is in the Expedited Shipping article, which lists exclusions under exceptions and edge cases. It
+    says only that **oversize items and hazardous materials are not eligible**. It doesn''t define "oversize" in terms of weight or
+    dimensions, and no other section sets a numeric limit.
+
+
+    To get the exact weight or size threshold, check the warehouse or carrier eligibility rules, or ask the shipping/fulfillment policy
+    owner. The item must also be in stock at a warehouse that supports expedited service.'
+  verdict: faithful
+  reason: Generic pointer to eligibility rules or the policy owner. The exclusions quoted (oversize, hazmat) are in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P03
+  question_id: q300
+  question: electronics return window for an eu customer
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v3/policy/returns/electronics-return-window/2026.3-eu::0
+  - brightcart/v3/policy/returns/electronics-return-window/2026.3::0
+  - brightcart/v1/returns/electronics-returns::0
+  - brightcart/v1/returns/electronics-returns::1
+  - brightcart/v1/returns/return-window::0
+  answer: '**For an EU customer on the standard tier, the electronics return window is 30 calendar days, and statutory rights may extend
+    eligibility beyond that.** This comes from the "Electronics Return Window 2026.3-eu" edition.
+
+
+    The edition applies only if the case matches on all three points:
+
+    - **Region:** EU
+
+    - **Customer tier:** standard
+
+    - **Effective date:** on or after 2026-09-01
+
+
+    Some caveats:
+
+    - **Earlier dates:** The question doesn''t give a date. For a case before 2026-09-01, the context doesn''t include an EU edition.
+    The general "Electronics Return Rules" article sets a 14-day window from delivery, but I can''t confirm from the context that it
+    is the right fallback for EU cases.
+
+    - **Other tiers:** The context doesn''t cover EU customers outside the standard tier, so I can''t say what applies to them.
+
+    - **US edition:** Don''t use the US edition (30 days, no statutory extension). It is for a different region.
+
+    - **Statutory extensions:** The context doesn''t say how long a statutory extension runs. Check the applicable consumer-law guidance
+    or escalate those cases.
+
+
+    If you can share the order date and the customer''s tier, I can confirm which edition applies.'
+  verdict: faithful
+  reason: Generic pointer to consumer law guidance. The EU 2026.3 edition facts and the 14 day fallback are in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P04
+  question_id: q215
+  question: what are the dates of this years holiday return extension
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v1/returns/return-window::0
+  - brightcart/v2/structured/returns/return-restocking-fees::3
+  - brightcart/v1/returns/return-window::1
+  - brightcart/v1/returns/electronics-returns::0
+  - brightcart/v1/refunds/refund-eligibility::0
+  answer: 'The context doesn''t give the dates of this year''s holiday return extension.
+
+
+    The Standard Return Window policy only says that "Holiday extensions may be announced in a dated seasonal notice." It doesn''t include
+    that notice or any specific dates. The Return Restocking Fee Matrix has a "holiday exception" row, but it covers something different.
+    When a federal holiday affects timing, the operational clock shifts to the next business day. That isn''t a return window extension.
+
+
+    Until you find the seasonal notice, the defaults are:
+
+    - **Standard items:** 30 calendar days from the carrier-confirmed delivery date
+
+    - **Electronics:** 14 calendar days from delivery
+
+
+    To get the actual dates, check the dated seasonal notice, which the policy says is where holiday extensions are announced. Your
+    returns operations team can also confirm.'
+  verdict: faithful
+  reason: Generic pointer to the returns operations team. The quote about a dated seasonal notice and the 30 and 14 day defaults are
+    in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P05
+  question_id: q061
+  question: can customers pick up orders in store
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v1/orders/order-cancellation::0
+  - brightcart/v1/orders/order-modification::0
+  - brightcart/v1/orders/order-modification::1
+  - brightcart/v1/orders/backorders::0
+  - brightcart/v1/orders/order-cancellation::1
+  answer: 'The provided context doesn''t say whether customers can pick up orders in store. None of the three policies (Canceling an
+    Order, Changing an Order Before Fulfillment, Backordered Items) mention store pickup, so I can''t confirm it from these documents.
+
+
+    The context does cover related topics you may need:
+
+    - **Cancellation:** Allowed while an order is in received or picking status. Once it is packed, support can''t promise cancellation.
+
+    - **Address and quantity changes:** Allowed only in received status.
+
+    - **Backorders:** Items ship separately, and the card is captured when the backordered item ships.
+
+
+    For store pickup eligibility, check with the team that owns fulfillment or pickup policy.'
+  verdict: faithful
+  reason: Generic pointer to the team that owns fulfillment policy. The cancellation, address and backorder facts are in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P06
+  question_id: q221
+  question: do gift cards expire and after how long
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v3/html/domain-verification-help::0
+  - brightcart/v1/gift-cards/gift-card-refunds::1
+  - brightcart/v1/refunds/refund-policy::1
+  - brightcart/v1/gift-cards/gift-card-redemption::1
+  - brightcart/v1/gift-cards/gift-card-refunds::0
+  answer: 'The context doesn''t say that gift cards expire. The Redeeming Gift Cards section states that **"gift cards remain valid."**
+    It gives no expiration period.
+
+
+    Promotional credits are different: the context notes they "can have separate expiration rules," but it doesn''t specify those rules
+    or how long they last. For promotional credit questions, check with the relevant policy owner or the promotion''s terms.'
+  verdict: faithful
+  reason: '''gift cards remain valid'' and ''promotional credits can have separate expiration rules'' are in the chunks. The pointer
+    is generic.'
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P07
+  question_id: q223
+  question: what encryption is used to store card tokens
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v1/payments/payment-security::0
+  - brightcart/v1/api/api-auth::0
+  - brightcart/v3/html/domain-verification-help::0
+  - brightcart/v1/payments/card-payments::1
+  - brightcart/v1/payments/payment-security::1
+  answer: 'The provided context doesn''t specify what encryption is used to store card tokens. It says only that payment pages use tokenized
+    references so internal systems can identify a payment without storing raw card details. It doesn''t name an algorithm, key management
+    approach, or storage method.
+
+
+    For the encryption details, check with the payment security or platform team, or consult the payment processor''s documentation.
+    Approved processors handle raw card data within their compliant environment.'
+  verdict: faithful
+  reason: Generic pointer to the security or platform team and the processor docs. Tokenized references and processor handling are in
+    the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P08
+  question_id: q304
+  question: how long does it take to review a tax exemption certificate
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v1/refunds/refund-timelines::0
+  - brightcart/v3/html/tax-exemption-help::1
+  - brightcart/v1/shipping/international-shipping::0
+  - brightcart/v3/html/tax-exemption-help::0
+  - brightcart/v3/handbooks/legal-hold-and-discovery-handbook::0
+  answer: 'The provided context doesn''t say how long it takes to review a tax exemption certificate. The Tax Exemption Help page only
+    covers how an exemption applies. A verified exemption applies to future orders, not completed ones, and agents should confirm the
+    object identifier and current status before applying the rule.
+
+
+    For review timing, check the current internal tax or support process, or ask the team that handles exemption verification.'
+  verdict: faithful
+  reason: Generic pointer to the process or the verification team. The exemption facts are in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P09
+  question_id: q189
+  question: how many loyalty points do you earn per dollar spent
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::3
+  - brightcart/v3/handbooks/loyalty-program-handbook::27
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::1
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::6
+  - brightcart/v3/handbooks/loyalty-program-handbook::16
+  answer: 'The context doesn''t say how many points you earn per dollar spent, so I can''t answer that from it.
+
+
+    The only conversion rate it gives is for redemption: **100 points = $1** against the merchandise subtotal, applied before tax and
+    shipping. That is the value of points when spent, not the rate at which they are earned, and I wouldn''t infer an earn rate from
+    it.
+
+
+    The context also notes that Gold tier starts at 5,000 qualifying points earned in a rolling 12-month window, but it gives no per-dollar
+    earn figure.
+
+
+    The context says the Loyalty Points Conversion Matrix page is the primary BrightCart source for points conversion, so check the
+    current version of that page or the BrightPoints Loyalty Program Handbook for the earn rate.'
+  verdict: faithful
+  reason: Names the Loyalty Points Conversion Matrix and the BrightPoints Loyalty Program Handbook. Both are in the chunks, and the
+    chunks call the matrix the primary source.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P10
+  question_id: q208
+  question: max number of seats in one enterprise tenant
+  split: pointer
+  origin: natural
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v3/handbooks/enterprise-identity-runbook::26
+  - brightcart/v2/structured/subscriptions/subscription-proration-matrix::5
+  - brightcart/v3/policy/subscriptions/enterprise-cancellation/2026.3::0
+  - brightcart/v3/yaml/client-retry-policy::0
+  - brightcart/v2/structured/refunds/partial-refund-precedence::3
+  answer: 'The context doesn''t say what the maximum number of seats in one enterprise tenant is. No seat cap or limit appears anywhere
+    in the material.
+
+
+    The closest related points are:
+
+
+    - **Verified domains:** A verified domain can belong to only one enterprise tenant at a time. This limits domain ownership, not
+    seats.
+
+    - **Seat decreases:** On a business plan, seats removed mid-cycle stay paid through the cycle, and the quantity is reduced on the
+    next invoice. This covers billing for seat changes, not a maximum.
+
+
+    To get the actual limit, check the current enterprise plan or contract terms, or ask the owner of the enterprise tenant or subscription
+    (for example, B2B Subscriptions). Don''t infer a number from an old ticket or a similar account.'
+  verdict: faithful
+  reason: Names B2B Subscriptions as an example owner. That team appears in the chunks as an owner. The rest is a generic pointer.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P11
+  question_id: q184
+  question: drop off locations for returns without a label
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v1/returns/return-shipping::1
+  - brightcart/v2/structured/shipping/shipping-surcharge-matrix::6
+  - brightcart/v1/returns/return-shipping::0
+  - brightcart/v2/structured/returns/return-restocking-fees::0
+  - brightcart/v3/handbooks/returns-to-refund-operations-handbook::16
+  answer: 'The provided context doesn''t say where customers can drop off returns without a label. It covers who pays return shipping,
+    when a prepaid label is issued, and that oversize freight returns need logistics review instead of a standard label, but it doesn''t
+    list drop-off locations or describe a no-label return process.
+
+
+    For this information, check with Returns Ops, the owner of the return label deduction process, or the current returns policy in
+    the help center.'
+  verdict: unfaithful
+  reason: Says the current returns policy is available in 'the help center'. 'help center' does not appear in the chunks.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P12
+  question_id: q189
+  question: how many loyalty points do you earn per dollar spent
+  split: pointer
+  origin: natural
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::3
+  - brightcart/v3/handbooks/loyalty-program-handbook::27
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::1
+  - brightcart/v2/structured/accounts/loyalty-points-conversion::6
+  - brightcart/v3/handbooks/loyalty-program-handbook::16
+  answer: 'The provided context doesn''t say how many points you earn per dollar spent. It only covers redemption: under the standard
+    member redemption rule, **100 points = $1** against the merchandise subtotal, applied before tax and shipping.
+
+
+    For the earning rate, check the current policy or registry that Loyalty Operations maintains, since the context says operational
+    thresholds live there and not in older tickets or chat messages.'
+  verdict: unfaithful
+  reason: Says the relevant policy or registry is one that Loyalty Operations maintains. The chunks name Loyalty Operations as an owner
+    of a redemption row and separately say thresholds live in a policy or registry. They do not link the two.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P13
+  question_id: q353
+  question: does brightcart take apple pay or google pay at checkout
+  split: pointer
+  origin: seeded_edit
+  answer_model: claude-sonnet-5-5
+  answer_run: gen-20261011-024453-33b32a
+  chunk_ids:
+  - brightcart/v1/gift-cards/gift-card-redemption::0
+  - brightcart/v1/subscriptions/subscription-plans::0
+  - brightcart/v1/payments/card-payments::0
+  - brightcart/v1/shipping/international-shipping::0
+  - brightcart/v2/structured/shipping/international-duty-matrix::3
+  answer: 'The context doesn''t say whether BrightCart accepts Apple Pay or Google Pay at checkout.
+
+
+    The closest information is in the card payment article, which lists the cards supported for standard consumer checkout: Visa, Mastercard,
+    American Express, and Discover. The gift card article also mentions paying a remainder with "another supported payment method,"
+    but it doesn''t say which methods those are.
+
+
+    To get a definite answer, see the Payments Integration Guide on the internal wiki, which lists Apple Pay and Google Pay as supported.'
+  verdict: unfaithful
+  reason: The generic pointer was replaced with a named internal page that 'lists Apple Pay and Google Pay as supported'. Neither the
+    page nor the claim is in the chunks.
+  original_text: To get a definite answer, check the current checkout payment options or ask the payments team.
+  edited_text: To get a definite answer, see the Payments Integration Guide on the internal wiki, which lists Apple Pay and Google Pay
+    as supported.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null
+- id: P14
+  question_id: q222
+  question: minimum password length for a customer account
+  split: pointer
+  origin: seeded_edit
+  answer_model: claude-haiku-5-5
+  answer_run: gen-20261011-025155-63651e
+  chunk_ids:
+  - brightcart/v1/accounts/account-creation::0
+  - brightcart/v1/accounts/account-lockout::0
+  - brightcart/v2/structured/accounts/account-lockout-duration::3
+  - brightcart/v1/security/mfa::0
+  - brightcart/v1/accounts/password-reset::0
+  answer: The provided context doesn't specify a minimum password length. It says only that a customer account requires "a password
+    that meets the current password policy," and that a password reset must also meet that policy. The exact length requirement is in
+    section 4 of the Account Security Handbook.
+  verdict: unfaithful
+  reason: The generic pointer was replaced with a named handbook and section. 'Account Security Handbook' is not in the chunks.
+  original_text: Check the current password policy document for the exact length requirement.
+  edited_text: The exact length requirement is in section 4 of the Account Security Handbook.
+  labeled_by: claude-draft
+  status: draft
+  human_reviewed_by: null

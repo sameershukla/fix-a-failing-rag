@@ -8,6 +8,7 @@ sample, score  come later in the lesson (the judge itself is not built yet).
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -16,7 +17,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 CAL = ROOT / "eval/judges/calibration"
-LABELS = CAL / "labels.yaml"
+LABELS = CAL / (os.environ.get("JUDGE_LABELS", "labels") + ".yaml")   # JUDGE_LABELS=labels_pointer scores the pointer drafts
 SHEET = CAL / "sheet.md"
 MARK = "Your verdict (faithful or unfaithful):"
 

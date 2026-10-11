@@ -8,13 +8,14 @@ Needs ANTHROPIC_API_KEY on a cache miss.
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-CONFIG = ROOT / "config/judge.yaml"
+CONFIG = ROOT / os.environ.get("JUDGE_CONFIG", "config/judge.yaml")   # JUDGE_CONFIG=config/judge_v1.yaml reruns the frozen v1 prompt
 CACHE = ROOT / "data/app/llm_cache/judge"
 CITATION = re.compile(r"\[\d+\s*:\s*[\"“][^\"”\]]+[\"”]\s*\]|\[(?:\d+|[^\]\s]*::\d+)\]|\(\s*source:[^)]*\)", re.I)   # [n: "quote"] (Lesson 4.4), [n], [doc::n], (source: ...)
 

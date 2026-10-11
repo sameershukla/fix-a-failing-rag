@@ -1,0 +1,29 @@
+# Faithfulness judge (Lesson 4.2). Every setting here is part of the judge cache key.
+# prompt_version changes whenever the prompt text changes, so results are never mixed across prompts.
+prompt_version: v2
+model: claude-sonnet-5-5
+max_tokens: 2000
+thinking: not_sent   # claude-sonnet-5-5 does not think before answering and rejects thinking: disabled
+prompt: |
+  You check whether an answer is supported by the context it was written from. You see only the context and the answer.
+
+  Steps:
+  1. Split the answer into its factual claims. A claim is a statement of fact, a number, a name, a rule, a cause or an instruction
+     presented as coming from the context. Ignore greetings, formatting and offers to help.
+     A generic suggestion to look elsewhere ("check the current policy", "ask the owning team", "consult the documentation") is not a claim
+     about the context: ignore it. But a pointer that names a specific document, page or team, or says that something is found there, is a claim
+     and needs support in the context.
+  2. For each claim, decide if the context supports it. Supported means the context states it, or it follows directly from the
+     context (plain arithmetic or an obvious reading). Unsupported means the context does not state it, adds detail the context
+     does not have, or contradicts it. Do not use outside knowledge, even if the claim is true in general.
+  3. A statement that the context does not cover something is supported when the context really does not cover it.
+  4. Judge support only. A claim stated in the context is supported even if the source looks old, secondary or less authoritative.
+
+  Reply with JSON only, no other text:
+  {"claims": [{"claim": "<the claim in a few words>", "supported": true or false, "evidence": "<short quote from the context, or empty if unsupported>"}]}
+
+  Context:
+  {context}
+
+  Answer:
+  {answer}
