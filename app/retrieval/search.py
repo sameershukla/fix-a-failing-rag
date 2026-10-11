@@ -65,12 +65,29 @@ def _hit(chunk, score):
     return {"chunk_id": chunk["chunk_id"], "doc_id": chunk["doc_id"], "text": chunk["text"], "score": score, "metadata": meta}
 
 
+import time
+from contextlib import contextmanager
+
+
+@contextmanager
+def _timed(timings, name):
+    """Adds the milliseconds spent in the block to timings[name]. Does nothing when timings is None."""
+    if timings is None:
+        yield
+        return
+    t0 = time.perf_counter()
+    try:
+        yield
+    finally:
+        timings[name] = timings.get(name, 0.0) + (time.perf_counter() - t0) * 1000
+
+
 def access_groups() -> set:
     """Every access_group value present in the indexed chunks."""
     return {c["metadata"].get("access_group") for c in _chunks()["chunks"]} - {None, ""}
 
 
-def search(query: str, k: int = None, deny_groups=None) -> list:
+def search(query: str, k: int = None, deny_groups=None, timings: dict = None) -> list:
     """deny_groups: access groups the caller may not read. Chunks in them are removed BEFORE ranking, in both the vector and the keyword search (Lesson 5.3)."""
     state = _load()
     config = state["config"]
@@ -95,14 +112,16 @@ def search(query: str, k: int = None, deny_groups=None) -> list:
     vector_ids, vector_scores = [], {}
     if mode in ("vector", "hybrid"):
         prefix = config["embedding"].get("query_prefix", "")
-        emb = state["model"].encode([prefix + vector_text], normalize_embeddings=config["embedding"]["normalize"])
+        with _timed(timings, "embed_query"):
+            emb = state["model"].encode([prefix + vector_text], normalize_embeddings=config["embedding"]["normalize"])
         n = max(candidates, depth) if mode == "hybrid" else depth
         where = chroma_where(filters)
         if deny_groups:
             acl = {"access_group": {"$nin": list(deny_groups)}}   # chunks with no access_group are open and are kept by $nin
             where = acl if where is None else {"$and": [where, acl]}
         kwargs = {"where": where} if where else {}
-        res = state["collection"].query(query_embeddings=emb.tolist(), n_results=n, **kwargs)
+        with _timed(timings, "vector_search"):
+            res = state["collection"].query(query_embeddings=emb.tolist(), n_results=n, **kwargs)
         vector_ids = res["ids"][0]
         vector_scores = {cid: 1 - d for cid, d in zip(res["ids"][0], res["distances"][0])}
 
@@ -112,7 +131,8 @@ def search(query: str, k: int = None, deny_groups=None) -> list:
         allowed = None
         if filters or deny_groups:
             allowed = {i for i, c in enumerate(st["chunks"]) if matches(c["metadata"], filters) and c["metadata"].get("access_group") not in (deny_groups or ())}
-        top = st["bm25"].top(keyword_text, max(candidates, depth), allowed)
+        with _timed(timings, "keyword_search"):
+            top = st["bm25"].top(keyword_text, max(candidates, depth), allowed)
         bm25_ids = [st["chunks"][i]["chunk_id"] for i, _ in top]
         bm25_scores = {st["chunks"][i]["chunk_id"]: s for i, s in top}
 
@@ -127,8 +147,9 @@ def search(query: str, k: int = None, deny_groups=None) -> list:
     st = _chunks()
     pool = [(st["chunks"][st["by_id"][cid]], score) for cid, score in ordered]
     if rerank.get("enabled") and pool:
-        model = _reranker(rerank["model"])
-        scores = model.predict([(query, c["text"]) for c, _ in pool])
+        with _timed(timings, "rerank"):
+            model = _reranker(rerank["model"])
+            scores = model.predict([(query, c["text"]) for c, _ in pool])
         pool = sorted(((c, float(s)) for (c, _), s in zip(pool, scores)), key=lambda p: -p[1])
     return [_hit(c, s) for c, s in pool[:k]]
 

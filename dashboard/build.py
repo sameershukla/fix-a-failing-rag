@@ -154,6 +154,53 @@ details summary{cursor:pointer;color:var(--ink2);margin:8px 0}.pending{color:var
 """
 
 
+def _runs_of_kind(kind):
+    base = ROOT / "eval" / "runs"
+    out = []
+    for d in sorted(base.glob("*/record.json")):
+        try:
+            r = json.loads(d.read_text())
+        except ValueError:
+            continue
+        if r.get("kind") == kind:
+            out.append((d.parent, r))
+    return out
+
+
+def cost_latency_panel():
+    """Section 4. Reads the latest latency run (retrieval stages) and the latest generation run that carries timing and tokens. Shows what is missing instead of guessing."""
+    import statistics
+    html = ['<h2>4. Cost and latency</h2>']
+    lat = _runs_of_kind("latency")
+    if lat:
+        d, r = lat[-1]
+        calls = [json.loads(l) for l in (d / "calls.jsonl").read_text().splitlines()]
+        warm = calls[r["warmup_calls_not_counted"] + 1:]
+        tot = sorted(c["total_ms"] for c in warm)
+        p95 = lambda xs: sorted(xs)[min(len(xs) - 1, round(0.95 * (len(xs) - 1)))]
+        rows = ""
+        for stage in ("embed_query", "vector_search", "keyword_search", "rerank", "acl_check", "injection_filter", "redact"):
+            xs = [c["stages"].get(stage, 0.0) for c in warm]
+            if any(xs):
+                rows += f"<tr><td>{stage}</td><td>{statistics.median(xs):.1f} ms</td><td>{p95(xs):.1f} ms</td><td>{100 * statistics.median(xs) / statistics.median(tot):.0f}%</td></tr>"
+        rows += f"<tr><td><b>total retrieval</b></td><td><b>{statistics.median(tot):.1f} ms</b></td><td><b>{p95(tot):.1f} ms</b></td><td></td></tr>"
+        html.append(f'<p class="sub">Retrieval side, no model call. Run {e(r["run_id"])}: {len(warm)} warm calls; the first call in a fresh process (cold start) took {r["cold_first_call_ms"] / 1000:.1f} s. One machine, one run.</p>'
+                    f'<div class="card"><table><tr><th>stage</th><th>median</th><th>p95</th><th>share of median</th></tr>{rows}</table></div>')
+    else:
+        html.append('<p class="pending">No latency run yet. Run <code>make eval-latency</code>.</p>')
+    gen = [(d, r) for d, r in _runs_of_kind("generation") if r.get("latency_ms")]
+    if gen:
+        d, r = gen[-1]
+        t, c = r["tokens_per_answer"], r.get("cost_per_answer")
+        cost = f'{c["mean"]:.5f} {e(c["currency"])} per answer (prices as of {e(c["prices_as_of"])})' if c else "not computed (config/pricing.yaml missing or lacks this model)"
+        html.append(f'<p class="sub">Model call. Run {e(r["run_id"])}, {e(r["model"])}, prompt {e(r["prompt"])}, {r["measured_answers"]} answers measured.</p>'
+                    f'<div class="card"><table><tr><th>latency median</th><th>latency p95</th><th>mean input tokens</th><th>mean output tokens</th><th>cost</th></tr>'
+                    f'<tr><td>{r["latency_ms"]["median"]:.0f} ms</td><td>{r["latency_ms"]["p95"]:.0f} ms</td><td>{t["input_mean"]:.0f}</td><td>{t["output_mean"]:.0f}</td><td>{cost}</td></tr></table></div>')
+    else:
+        html.append('<p class="pending">No generation run with measured latency and tokens yet. Run <code>make eval-gen</code> with a fresh cache.</p>')
+    return "\n".join(html)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run")
@@ -191,13 +238,15 @@ def main():
 <h3>Hit Rate@5 by slice</h3><p class="sub">Slices overlap, so a question can count in several rows. Rows with n under 10 are indicative only.</p>
 <div class="card">{slice_bars(rec)}</div>
 
+{cost_latency_panel()}
+
 <h2>5. Failing questions (Hit@5 = 0)</h2><p class="sub">{len(bad)} of {n_ans} answerable questions found no evidence in the top 5.</p>
 <details><summary>Show all {len(bad)}</summary>{fail_html}</details>
 
 <h2>6. Recent runs</h2><p class="sub">A row marked as a different golden set or rule is not comparable with the others.</p>
 <div class="card">{trend_table(rec)}</div>
 
-<h2>Not built yet</h2><p class="pending">Generation panel (Module 4), cost and latency panel (Module 6), gate status and PR comment (Module 7).</p>
+<h2>Not built yet</h2><p class="pending">Generation panel (Module 4), gate status and PR comment (Module 7).</p>
 </main></body></html>"""
     out = ROOT / "dashboard" / "out"
     out.mkdir(parents=True, exist_ok=True)

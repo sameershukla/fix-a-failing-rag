@@ -57,3 +57,8 @@ security:
   acl: true            # Lesson 5.3: drop chunks the caller may not read, before ranking
   redact: true         # Lesson 5.2: mask fake PII and secrets in the text sent to the model
   injection_filter: true    # Lesson 5.1: drop chunks that carry instructions aimed at the assistant
+cache:
+  semantic:
+    enabled: false    # Lesson 6.3: reuse a stored answer for a close question, inside the same scope (caller, security, prompt, model, retrieval)
+    threshold: 0.96   # cosine similarity of the question embeddings. Chosen with make eval-cache: the lowest value with no false hit on the 26 pairs. See the lesson.
+    ttl_days: 7

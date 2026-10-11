@@ -12,7 +12,7 @@ export RAG_CONFIG := $(CONFIG)
 endif
 
 
-.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet eval-security judge-run cite-check judge-compare judge-calibrate dashboard compare test
+.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet eval-cache eval-latency eval-security judge-run cite-check judge-compare judge-calibrate dashboard compare test
 
 # Create a local virtual environment and install the generator's dependencies.
 $(PY):
@@ -86,6 +86,16 @@ eval: $(PY)
 # Compare two of these runs with make compare, the same as for retrieval runs.
 eval-gen: $(PY)
 	$(PY) -m eval.generate --system $(SYSTEM) $(if $(SUBSET),--subset $(SUBSET)) $(if $(LIMIT),--limit $(LIMIT)) $(if $(NOCACHE),--no-cache)
+
+# Module 6: time the retrieval side of a request stage by stage (no model call). LIMIT=60 questions by default.
+#   make eval-latency [LIMIT=60] [CONFIG=...]
+eval-latency: $(PY)
+	$(PY) -m eval.latency $(if $(LIMIT),--limit $(LIMIT))
+
+# Module 6: how well question similarity separates a paraphrase (reuse) from a near miss (do not). No model call.
+#   make eval-cache
+eval-cache: $(PY)
+	$(PY) -m eval.cache_eval
 
 # Module 5: score the security controls with no model call (leaks, blocks, and controls that must still work). Set CONFIG= to try an experiment config.
 #   make eval-security [CONFIG=config/experiments/s-nofilter.yaml]

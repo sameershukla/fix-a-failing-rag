@@ -1,0 +1,32 @@
+# Semantic cache eval pairs (Lesson 6.3). DRAFT written by Claude, to be reviewed by the author. Written BEFORE the cache code.
+# base       a golden question id (its wording is the question that fills the cache)
+# paraphrase same intent, different words: the cache SHOULD answer it from the stored answer.
+# near_miss  similar words, different intent or a different answer: the cache must NOT answer it from the stored answer.
+# A near miss changes one fact that changes the answer (a tier, a number, a region, a product, a rule).
+pairs:
+  - {base: q015, paraphrase: "if the customer is mailing the item back, does shipping time eat into the 30 day return window", near_miss: "does the 30 day return window start at the order date or at delivery"}
+  - {base: q016, paraphrase: "is the failed sign in counter tracked for each device or for the whole account", near_miss: "how long is an account locked after too many failed sign in attempts"}
+  - {base: q017, paraphrase: "a returned item is missing a part, which state does it move to and how many photos are needed", near_miss: "a returned item has a swollen battery, which state does it move to and how many photos are needed"}
+  - {base: q074, paraphrase: "how many days does an ACH payment from a business take to clear", near_miss: "how many days does a credit card payment take to settle for a business"}
+  - {base: q112, paraphrase: "an annual subscriber downgrades six weeks into the term, is there a refund", near_miss: "an annual subscriber downgrades ten days into the term, is there a refund"}
+  - {base: q114, paraphrase: "is there an extra fee for a very long package shipped to the far zones", near_miss: "is there an extra fee for a very long package shipped to Alaska"}
+  - {base: q128, paraphrase: "what does the professional seller plan cost per month", near_miss: "what does the standard seller plan cost per month"}
+  - {base: q136, paraphrase: "how long do international orders usually take to arrive", near_miss: "how long do international returns usually take to be refunded"}
+  - {base: q164, paraphrase: "what is the cutoff for expedited shipping in the routing config and what happens to orders placed after it", near_miss: "what is the cutoff for standard ground shipping in the routing config and what happens to orders placed after it"}
+  - {base: q175, paraphrase: "after a payment is authorized do we store the card security code", near_miss: "after a payment is authorized do we store the last four digits of the card"}
+  - {base: q182, paraphrase: "are SEV 1 incidents covered at three in the morning on a Sunday", near_miss: "is a SEV 3 incident covered at three in the morning on a Sunday"}
+  - {base: q196, paraphrase: "how long does the emailed password reset link stay valid", near_miss: "how long does the email change verification code stay valid"}
+  - {base: q203, paraphrase: "in the card velocity config how many orders within how many minutes trigger a manual review", near_miss: "in the gift card velocity rule how many cards within an hour trigger a risk review"}
+  - {base: q314, paraphrase: "when an account's email is changed is the previous address notified", near_miss: "when an account's password is changed is the previous email address notified"}
+  - {base: q321, paraphrase: "is it allowed to register the same email address on two consumer accounts", near_miss: "is it allowed to register the same phone number on two consumer accounts"}
+  - {base: q328, paraphrase: "what are the idle timeout and the maximum session length for enterprise admin accounts", near_miss: "what are the idle timeout and the maximum session length for consumer accounts"}
+  - {base: q057, paraphrase: "payments are down at checkout, within how many minutes must the incident commander be paged", near_miss: "the customer chat widget is down, within how many minutes must the incident commander be paged"}
+  - {base: q058, paraphrase: "a customer just bought 12 gift cards in an hour, what do we do", near_miss: "a customer just bought 3 gift cards in an hour, what do we do"}
+  - {base: q230, paraphrase: "an order contains more than 100 digital gift cards, how is it handled", near_miss: "an order contains more than 100 physical gift cards, how is it handled"}
+  - {base: q262, paraphrase: "a package arrived crushed and the battery inside is leaking, how long do we have to report it and where does it go", near_miss: "a package arrived crushed but nothing inside is leaking, how long do we have to report it and where does it go"}
+  - {base: q300, paraphrase: "what is the return window for electronics bought by an EU customer", near_miss: "what is the return window for electronics bought by a US customer"}
+  - {base: q294, paraphrase: "a refund failed because the card was closed, should support just retry it", near_miss: "a refund failed because the card was reported stolen, should support just retry it"}
+  - {base: q348, paraphrase: "can an oversized freight return use a normal shipping label", near_miss: "can an oversized freight order be shipped to the customer with a normal shipping label"}
+  - {base: q130, paraphrase: "how is available to promise inventory calculated", near_miss: "how is on hand inventory counted"}
+  - {base: q013, paraphrase: "what does calculate_shipping_surcharge do for a hazardous parcel", near_miss: "what does calculate_shipping_surcharge do for an oversized parcel going to Alaska"}
+  - {base: q273, paraphrase: "what does send_refund do when the idempotency key is missing", near_miss: "what does send_refund do when the idempotency key was already used"}

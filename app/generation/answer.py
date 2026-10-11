@@ -9,6 +9,7 @@ Nothing else differs, so a run with one and a run with the other differ in the p
 import sys
 
 from app.common import load_config
+from app.cache.semantic import SemanticCache, scope_key
 from app.security.context import build_context
 
 SYSTEM = "You are a helpful assistant for an AI platform team."
@@ -50,11 +51,32 @@ def call_llm(system: str, user: str) -> str:
     return "".join(block.text for block in response.content if block.type == "text")
 
 
-def answer(question: str) -> dict:
-    chunks = build_context(question)["chunks"]   # applies the security controls the config turns on (Module 5)
-    system, template, fmt = prompt_for(load_config().get("generation", {}).get("prompt", "plain"))
+def _semantic_cache(cfg: dict) -> SemanticCache:
+    from app.common import DATA
+    from app.retrieval.search import _load
+
+    st = _load()
+    c = cfg["cache"]["semantic"]
+    embed = lambda xs: st["model"].encode(xs, normalize_embeddings=st["config"]["embedding"]["normalize"])
+    return SemanticCache(DATA / "semantic_cache" / "entries.jsonl", embed, c["threshold"], c.get("ttl_days"))
+
+
+def answer(question: str, caller: str = None) -> dict:
+    cfg = load_config()
+    caller = caller or cfg.get("security", {}).get("caller", "staff-all")
+    cache_cfg = (cfg.get("cache") or {}).get("semantic") or {}
+    cache, scope = None, None
+    if cache_cfg.get("enabled"):           # Lesson 6.3: a hit skips retrieval and the model
+        cache, scope = _semantic_cache(cfg), scope_key(cfg, caller)
+        entry, sim = cache.lookup(question, scope)
+        if entry:
+            return {"question": question, "answer": entry["answer"], "chunks": [], "cache": {"hit": True, "similarity": sim, "matched_question": entry["question"]}}
+    chunks = build_context(question, caller)["chunks"]   # applies the security controls the config turns on (Module 5)
+    system, template, fmt = prompt_for(cfg.get("generation", {}).get("prompt", "plain"))
     text = call_llm(system, template.format(context=fmt(chunks), question=question))
-    return {"question": question, "answer": text, "chunks": chunks}
+    if cache is not None:
+        cache.store(question, scope, text, [c["chunk_id"] for c in chunks])
+    return {"question": question, "answer": text, "chunks": chunks, "cache": {"hit": False}}
 
 
 if __name__ == "__main__":

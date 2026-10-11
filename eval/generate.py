@@ -12,7 +12,9 @@ import argparse
 import hashlib
 import json
 import random
+import statistics
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -31,9 +33,11 @@ def call_model(model, system, user, max_tokens):
     import anthropic
 
     client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY
+    t0 = time.perf_counter()
     r = client.messages.create(model=model, max_tokens=max_tokens, system=system, messages=[{"role": "user", "content": user}])
+    latency_ms = (time.perf_counter() - t0) * 1000
     text = "".join(b.text for b in r.content if b.type == "text")
-    return {"text": text, "stop_reason": r.stop_reason, "output_tokens": r.usage.output_tokens}
+    return {"text": text, "stop_reason": r.stop_reason, "output_tokens": r.usage.output_tokens, "input_tokens": r.usage.input_tokens, "latency_ms": latency_ms}
 
 
 def pick(golden, ids, limit, seed):
@@ -94,7 +98,8 @@ def main():
             calls += 1
         rows.append({"id": q["id"], "question": q["question"], "answerable": q["answerable"], "tags": q.get("tags", []),
                      "chunks": [{"chunk_id": c["chunk_id"], "doc_id": c["doc_id"], "text": c["text"]} for c in chunks],
-                     "answer": res["text"], "stop_reason": res["stop_reason"], "output_tokens": res["output_tokens"]})
+                     "answer": res["text"], "stop_reason": res["stop_reason"], "output_tokens": res["output_tokens"],
+                     "input_tokens": res.get("input_tokens"), "latency_ms": res.get("latency_ms")})
         print(f"{i}/{len(questions)} {q['id']}", end="\r")
 
     with (out_dir / "answers.jsonl").open("w", encoding="utf-8") as fh:
@@ -105,9 +110,25 @@ def main():
               "subset": args.subset or "all", "limit": args.limit, "seed": args.seed, "questions": len(rows),
               "answerable": sum(r["answerable"] for r in rows), "unanswerable": sum(not r["answerable"] for r in rows),
               "truncated_answers": truncated, "model_calls": calls, "judged": False}
+    # Module 6: tokens, latency and cost for the answers that carry them (fresh calls; answers served from an old cache entry have none)
+    from eval.cost import cost_of, load_pricing
+    measured = [r for r in rows if r.get("latency_ms") is not None and r.get("input_tokens") is not None]
+    if measured:
+        lat = sorted(r["latency_ms"] for r in measured)
+        pricing = load_pricing()
+        costs = [cost_of(llm["model"], r["input_tokens"], r["output_tokens"], pricing) for r in measured]
+        record["measured_answers"] = len(measured)
+        record["latency_ms"] = {"median": statistics.median(lat), "p95": lat[min(len(lat) - 1, round(0.95 * (len(lat) - 1)))], "mean": statistics.mean(lat)}
+        record["tokens_per_answer"] = {"input_mean": statistics.mean(r["input_tokens"] for r in measured), "output_mean": statistics.mean(r["output_tokens"] for r in measured)}
+        record["cost_per_answer"] = None if None in costs else {"mean": statistics.mean(costs), "currency": pricing.get("currency"), "prices_as_of": pricing.get("as_of")}
     (out_dir / "record.json").write_text(json.dumps(record, indent=2))
     print(f"\nrun {run_id}: {len(rows)} answers ({record['answerable']} answerable, {record['unanswerable']} unanswerable), "
           f"{calls} model calls, {truncated} hit the output token limit")
+    if "latency_ms" in record:
+        t, c = record["tokens_per_answer"], record["cost_per_answer"]
+        print(f"{record['measured_answers']} answers measured: latency median {record['latency_ms']['median']:.0f} ms, p95 {record['latency_ms']['p95']:.0f} ms; "
+              f"mean tokens in {t['input_mean']:.0f} / out {t['output_mean']:.0f}; "
+              + (f"mean cost {c['mean']:.5f} {c['currency']} per answer (prices as of {c['prices_as_of']})" if c else "no cost: config/pricing.yaml is missing or lacks this model"))
     print(f"saved eval/runs/{run_id}/answers.jsonl   (not judged yet: faithfulness is Lesson 4.2)")
 
 
