@@ -61,7 +61,7 @@ def main():
 
     from app.common import DATA, load_config
     from app.generation.answer import prompt_for
-    from app.retrieval.search import search
+    from app.security.context import build_context
 
     cfg = load_config()
     llm = cfg["llm"]
@@ -82,7 +82,7 @@ def main():
 
     rows, calls = [], 0
     for i, q in enumerate(questions, 1):
-        chunks = search(q["question"])
+        chunks = build_context(q["question"])["chunks"]   # security controls from the config (Module 5); all off in earlier modules
         context = fmt(chunks)
         user = PROMPT.format(context=context, question=q["question"])
         path = cache_dir / (cache_key(llm["model"], SYSTEM, PROMPT, llm["max_tokens"], context + "\n" + q["question"]) + ".json")

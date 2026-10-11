@@ -1,0 +1,14 @@
+# Callers for the security controls (Module 5). A caller is who is asking. The golden set is written for a privileged staff user, so it is scored as staff-all.
+# A document is readable by a caller when its access_group is empty (open), or does not match any deny pattern, or matches an allow pattern.
+# Allow wins over deny. Patterns use * as a wildcard. A deny list is easier to read here because 567 of 689 documents have no access_group;
+# an allow list is the safer choice in production.
+callers:
+  staff-all:
+    deny: []
+    allow: []
+  support-agent:
+    deny: ["*-restricted", "ai-security"]
+    allow: []
+  finance-analyst:
+    deny: ["*-restricted", "ai-security"]
+    allow: ["finance-restricted"]

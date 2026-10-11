@@ -1,4 +1,4 @@
-# App config: the end state of the last lesson. Module 3 stack so far: 250 token chunks with title prefix, table and config
+# App config: the end state of the last lesson (Module 5 end state: access control, redaction and the injection filter on). Module 3 stack so far: 250 token chunks with title prefix, table and config
 # aware chunks (Module 2), hybrid search (BM25 weight 2) over the top 50 of each, a cross encoder reranking the top 20,
 # and a filter that keeps only active, authoritative documents.
 # Every setting here contributes to the config hash. Experiments live in config/experiments/.
@@ -52,3 +52,8 @@ llm:
   max_tokens: 1000
 generation:
   prompt: plain   # plain or cited (Lesson 4.4). Prompt texts are in app/generation/answer.py.
+security:
+  caller: staff-all   # who is asking by default (config/security.yaml). The golden set is scored as staff-all.
+  acl: true            # Lesson 5.3: drop chunks the caller may not read, before ranking
+  redact: true         # Lesson 5.2: mask fake PII and secrets in the text sent to the model
+  injection_filter: true    # Lesson 5.1: drop chunks that carry instructions aimed at the assistant

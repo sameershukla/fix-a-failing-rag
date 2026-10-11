@@ -9,7 +9,7 @@ Nothing else differs, so a run with one and a run with the other differ in the p
 import sys
 
 from app.common import load_config
-from app.retrieval.search import search
+from app.security.context import build_context
 
 SYSTEM = "You are a helpful assistant for an AI platform team."
 PROMPT = "Answer the question using this context.\n\nContext:\n{context}\n\nQuestion: {question}"
@@ -51,7 +51,7 @@ def call_llm(system: str, user: str) -> str:
 
 
 def answer(question: str) -> dict:
-    chunks = search(question)
+    chunks = build_context(question)["chunks"]   # applies the security controls the config turns on (Module 5)
     system, template, fmt = prompt_for(load_config().get("generation", {}).get("prompt", "plain"))
     text = call_llm(system, template.format(context=fmt(chunks), question=question))
     return {"question": question, "answer": text, "chunks": chunks}
