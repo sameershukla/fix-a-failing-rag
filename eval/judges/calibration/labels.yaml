@@ -1,12 +1,17 @@
 # Calibration labels for the faithfulness judge (Lesson 4.2).
-# verdict is the AUTHOR'S, typed blind in sheet.md before seeing the draft. claude_draft_verdict is Claude's earlier draft, kept for comparison.
-# Blind comparison on 30 items: agreement 27/30, kappa 0.80. The three disagreements (L06, L23, L30) carry a disagreement field.
+# RULES
+# 1. verdict is the AUTHOR'S and is final. Claude may disagree, but a disagreement is logged in claude_view / disagreement fields next to the
+#    verdict. It is never swapped in for the author's verdict.
+# 2. claude_draft_verdict is Claude's first draft, written before the author labeled. Kept for comparison only.
+# 3. A split is held out only until it is scored. The original 15 test items were scored once (results/test-v1-first-scoring-L23-as-faithful.json,
+#    the official test result). After that the original test split is spent: any new test scoring needs fresh items.
+# 4. L23 and L28 were moved from test to tune, because their labels were settled after the judge flagged them.
+# Blind comparison of author vs Claude draft on 30 items: agreement 27/30, kappa 0.80. Disagreements: L06, L23, L30.
 # origin: natural      = an answer a model really wrote, judged as it is.
-# origin: seeded_edit  = a faithful natural answer with exactly one claim changed (see edit). Unfaithful by construction; the author agreed on all nine.
+# origin: seeded_edit  = a faithful natural answer with exactly one claim changed (see edit). Unfaithful by construction.
 # Context for an item = the chunks in chunk_ids, from the saved run in answer_run (eval/runs/<answer_run>/answers.jsonl).
-# Rule: a claim is faithful if the chunks state it or it follows directly from them. Support only, not authority. A true statement that the context does not cover something is faithful.
-# Count check (CLAUDE.md needs >= 15 human unfaithful labels per split before recall and kappa are results): see the table in the lesson.
-# L23 (restored to the author's blind verdict) and L28 (author decision) were changed after the judge was first scored on test. Both result files are kept in results/.
+# Rule for a verdict: faithful if the chunks state the claim or it follows directly from them. Support only, not authority.
+# The judge sees only chunks and answer, so a fact restated from the question counts as unsupported. A true statement that the context does not cover something is faithful.
 - id: L01
   question_id: q091
   question: what format is the customer data export file
@@ -716,7 +721,7 @@
 - id: L23
   question_id: q114
   question: extra handling fee for a really long box going to the far zones
-  split: test
+  split: tune
   origin: natural
   answer_model: claude-sonnet-5-5
   answer_run: gen-20261011-010241-2ab232
@@ -753,11 +758,12 @@
   claude_draft_verdict: faithful
   claude_draft_reason: $25 for zone 5 to 8 over 48 inches, $45 Alaska, the hazmat zero charge, and the rural and signature rows are
     all in chunks. The answer says the context does not define is_oversized in the matrix and relies on the 48 inch row.
-  disagreement: Claude draft said faithful. Claude first kept faithful after rechecking, then the judge flagged 'rural residential or
-    signature fees are separate line items' (the matrix lists the rows but not that they are separate line items). Author's blind verdict
-    restored.
   unsupported_claims:
   - Rural residential or signature fees are separate line items and may also apply
+  moved_from: test
+  moved_because: Its label was settled after the judge flagged it, so it can no longer be held out.
+  claude_view: faithful. Claude first overruled the author's blind verdict. The judge then flagged 'rural residential or signature fees
+    are separate line items' (rows exist, 'separate line items' is not stated). The author's verdict stands.
 - id: L24
   question_id: q074
   question: business paying by ach, how many days till it clears
@@ -910,7 +916,7 @@
 - id: L28
   question_id: q254
   question: order paid half gift card half visa, 50 dollar partial refund. how is it split and when does each part land
-  split: test
+  split: tune
   origin: natural
   answer_model: claude-sonnet-5-5
   answer_run: gen-20261011-010241-2ab232
@@ -957,6 +963,8 @@
   - The order was 50% gift card and 50% Visa (stated in the question, not in the chunks)
   disagreement: 'Changed from faithful to unfaithful by the author after the first test scoring. Rule applied: restating a fact from
     the question counts as unsupported.'
+  moved_from: test
+  moved_because: Its label was settled after the judge flagged it, so it can no longer be held out.
 - id: L29
   question_id: q175
   question: do we keep the cvv after the payment is authorized

@@ -1,0 +1,819 @@
+{
+ "split": "tune",
+ "prompt_version": "v1",
+ "model": "claude-sonnet-5-5",
+ "agreement": 0.9411764705882353,
+ "kappa": 0.8827586206896552,
+ "recall": 0.8888888888888888,
+ "precision": 1.0,
+ "counts": {
+  "tp": 8,
+  "fn": 1,
+  "fp": 0,
+  "tn": 8
+ },
+ "items": [
+  {
+   "id": "L01",
+   "question_id": "q091",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "The context doesn't state the file format of the customer data export",
+     "supported": true,
+     "evidence": "Customer Data Export policy never mentions CSV, JSON, ZIP or any format."
+    },
+    {
+     "claim": "Customer data export is prepared within 24 hours",
+     "supported": true,
+     "evidence": "A verified customer data export is normally prepared within 24 hours."
+    },
+    {
+     "claim": "Download link valid for 48 hours with sign-in required",
+     "supported": true,
+     "evidence": "a download link that remains valid for 48 hours. The link requires the customer to sign in again before download."
+    },
+    {
+     "claim": "Policy covers scope and exceptions",
+     "supported": true,
+     "evidence": "Conditions: Only data tied to the requesting account is included. Exceptions and edge cases section."
+    },
+    {
+     "claim": "Job Export API status endpoint is GET /v3/exports/{job_id}",
+     "supported": true,
+     "evidence": "The export job status endpoint is GET /v3/exports/{job_id}"
+    },
+    {
+     "claim": "Job Export API download links expire after 15 minutes",
+     "supported": true,
+     "evidence": "completed download links expire after 15 minutes."
+    },
+    {
+     "claim": "Job Export API page doesn't mention a file format",
+     "supported": true,
+     "evidence": "The page only gives the status endpoint and link expiry rule; no format is mentioned."
+    },
+    {
+     "claim": "The two sources give different link lifetimes (48 hours vs 15 minutes)",
+     "supported": true,
+     "evidence": "48 hours (Chunk 1) versus 15 minutes (Chunk 2)"
+    },
+    {
+     "claim": "The context doesn't clarify whether the two sources describe different things",
+     "supported": true,
+     "evidence": "Neither chunk explains the relationship between the self-service export and the job export API."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L02",
+   "question_id": "q128",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Professional marketplace plan costs $49 per month",
+     "supported": false,
+     "evidence": "Context says \"$39 monthly\" for the professional marketplace plan."
+    },
+    {
+     "claim": "Fee is deducted monthly and applies independently of sales commission",
+     "supported": true,
+     "evidence": "deduct monthly subscription fee independent of sales commission"
+    },
+    {
+     "claim": "BrightCart Plus is a separate customer subscription, not the seller plan",
+     "supported": true,
+     "evidence": "BrightCart Plus is offered as a monthly plan and an annual plan (customer subscription options used by support and checkout); the seller plan is the professional marketplace plan in the Seller Fee Matrix."
+    },
+    {
+     "claim": "BrightCart Plus pricing does not apply to the seller plan",
+     "supported": true,
+     "evidence": "Follows from the context treating BrightCart Plus subscription (support and checkout) and the seller professional marketplace plan as separate items."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L03",
+   "question_id": "q016",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The failed attempt counter is tracked per device, not per account",
+     "supported": false,
+     "evidence": "The context says: \"The counter is tracked per account, not per device.\""
+    },
+    {
+     "claim": "Each phone or laptop has its own counter",
+     "supported": false,
+     "evidence": "The context says the counter is per account, not per device."
+    },
+    {
+     "claim": "After 5 consecutive failed sign-in attempts the consumer account is locked for 15 minutes",
+     "supported": true,
+     "evidence": "After 5 consecutive failed sign in attempts, the consumer account is locked for 15 minutes."
+    },
+    {
+     "claim": "A successful sign-in resets the counter",
+     "supported": true,
+     "evidence": "A successful sign in resets the failed attempt counter."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L04",
+   "question_id": "q065",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "BrightPoints expire after 12 months of account inactivity, not 12 months after each purchase",
+     "supported": true,
+     "evidence": "BrightPoints expire after 12 months of account inactivity, not 12 months after each purchase."
+    },
+    {
+     "claim": "Earning points doesn't reset a separate clock for each transaction",
+     "supported": true,
+     "evidence": "not 12 months after each purchase"
+    },
+    {
+     "claim": "The expiration window runs from the account's last activity",
+     "supported": true,
+     "evidence": "expire after 12 months of account inactivity"
+    },
+    {
+     "claim": "Silver, Gold, and Platinum qualifying points are measured over a rolling 12-month window",
+     "supported": true,
+     "evidence": "Silver,1000,rolling 12 months; Gold,5000,rolling 12 months; Platinum,12000,rolling 12 months"
+    },
+    {
+     "claim": "The tier rolling window affects tier status, not when points expire",
+     "supported": true,
+     "evidence": "Tier Thresholds table lists qualifying_points, window, and benefit per tier; expiry is tied to account inactivity"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L05",
+   "question_id": "q058",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Matches the gift card velocity scenario (more than ten gift cards in one hour)",
+     "supported": true,
+     "evidence": "gift card velocity | customer buys more than ten gift cards in one hour | high risk"
+    },
+    {
+     "claim": "The customer bought 12 gift cards",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Risk level is High",
+     "supported": true,
+     "evidence": "gift card velocity | ... | high risk"
+    },
+    {
+     "claim": "Required action: permanently close the account and refund all 12 gift card orders",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Owner is Gift Card Risk",
+     "supported": true,
+     "evidence": "pause gift-card issuance and review funding source | Gift Card Risk"
+    },
+    {
+     "claim": "Fraud screening can delay gift card delivery",
+     "supported": true,
+     "evidence": "Fraud screening can delay delivery."
+    },
+    {
+     "claim": "Each gift card is recorded as a separate order",
+     "supported": true,
+     "evidence": "The purchase is recorded as a separate gift card order."
+    },
+    {
+     "claim": "Lost/stolen runbook says to freeze remaining balance when fraud is suspected",
+     "supported": true,
+     "evidence": "Freeze the remaining balance when fraud is reasonably suspected."
+    },
+    {
+     "claim": "Fraud-locked cards cannot be redeemed until reviewed",
+     "supported": true,
+     "evidence": "Fraud locked gift cards cannot be redeemed until reviewed."
+    },
+    {
+     "claim": "Bulk corporate orders go through the business sales process",
+     "supported": true,
+     "evidence": "Bulk corporate gift card orders use the business sales process."
+    },
+    {
+     "claim": "Use masked identifiers only in notes; never paste full codes into support notes",
+     "supported": true,
+     "evidence": "Never paste complete gift card codes into general support notes. Record masked identifiers"
+    },
+    {
+     "claim": "Never read full codes aloud in an unverified session",
+     "supported": true,
+     "evidence": "Never read a full gift card code aloud in an unverified support session."
+    },
+    {
+     "claim": "Context doesn't specify funding source review criteria or steps for resuming issuance",
+     "supported": true,
+     "evidence": "Matrix says only 'pause gift-card issuance and review funding source' with no further detail."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L06",
+   "question_id": "q171",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "New sellers do not always get full payouts",
+     "supported": true,
+     "evidence": "new,Tuesday,10,60,rolling reserve applies"
+    },
+    {
+     "claim": "Payout Calendar lists 10% rolling reserve for 60 days for new sellers",
+     "supported": true,
+     "evidence": "new,Tuesday,10,60,rolling reserve applies"
+    },
+    {
+     "claim": "Handbook states new sellers keep a 10 percent rolling reserve for 60 days",
+     "supported": true,
+     "evidence": "New sellers keep a 10 percent rolling reserve for 60 days."
+    },
+    {
+     "claim": "New sellers are paid Tuesdays with 10% of each payout held back during the period",
+     "supported": true,
+     "evidence": "new,Tuesday,10,60,rolling reserve applies"
+    },
+    {
+     "claim": "Standard sellers have 0% reserve for 0 days",
+     "supported": true,
+     "evidence": "standard,Tuesday,0,0"
+    },
+    {
+     "claim": "Standard sellers are paid every Tuesday for transactions cleared through the previous Friday",
+     "supported": true,
+     "evidence": "Standard marketplace sellers are paid every Tuesday for transactions cleared through the previous Friday."
+    },
+    {
+     "claim": "High-risk sellers have 20% reserve for 90 days, paid every other Friday, after Finance Risk approval",
+     "supported": true,
+     "evidence": "high-risk,Every other Friday,20,90,Finance Risk approval required"
+    },
+    {
+     "claim": "Payouts can be reduced by marketplace commission, e.g. 12% on electronics for standard-tier sellers",
+     "supported": true,
+     "evidence": "electronics marketplace sale | seller is on standard tier | 12% | deduct commission from seller payout"
+    },
+    {
+     "claim": "Context does not give new-seller commission rates",
+     "supported": true,
+     "evidence": "The fee matrix only lists a 12% electronics rate for standard tier; no new-seller rates."
+    },
+    {
+     "claim": "Suggested wording: new sellers paid weekly on Tuesdays with 10% rolling reserve for first 60 days",
+     "supported": true,
+     "evidence": "new,Tuesday,10,60,rolling reserve applies"
+    },
+    {
+     "claim": "Context doesn't say when the 60 days start or how reserves are released",
+     "supported": true,
+     "evidence": "No chunk describes the start of the reserve period or release of held reserves."
+    },
+    {
+     "claim": "Handbook says operational thresholds come from the policy or registry named in the procedure, not old tickets or chats",
+     "supported": true,
+     "evidence": "Operational thresholds are maintained in the policy or registry named in the procedure. Historical notes are useful for diagnosis, but they are not authority for a current action."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L07",
+   "question_id": "q196",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "A password reset link is valid for 60 minutes",
+     "supported": false,
+     "evidence": "Context says: \"A password reset link is valid for 30 minutes and can be used only once.\""
+    },
+    {
+     "claim": "A reset link can be used only once",
+     "supported": true,
+     "evidence": "\"valid for 30 minutes and can be used only once\""
+    },
+    {
+     "claim": "Requesting a new reset link invalidates the previous unused link",
+     "supported": true,
+     "evidence": "\"Requesting a new reset link invalidates the previous unused link.\""
+    },
+    {
+     "claim": "Example: requests at 2:00 PM and 2:10 PM, second link stays valid until 2:40 PM unless used earlier",
+     "supported": true,
+     "evidence": "\"The second link remains valid until 2:40 PM unless it is used earlier.\""
+    },
+    {
+     "claim": "After a successful reset, all older reset links are invalid",
+     "supported": true,
+     "evidence": "\"After a successful reset, all older reset links are invalid.\""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L08",
+   "question_id": "q297",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Treat leaking battery as a safety issue and escalate immediately",
+     "supported": true,
+     "evidence": "Safety issues such as leaking batteries should be escalated immediately."
+    },
+    {
+     "claim": "Tell customer not to use or charge the item, keep it away from heat and flammables, and not to repair or open it",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "If there is smoke, fire, or heat, the customer should contact emergency services first",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Don't ask the customer to ship the item back until BrightCart gives return instructions",
+     "supported": true,
+     "evidence": "The customer should not ship the damaged item back until BrightCart provides return instructions or confirms that no return is required."
+    },
+    {
+     "claim": "Request photos only if the customer can safely take them; don't require photos if handling is unsafe",
+     "supported": true,
+     "evidence": "If a customer cannot safely handle the product, do not require extra photos."
+    },
+    {
+     "claim": "Request up to 3 photos, matching the BATTERY_SWELL inspection code",
+     "supported": true,
+     "evidence": "BATTERY_SWELL,swelling or leakage,HAZMAT_QUARANTINE,3"
+    },
+    {
+     "claim": "Confirm the order number and affected item",
+     "supported": true,
+     "evidence": "The order number and affected item must be identified."
+    },
+    {
+     "claim": "Check for an existing or duplicate case before recording anything",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L09",
+   "question_id": "q023",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "Standard support can approve credits up to $250",
+     "supported": true,
+     "evidence": "\"standard_support_limit_usd\": 250"
+    },
+    {
+     "claim": "Credits above $250 need a supervisor",
+     "supported": true,
+     "evidence": "\"standard_support_limit_usd\": 250, \"supervisor_limit_usd\": 1000"
+    },
+    {
+     "claim": "Supervisor can approve up to $1,000",
+     "supported": true,
+     "evidence": "\"supervisor_limit_usd\": 1000"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L10",
+   "question_id": "q112",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "The customer would not get money back",
+     "supported": true,
+     "evidence": "do not issue midterm cash credit; apply lower price at renewal"
+    },
+    {
+     "claim": "Six weeks (about 42 days) is past the 30-day mark",
+     "supported": true,
+     "evidence": "downgrade requested after day 30"
+    },
+    {
+     "claim": "For an annual plan downgrade requested after day 30, no midterm cash credit is issued and the lower price applies at renewal",
+     "supported": true,
+     "evidence": "annual plan downgrade | downgrade requested after day 30 | next renewal | do not issue midterm cash credit; apply lower price at renewal"
+    },
+    {
+     "claim": "Switching annual to monthly is scheduled for annual expiration with no midterm conversion",
+     "supported": true,
+     "evidence": "schedule monthly plan for annual expiration; no midterm conversion"
+    },
+    {
+     "claim": "Refund policy covers only accidental renewals requested within 48 hours of the renewal charge",
+     "supported": true,
+     "evidence": "An accidental subscription renewal can be refunded when the customer requests the refund within 48 hours of the renewal charge"
+    },
+    {
+     "claim": "Six weeks is well outside the 48-hour refund window",
+     "supported": true,
+     "evidence": "The request must be within 48 hours of the renewal timestamp."
+    },
+    {
+     "claim": "Contracted enterprise plans follow the signed order form instead of the matrix",
+     "supported": true,
+     "evidence": "follow signed order form instead of consumer proration matrix"
+    },
+    {
+     "claim": "Support can tell the customer the lower price or plan takes effect at next renewal",
+     "supported": true,
+     "evidence": "apply lower price at renewal; schedule monthly plan for annual expiration"
+    },
+    {
+     "claim": "The context does not say how a downgrade requested before day 30 is handled",
+     "supported": true,
+     "evidence": "The matrix only lists the downgrade row for requests after day 30."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L11",
+   "question_id": "q013",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "The function never prices a hazmat parcel automatically",
+     "supported": true,
+     "evidence": "A hazmat parcel is never silently priced by this function; it returns a zero charge with ``MANUAL_HAZMAT_REVIEW``"
+    },
+    {
+     "claim": "It checks parcel.hazmat first",
+     "supported": true,
+     "evidence": "if parcel.hazmat: return Decimal(\"0.00\"), \"MANUAL_HAZMAT_REVIEW\" (first check in the function)"
+    },
+    {
+     "claim": "If hazmat is true it returns (Decimal(\"0.00\"), \"MANUAL_HAZMAT_REVIEW\")",
+     "supported": true,
+     "evidence": "return Decimal(\"0.00\"), \"MANUAL_HAZMAT_REVIEW\""
+    },
+    {
+     "claim": "Zero charge and action code sends parcel to specialist workflow, which decides eligibility",
+     "supported": true,
+     "evidence": "so the specialist workflow can determine eligibility"
+    },
+    {
+     "claim": "Hazmat parcel never reaches the Alaska oversized ($45.00) or standard oversized ($25.00) logic because the hazmat check comes first",
+     "supported": true,
+     "evidence": "if parcel.hazmat: return ... precedes the AK and oversized checks; $45.00 and $25.00 amounts shown"
+    },
+    {
+     "claim": "Matrix row lists an $18 regulated-material handling surcharge for approved hazmat SKUs routed by ground",
+     "supported": true,
+     "evidence": "hazmat ground shipment | approved hazardous material SKU routed by ground | $18 | add regulated-material handling surcharge"
+    },
+    {
+     "claim": "The function itself does not apply the $18 fee",
+     "supported": true,
+     "evidence": "The function code returns only 0.00, 45.00, 25.00 amounts; no $18 appears"
+    },
+    {
+     "claim": "Docstring says hazmat is \"never silently priced by this function\"",
+     "supported": true,
+     "evidence": "A hazmat parcel is never silently priced by this function"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L12",
+   "question_id": "q226",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context doesn't include the URL of the public status page.",
+     "supported": true,
+     "evidence": "The context mentions the public status page only in the SEV-1 update-frequency sentence and gives no URL."
+    },
+    {
+     "claim": "For SEV-1 incidents, the status page is updated at least every 30 minutes until mitigation.",
+     "supported": true,
+     "evidence": "For SEV-1, the public status page is updated at least every 30 minutes until mitigation."
+    },
+    {
+     "claim": "The URL can be found in the Production Incident Command Handbook (reason code RELIA-155).",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "The URL can be found by asking the incident commander or the platform team.",
+     "supported": false,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L13",
+   "question_id": "q279",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "Context has no US East returns warehouse",
+     "supported": true,
+     "evidence": "Only routing > return > us_central appears in the context; no us_east entry."
+    },
+    {
+     "claim": "Primary facility for us_central returns is DFW-RET-1",
+     "supported": true,
+     "evidence": "primary: DFW-RET-1"
+    },
+    {
+     "claim": "Overflow is PHX-RET-2, used at 85%",
+     "supported": true,
+     "evidence": "overflow: PHX-RET-2; overflow_at_percent: 85"
+    },
+    {
+     "claim": "Fail-closed is enabled",
+     "supported": true,
+     "evidence": "fail_closed: true"
+    },
+    {
+     "claim": "Audit logging is required",
+     "supported": true,
+     "evidence": "audit_log: required"
+    },
+    {
+     "claim": "A us_east entry, if it exists, would be under routing > return in the routing configuration",
+     "supported": true,
+     "evidence": "config path: routing > return > us_central"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L14",
+   "question_id": "q137",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "For FAKE_USER_882, login was disabled at 04:11 (UTC, 2026-09-19)",
+     "supported": true,
+     "evidence": "Follow-up: login was disabled at 04:11; 2026-09-19T04:11:08Z ERROR user=FAKE_USER_882"
+    },
+    {
+     "claim": "Session revocation completed at 04:19",
+     "supported": true,
+     "evidence": "session revocation completed at 04:19."
+    },
+    {
+     "claim": "The session revoke call timed out at 04:11:08Z with TimeoutError after 5s",
+     "supported": true,
+     "evidence": "2026-09-19T04:11:08Z ERROR ... session revoke timed out ... TimeoutError: session store timed out after 5s"
+    },
+    {
+     "claim": "Revocation finished about 8 minutes after the timeout",
+     "supported": true,
+     "evidence": "timeout at 04:11, revocation completed at 04:19"
+    },
+    {
+     "claim": "Configured SLAs are 5 minutes for login disable and 15 minutes for session revocation",
+     "supported": true,
+     "evidence": "LOGIN_DISABLE_SLA_MIN = 5; SESSION_REVOKE_SLA_MIN = 15; login_disable_sla_minutes: 5; session_revoke_sla_minutes: 15"
+    },
+    {
+     "claim": "Revocation at 04:19 is about 8 minutes after login disabled, within the 15-minute SLA if measured from 04:11",
+     "supported": true,
+     "evidence": "login disabled at 04:11; revocation completed at 04:19 (8 minutes < 15)"
+    },
+    {
+     "claim": "The context doesn't state the exact start time of the deprovision request",
+     "supported": true,
+     "evidence": "Context gives only the 04:11 login-disabled time and the 04:11:08Z error, with no deprovision request start time."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L15",
+   "question_id": "q103",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "A 35 percent price cut requires 1 approval",
+     "supported": true,
+     "evidence": "test_35_percent_cut_needs_director: approvals_required(100,65) == 1"
+    },
+    {
+     "claim": "The approval comes from a Merchandising Director",
+     "supported": true,
+     "evidence": "A price decrease above 30 percent requires a Merchandising Director approval before publication."
+    },
+    {
+     "claim": "approvals_required(100, 65) computes a 35% decrease",
+     "supported": true,
+     "evidence": "decrease = (old_price - new_price) / old_price * 100"
+    },
+    {
+     "claim": "35% is above the 30% director threshold and below the 60% dual-approval threshold",
+     "supported": true,
+     "evidence": "DIRECTOR_APPROVAL_DECREASE_PCT = 30; DUAL_APPROVAL_DECREASE_PCT = 60"
+    },
+    {
+     "claim": "The function returns 1 for this case",
+     "supported": true,
+     "evidence": "if decrease > DIRECTOR_APPROVAL_DECREASE_PCT: return 1"
+    },
+    {
+     "claim": "test_35_percent_cut_needs_director tests this case",
+     "supported": true,
+     "evidence": "def test_35_percent_cut_needs_director(): assert approvals_required(100,65) == 1"
+    },
+    {
+     "claim": "Runbook says decreases above 30 percent need Director approval before publication",
+     "supported": true,
+     "evidence": "A price decrease above 30 percent requires a Merchandising Director approval before publication."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L23",
+   "question_id": "q114",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The oversized handling surcharge is $25.",
+     "supported": true,
+     "evidence": "continental oversized parcel | ... | $25 | add oversized handling surcharge before label purchase"
+    },
+    {
+     "claim": "Continental oversized rule applies to zones 5 to 8 when longest side exceeds 48 inches.",
+     "supported": true,
+     "evidence": "zone 5 to 8 and package exceeds 48 inches on longest side"
+    },
+    {
+     "claim": "Add the oversized handling surcharge before the label is purchased.",
+     "supported": true,
+     "evidence": "add oversized handling surcharge before label purchase"
+    },
+    {
+     "claim": "Owner is Fulfillment.",
+     "supported": true,
+     "evidence": "| Fulfillment |"
+    },
+    {
+     "claim": "Alaska oversized parcel is charged $45.00 instead of standard $25.",
+     "supported": true,
+     "evidence": "A parcel going to **Alaska (AK)** that is oversized receives a **$45.00** surcharge."
+    },
+    {
+     "claim": "Hazmat parcel gets no automatic price; returns $0.00 with MANUAL_HAZMAT_REVIEW for specialist review.",
+     "supported": true,
+     "evidence": "it returns a zero charge with ``MANUAL_HAZMAT_REVIEW`` so the specialist workflow can determine eligibility."
+    },
+    {
+     "claim": "Rural residential or signature fees are separate line items and may also apply.",
+     "supported": false,
+     "evidence": "The matrix lists these surcharges as separate scenarios, but does not state that they stack with the oversized surcharge or are separate line items."
+    },
+    {
+     "claim": "The context doesn't say how the code's is_oversized check is defined.",
+     "supported": true,
+     "evidence": "The code calls is_oversized(parcel) but its definition is not given in the context."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L28",
+   "question_id": "q254",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Refund goes back proportionally to the original payment methods",
+     "supported": true,
+     "evidence": "the refund is returned proportionally to the original payment methods until each method has received its share"
+    },
+    {
+     "claim": "The order was 50% gift card and 50% Visa",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "A $50 partial refund splits $25 to gift card and $25 to Visa",
+     "supported": true,
+     "evidence": "A $50 proportional refund returns $20 to the gift card and $30 to the Visa (same proportional rule applied; the 50/50 premise itself is not in the context)"
+    },
+    {
+     "claim": "Support can't redirect the whole refund to the Visa",
+     "supported": true,
+     "evidence": "Support cannot choose to move the entire refund to a credit card for convenience."
+    },
+    {
+     "claim": "Gift card value can't be moved to cash or a bank card",
+     "supported": true,
+     "evidence": "Gift-card value must go back to ``gift_card`` and may never be moved to cash or a bank card."
+    },
+    {
+     "claim": "Worked example: $50 refund on $40 gift card/$60 Visa order returns $20 and $30",
+     "supported": true,
+     "evidence": "A $50 proportional refund returns $20 to the gift card and $30 to the Visa."
+    },
+    {
+     "claim": "Gift card portion is normally available the same day the refund is issued",
+     "supported": true,
+     "evidence": "A gift card refund is normally available the same day it is issued."
+    },
+    {
+     "claim": "Visa portion follows normal card posting times",
+     "supported": true,
+     "evidence": "Card portions follow normal card posting times."
+    },
+    {
+     "claim": "Context gives no specific number of days for card posting",
+     "supported": true,
+     "evidence": "Context only says 'normal card posting times' with no day count."
+    },
+    {
+     "claim": "If the original gift card was disabled for confirmed fraud, payment operations decides the replacement path",
+     "supported": true,
+     "evidence": "If the original gift card is disabled for confirmed fraud, payment operations determines the replacement path."
+    },
+    {
+     "claim": "A federal holiday shifts the operational clock to the next business day",
+     "supported": true,
+     "evidence": "holiday exception | federal holiday impacts timing | next business day | shift operational clock only"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  }
+ ]
+}
