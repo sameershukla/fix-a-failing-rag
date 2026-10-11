@@ -1,0 +1,686 @@
+{
+ "split": "test",
+ "prompt_version": "v1",
+ "model": "claude-sonnet-5-5",
+ "agreement": 0.8571428571428571,
+ "kappa": 0.7199999999999999,
+ "recall": 1.0,
+ "precision": 0.75,
+ "counts": {
+  "tp": 6,
+  "fn": 0,
+  "fp": 2,
+  "tn": 6
+ },
+ "items": [
+  {
+   "id": "L16",
+   "question_id": "q203",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": null,
+   "claims": [],
+   "problem": "unparseable reply",
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L17",
+   "question_id": "q008",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "The support-chat retention job runs on cron schedule `0 3 * * *`",
+     "supported": true,
+     "evidence": "job_schedule: \"0 3 * * *\" under retention > support_chat > settings"
+    },
+    {
+     "claim": "The cron schedule means daily at 3:00 AM",
+     "supported": true,
+     "evidence": "job_schedule: \"0 3 * * *\""
+    },
+    {
+     "claim": "The context does not specify a timezone",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "The time zone would need to be confirmed in the job's configuration or platform settings",
+     "supported": true,
+     "evidence": ""
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L18",
+   "question_id": "q192",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "The context does not say which SSO providers are supported (Okta, Azure AD, etc.)",
+     "supported": true,
+     "evidence": "No chunk mentions any identity provider or provider compatibility."
+    },
+    {
+     "claim": "The material has a section titled \"Enterprise Identity: SSO, SCIM, and Break Glass\"",
+     "supported": true,
+     "evidence": "Enterprise Identity: SSO, SCIM, and Break Glass"
+    },
+    {
+     "claim": "The text under that section covers general operating rules, not provider compatibility",
+     "supported": true,
+     "evidence": "The text covers idempotency, exception ordering, human review, record keeping, and state verification."
+    },
+    {
+     "claim": "Capture the idempotency key before retrying state-changing actions (ENTER-133)",
+     "supported": true,
+     "evidence": "For state-changing actions, capture the idempotency key or transaction identifier before retrying... reason code ENTER-133."
+    },
+    {
+     "claim": "Evaluate exceptions after the base eligibility check (ENTER-134, ENTER-082, ENTER-091)",
+     "supported": true,
+     "evidence": "Regional and customer-tier exceptions are evaluated after the general eligibility check... ENTER-134 / ENTER-082 / ENTER-091"
+    },
+    {
+     "claim": "Reject requests with missing data instead of inferring it (ENTER-135, ENTER-083)",
+     "supported": true,
+     "evidence": "If required identifiers or evidence are absent, the reviewer should reject the request and ask for the missing material rather than infer values"
+    },
+    {
+     "claim": "Record case ID, source system, timestamps, and decision reason (ENTER-084)",
+     "supported": true,
+     "evidence": "Operators should record the case identifier, source system, timestamps, and the decision reason before moving to the next stage... ENTER-084."
+    },
+    {
+     "claim": "Verify authoritative state in the owning system before promising outcomes (ENTER-085, ENTER-015)",
+     "supported": true,
+     "evidence": "Staff should verify the authoritative state in the owning system before promising an outcome or creating a compensating action... ENTER-085; ENTER-015"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L19",
+   "question_id": "q328",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Enterprise admin idle timeout is 30 minutes",
+     "supported": false,
+     "evidence": "Context gives enterprise_admin idle_minutes: 15; 30 is the consumer value."
+    },
+    {
+     "claim": "Enterprise admin absolute session length is 8 hours",
+     "supported": true,
+     "evidence": "\"enterprise_admin\": {\"idle_minutes\": 15, \"absolute_hours\": 8"
+    },
+    {
+     "claim": "Enterprise admin MFA is required",
+     "supported": true,
+     "evidence": "\"mfa_required\": true"
+    },
+    {
+     "claim": "Consumer sessions allow 30 minutes idle",
+     "supported": true,
+     "evidence": "\"consumer\": {\"idle_minutes\": 30"
+    },
+    {
+     "claim": "Consumer sessions allow 24 hours absolute",
+     "supported": true,
+     "evidence": "\"absolute_hours\": 24"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L20",
+   "question_id": "q358",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "An Alaska parcel over 50 lb gets a $45.00 oversized remote-zone surcharge",
+     "supported": true,
+     "evidence": "| Alaska oversized parcel | zone AK and package over 50 lb | $45 | add oversized remote-zone surcharge | Fulfillment |"
+    },
+    {
+     "claim": "The Alaska oversized parcel rule is owned by Fulfillment",
+     "supported": true,
+     "evidence": "add oversized remote-zone surcharge | Fulfillment |"
+    },
+    {
+     "claim": "The code treats any parcel over 50 lb as oversized",
+     "supported": true,
+     "evidence": "return longest > Decimal(\"48\") or parcel.weight_lb > Decimal(\"50\")"
+    },
+    {
+     "claim": "So the AK rule applies to an Alaska parcel over 50 lb",
+     "supported": true,
+     "evidence": "if parcel.state.upper() == \"AK\" and is_oversized(parcel): return Decimal(\"45.00\")"
+    },
+    {
+     "claim": "A hazmat parcel isn't priced automatically; it returns $0.00 with MANUAL_HAZMAT_REVIEW for specialist review",
+     "supported": true,
+     "evidence": "A hazmat parcel is never silently priced by this function; it returns a zero charge with ``MANUAL_HAZMAT_REVIEW`` so the specialist workflow can determine eligibility."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L21",
+   "question_id": "q182",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "A SEV 1 incident is covered at 3:00 AM on a Sunday",
+     "supported": true,
+     "evidence": "SEV 1 incident response is available 24 hours a day through the on call process."
+    },
+    {
+     "claim": "SEV 1 response is available 24 hours a day, 7 days a week, through the on-call process",
+     "supported": true,
+     "evidence": "SEV 1 incident response is available 24 hours a day through the on call process."
+    },
+    {
+     "claim": "Standard support hours are 8 AM to 8 PM Central, Monday through Friday, and apply to routine tickets rather than SEV 1 incidents",
+     "supported": true,
+     "evidence": "Standard customer support is staffed from 8:00 AM to 8:00 PM Central Time, Monday through Friday... The on call path is for service incidents, not faster handling of normal tickets."
+    },
+    {
+     "claim": "SEV 1 is defined as a widespread outage, major security exposure, or critical business function unavailable with no practical workaround",
+     "supported": true,
+     "evidence": "SEV 1 is used for a widespread outage, major security exposure, or critical business function unavailable with no practical workaround."
+    },
+    {
+     "claim": "Routine billing or product questions sent after hours wait for the next staffed period",
+     "supported": true,
+     "evidence": "Routine billing and product questions submitted after hours wait for the next staffed period."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L22",
+   "question_id": "q168",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The context has no payout policy, so it can't be said whether the payout is allowed",
+     "supported": true,
+     "evidence": "The context covers password reset, account lockout and account creation only; none of it covers payouts."
+    },
+    {
+     "claim": "The context contains relevant guidance on password reset",
+     "supported": true,
+     "evidence": "Password Reset Process runbook"
+    },
+    {
+     "claim": "A reset link is valid for 30 minutes and works only once",
+     "supported": true,
+     "evidence": "A password reset link is valid for 30 minutes and can be used only once."
+    },
+    {
+     "claim": "A reset completed 10 minutes before the payout request is consistent with a normal reset / the reset followed the standard process",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "A payout request shortly after a password change can be a warning sign of account takeover",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Security can force an immediate password reset after suspicious activity",
+     "supported": true,
+     "evidence": "Security can force an immediate password reset after suspicious activity."
+    },
+    {
+     "claim": "The context lists a security review as a response to suspicious activity",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Support should not treat the reset as proof the customer is the account holder",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Support should not approve or block the payout based on this context alone",
+     "supported": true,
+     "evidence": "The context has no payout policy."
+    },
+    {
+     "claim": "Support should escalate to Security if the timing or other details look suspicious",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Support should never ask the customer for their new password",
+     "supported": true,
+     "evidence": "Support never asks the customer to reveal the new password."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L23",
+   "question_id": "q114",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "The oversized handling surcharge is $25.",
+     "supported": true,
+     "evidence": "continental oversized parcel | ... | $25 | add oversized handling surcharge before label purchase"
+    },
+    {
+     "claim": "Continental oversized rule applies to zones 5 to 8 when longest side exceeds 48 inches.",
+     "supported": true,
+     "evidence": "zone 5 to 8 and package exceeds 48 inches on longest side"
+    },
+    {
+     "claim": "Add the oversized handling surcharge before the label is purchased.",
+     "supported": true,
+     "evidence": "add oversized handling surcharge before label purchase"
+    },
+    {
+     "claim": "Owner is Fulfillment.",
+     "supported": true,
+     "evidence": "| Fulfillment |"
+    },
+    {
+     "claim": "Alaska oversized parcel is charged $45.00 instead of standard $25.",
+     "supported": true,
+     "evidence": "A parcel going to **Alaska (AK)** that is oversized receives a **$45.00** surcharge."
+    },
+    {
+     "claim": "Hazmat parcel gets no automatic price; returns $0.00 with MANUAL_HAZMAT_REVIEW for specialist review.",
+     "supported": true,
+     "evidence": "it returns a zero charge with ``MANUAL_HAZMAT_REVIEW`` so the specialist workflow can determine eligibility."
+    },
+    {
+     "claim": "Rural residential or signature fees are separate line items and may also apply.",
+     "supported": false,
+     "evidence": "The matrix lists these surcharges as separate scenarios, but does not state that they stack with the oversized surcharge or are separate line items."
+    },
+    {
+     "claim": "The context doesn't say how the code's is_oversized check is defined.",
+     "supported": true,
+     "evidence": "The code calls is_oversized(parcel) but its definition is not given in the context."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L24",
+   "question_id": "q074",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "ACH payments from approved business accounts normally clear the same day for orders under $5,000",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "A business submitting ACH on Monday with no bank holiday should normally clear between Wednesday and Thursday",
+     "supported": true,
+     "evidence": "A business submits an ACH payment on Monday. With no bank holiday, the payment will normally clear between Wednesday and Thursday."
+    },
+    {
+     "claim": "Weekends and bank holidays can extend clearing time",
+     "supported": true,
+     "evidence": "Weekends and bank holidays can extend clearing time."
+    },
+    {
+     "claim": "Very large transfers may need additional finance approval",
+     "supported": true,
+     "evidence": "Very large transfers may require additional finance approval."
+    },
+    {
+     "claim": "Orders requiring cleared funds stay on hold until payment reaches cleared status",
+     "supported": true,
+     "evidence": "Orders that require cleared funds are not released until the payment reaches cleared status."
+    },
+    {
+     "claim": "Support can report pending or cleared status but shouldn't promise a precise bank settlement hour",
+     "supported": true,
+     "evidence": "Support can report pending or cleared status but should not promise a precise bank settlement hour."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L25",
+   "question_id": "q170",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "Mid-cycle upgrades use a fixed 30-day denominator, not actual calendar month length",
+     "supported": true,
+     "evidence": "BrightCart uses a fixed **30-day denominator** for this product family so results do not change with calendar-month length."
+    },
+    {
+     "claim": "The fixed denominator keeps results the same regardless of month length",
+     "supported": true,
+     "evidence": "so results do not change with calendar-month length"
+    },
+    {
+     "claim": "Charge formula: round_half_up(max(0, new - old) \u00d7 days_remaining / 30)",
+     "supported": true,
+     "evidence": "price_difference = max(Decimal(\"0.00\"), change.new_monthly_price - change.old_monthly_price); fraction = Decimal(change.days_remaining) / Decimal(\"30\"); return _round_currency(price_difference * fraction)"
+    },
+    {
+     "claim": "Example: $10 to $30 with 15 days remaining gives $10.00",
+     "supported": true,
+     "evidence": "Follows from the formula: 20.00 \u00d7 15/30 = 10.00"
+    },
+    {
+     "claim": "The function's docstring defines this rule",
+     "supported": true,
+     "evidence": "calculate_upgrade_proration docstring: \"BrightCart uses a fixed **30-day denominator**...\""
+    },
+    {
+     "claim": "The matrix's remaining-term credit rows cover annual upgrades",
+     "supported": true,
+     "evidence": "| annual upgrade first quarter | ... | remaining-term credit | credit unused annual value and charge prorated upgraded annual amount |"
+    },
+    {
+     "claim": "The matrix rows don't change the 30-day divisor for monthly upgrades",
+     "supported": true,
+     "evidence": "Monthly upgrade rows say \"remaining-day credit\" and \"charge prorated difference for remaining days\" with no change to the divisor."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L26",
+   "question_id": "q164",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Config path is routing > domestic > expedited",
+     "supported": true,
+     "evidence": "config path: routing > domestic > expedited"
+    },
+    {
+     "claim": "cutoff_ct is \"14:00\", i.e. 2:00 PM Central Time",
+     "supported": true,
+     "evidence": "cutoff_ct: \"14:00\"; \"before 2:00 PM Central Time\""
+    },
+    {
+     "claim": "after_cutoff is NEXT_BUSINESS_DAY",
+     "supported": true,
+     "evidence": "after_cutoff: NEXT_BUSINESS_DAY"
+    },
+    {
+     "claim": "After the cutoff the order still ships the same day for a $15 rush fee",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "carrier_service is UPS_2DAY",
+     "supported": true,
+     "evidence": "carrier_service: UPS_2DAY"
+    },
+    {
+     "claim": "audit_log is required",
+     "supported": true,
+     "evidence": "audit_log: required"
+    },
+    {
+     "claim": "fail_closed is true",
+     "supported": true,
+     "evidence": "fail_closed: true"
+    },
+    {
+     "claim": "Eligible orders before 2:00 PM CT on a business day ship same day and arrive within 2 business days after carrier acceptance",
+     "supported": true,
+     "evidence": "Eligible expedited orders placed before 2:00 PM Central Time on a business day are expected to ship the same day and arrive within 2 business days after carrier acceptance."
+    },
+    {
+     "claim": "Orders placed after cutoff are processed the next business day",
+     "supported": true,
+     "evidence": "Orders placed after the cutoff are processed the next business day."
+    },
+    {
+     "claim": "Saturdays and Sundays don't count as business days",
+     "supported": true,
+     "evidence": "Saturday and Sunday are not counted as business days."
+    },
+    {
+     "claim": "Order at 1:30 PM CT Tuesday ships Tuesday and arrives by Thursday",
+     "supported": true,
+     "evidence": "The warehouse ships it Tuesday and the carrier should deliver by Thursday."
+    },
+    {
+     "claim": "Order at 3:30 PM ships Wednesday and arrives by Friday",
+     "supported": true,
+     "evidence": "The same order placed at 3:30 PM is expected to ship Wednesday and arrive by Friday."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L27",
+   "question_id": "q130",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "faithful",
+   "claims": [
+    {
+     "claim": "ATP inventory = on-hand \u2212 reservations \u2212 safety stock",
+     "supported": true,
+     "evidence": "Available-to-promise inventory is calculated from on-hand minus reservations minus safety stock."
+    },
+    {
+     "claim": "The formula comes from the 'Failure recovery' section of the Catalog Pricing and Inventory Change Runbook",
+     "supported": true,
+     "evidence": "## Failure recovery\n\nAvailable-to-promise inventory is calculated from on-hand minus reservations minus safety stock."
+    },
+    {
+     "claim": "The context does not define how reservations or safety stock are defined or sourced",
+     "supported": true,
+     "evidence": ""
+    },
+    {
+     "claim": "Runbook says to verify authoritative state in the owning system before promising to a customer",
+     "supported": true,
+     "evidence": "Staff should verify the authoritative state in the owning system before promising an outcome or creating a compensating action."
+    },
+    {
+     "claim": "Stale data from another system is a common cause of incidents",
+     "supported": true,
+     "evidence": "Most incidents in this area come from a correct local decision combined with stale context from another system."
+    },
+    {
+     "claim": "If inventory is unavailable, bulk order logic routes to BACKORDER_REVIEW and says not to promise allocation",
+     "supported": true,
+     "evidence": "if not order.inventory_available: return \"BACKORDER_REVIEW\", \"inventory unavailable; do not promise allocation\""
+    },
+    {
+     "claim": "Do not promise a ship date until the supply plan is confirmed for backorder bulk requests",
+     "supported": true,
+     "evidence": "do not promise ship date until supply plan is confirmed"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L28",
+   "question_id": "q254",
+   "origin": "natural",
+   "human": "faithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Refund goes back proportionally to the original payment methods",
+     "supported": true,
+     "evidence": "the refund is returned proportionally to the original payment methods until each method has received its share"
+    },
+    {
+     "claim": "The order was 50% gift card and 50% Visa",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "A $50 partial refund splits $25 to gift card and $25 to Visa",
+     "supported": true,
+     "evidence": "A $50 proportional refund returns $20 to the gift card and $30 to the Visa (same proportional rule applied; the 50/50 premise itself is not in the context)"
+    },
+    {
+     "claim": "Support can't redirect the whole refund to the Visa",
+     "supported": true,
+     "evidence": "Support cannot choose to move the entire refund to a credit card for convenience."
+    },
+    {
+     "claim": "Gift card value can't be moved to cash or a bank card",
+     "supported": true,
+     "evidence": "Gift-card value must go back to ``gift_card`` and may never be moved to cash or a bank card."
+    },
+    {
+     "claim": "Worked example: $50 refund on $40 gift card/$60 Visa order returns $20 and $30",
+     "supported": true,
+     "evidence": "A $50 proportional refund returns $20 to the gift card and $30 to the Visa."
+    },
+    {
+     "claim": "Gift card portion is normally available the same day the refund is issued",
+     "supported": true,
+     "evidence": "A gift card refund is normally available the same day it is issued."
+    },
+    {
+     "claim": "Visa portion follows normal card posting times",
+     "supported": true,
+     "evidence": "Card portions follow normal card posting times."
+    },
+    {
+     "claim": "Context gives no specific number of days for card posting",
+     "supported": true,
+     "evidence": "Context only says 'normal card posting times' with no day count."
+    },
+    {
+     "claim": "If the original gift card was disabled for confirmed fraud, payment operations decides the replacement path",
+     "supported": true,
+     "evidence": "If the original gift card is disabled for confirmed fraud, payment operations determines the replacement path."
+    },
+    {
+     "claim": "A federal holiday shifts the operational clock to the next business day",
+     "supported": true,
+     "evidence": "holiday exception | federal holiday impacts timing | next business day | shift operational clock only"
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L29",
+   "question_id": "q175",
+   "origin": "seeded_edit",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "BrightCart systems may keep card CVV values for 30 days after authorization to handle chargeback disputes.",
+     "supported": false,
+     "evidence": "Context says systems must not store card CVV values after authorization, and there is no support exception allowing CVV storage."
+    },
+    {
+     "claim": "Support staff must never ask customers to send a full card number, CVV, or card image through chat or email.",
+     "supported": true,
+     "evidence": "Support staff must never ask customers to send a full card number, CVV, or card image through chat or email."
+    },
+    {
+     "claim": "Internal systems identify payments through tokenized references rather than raw card details.",
+     "supported": true,
+     "evidence": "Payment pages use tokenized references so internal systems can identify a payment without storing the raw card details."
+    },
+    {
+     "claim": "Logs must redact sensitive card fields.",
+     "supported": true,
+     "evidence": "Logs must redact sensitive card fields."
+    },
+    {
+     "claim": "Case tools should hold only the minimum payment data needed for support.",
+     "supported": true,
+     "evidence": "Only the minimum payment data required for support should appear in case tools."
+    },
+    {
+     "claim": "The last four digits returned by the payment system can go in a case note.",
+     "supported": true,
+     "evidence": "The case note may include the last four digits returned by the payment system."
+    },
+    {
+     "claim": "Approved payment processors can handle raw card data only within their own compliant environment.",
+     "supported": true,
+     "evidence": "Approved payment processors can handle raw card data within their compliant environment."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  },
+  {
+   "id": "L30",
+   "question_id": "q044",
+   "origin": "natural",
+   "human": "unfaithful",
+   "judge": "unfaithful",
+   "claims": [
+    {
+     "claim": "Context doesn't list which countries support SMS codes for MFA",
+     "supported": true,
+     "evidence": "SMS availability depends on supported phone regions."
+    },
+    {
+     "claim": "Context states SMS availability depends on supported phone regions",
+     "supported": true,
+     "evidence": "SMS availability depends on supported phone regions."
+    },
+    {
+     "claim": "Check the current list of supported phone regions in the MFA documentation or contact the team that maintains that list",
+     "supported": false,
+     "evidence": ""
+    },
+    {
+     "claim": "Customers in unsupported regions can use an authenticator app instead",
+     "supported": true,
+     "evidence": "Customers may enable MFA using an authenticator app or SMS."
+    },
+    {
+     "claim": "Policy allows both authenticator app and SMS methods",
+     "supported": true,
+     "evidence": "Customers may enable MFA using an authenticator app or SMS."
+    }
+   ],
+   "problem": null,
+   "stop_reason": "end_turn"
+  }
+ ]
+}

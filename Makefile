@@ -12,7 +12,7 @@ export RAG_CONFIG := $(CONFIG)
 endif
 
 
-.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-calibrate dashboard compare test
+.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-compare judge-calibrate dashboard compare test
 
 # Create a local virtual environment and install the generator's dependencies.
 $(PY):
@@ -98,6 +98,10 @@ judge-sample: $(PY)
 
 judge-sheet: $(PY)
 	$(PY) -m eval.judges.calibrate sheet
+
+# Lesson 4.2: after typing your verdicts in sheet.md, compare them with the draft labels (agreement, kappa, each disagreement).
+judge-compare: $(PY)
+	$(PY) -m eval.judges.calibrate compare
 
 judge-calibrate: $(PY)
 	$(PY) -m eval.judges.calibrate score $(if $(SPLIT),--split $(SPLIT))
