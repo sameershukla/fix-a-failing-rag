@@ -1,0 +1,50 @@
+# Experiment: Lesson 4.4. Answer model claude-sonnet-5-5, prompt plain, max_tokens 2000 (both arms use 2000 because the cited prompt makes answers longer; at 1000 it cut off answers).
+chunking:
+  overlap_tokens: 25
+  size_tokens: 250
+  strategy: router
+  structure:
+    code: false
+    config: true
+    headings: false
+    tables: true
+    title_prefix: true
+  tokenizer: sentence-transformers/all-MiniLM-L6-v2
+  unit: tokens
+corpus:
+  exclude: []
+  include:
+  - corpus
+embedding:
+  dimensions: 384
+  model: sentence-transformers/all-MiniLM-L6-v2
+  normalize: true
+  provider: sentence-transformers
+generation:
+  prompt: plain
+llm:
+  max_tokens: 2000
+  model: claude-sonnet-5-5
+  provider: anthropic
+retrieval:
+  bm25_weight: 2.0
+  candidates: 50
+  filters:
+    authority:
+    - primary
+    - implementation
+    - observational
+    status:
+    - active
+  k: 5
+  mode: hybrid
+  rerank:
+    enabled: true
+    model: cross-encoder/ms-marco-MiniLM-L-6-v2
+    top_n: 20
+  rrf_k: 60
+  vector_weight: 1.0
+vector_store:
+  collection: auto
+  distance: cosine
+  provider: chroma

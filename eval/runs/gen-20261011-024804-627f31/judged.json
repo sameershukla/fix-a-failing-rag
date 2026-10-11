@@ -1,0 +1,611 @@
+{
+ "judge": "v1",
+ "model": "claude-sonnet-5-5",
+ "calibrated": false,
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1213,
+   "unsupported": []
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 467,
+   "unsupported": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 754,
+   "unsupported": []
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 319,
+   "unsupported": []
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 38,
+   "unsupported": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 151,
+   "unsupported": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 408,
+   "unsupported": []
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 160,
+   "unsupported": []
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 713,
+   "unsupported": []
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 596,
+   "unsupported": []
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 120,
+   "unsupported": []
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 607,
+   "unsupported": []
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 517,
+   "unsupported": []
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 221,
+   "unsupported": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 653,
+   "unsupported": []
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 437,
+   "unsupported": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 731,
+   "unsupported": []
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 775,
+   "unsupported": []
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 394,
+   "unsupported": []
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 353,
+   "unsupported": []
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 69,
+   "unsupported": []
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 807,
+   "unsupported": []
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 189,
+   "unsupported": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 120,
+   "unsupported": [
+    "This error is the one that prompted the question"
+   ]
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 191,
+   "unsupported": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 507,
+   "unsupported": []
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 745,
+   "unsupported": []
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 129,
+   "unsupported": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 769,
+   "unsupported": []
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 219,
+   "unsupported": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 522,
+   "unsupported": []
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 435,
+   "unsupported": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 452,
+   "unsupported": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 169,
+   "unsupported": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 570,
+   "unsupported": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 336,
+   "unsupported": []
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 505,
+   "unsupported": []
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 348,
+   "unsupported": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 399,
+   "unsupported": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 183,
+   "unsupported": []
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 62,
+   "unsupported": []
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 728,
+   "unsupported": []
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 785,
+   "unsupported": []
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 752,
+   "unsupported": []
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 961,
+   "unsupported": []
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 487,
+   "unsupported": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 201,
+   "unsupported": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 116,
+   "unsupported": [
+    "ACH is the only payment method the context covers."
+   ]
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 865,
+   "unsupported": []
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 927,
+   "unsupported": []
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 898,
+   "unsupported": []
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 327,
+   "unsupported": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 520,
+   "unsupported": []
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 640,
+   "unsupported": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 250,
+   "unsupported": []
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 98,
+   "unsupported": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 381,
+   "unsupported": []
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1066,
+   "unsupported": []
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 130,
+   "unsupported": []
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 479,
+   "unsupported": []
+  }
+ ]
+}

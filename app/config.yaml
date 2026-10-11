@@ -50,3 +50,5 @@ llm:
   provider: anthropic
   model: claude-sonnet-5-5
   max_tokens: 1000
+generation:
+  prompt: plain   # plain or cited (Lesson 4.4). Prompt texts are in app/generation/answer.py.

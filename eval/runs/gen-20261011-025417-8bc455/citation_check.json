@@ -1,0 +1,608 @@
+{
+ "summary": {
+  "answers": 60,
+  "with_citations": 59,
+  "citations": 156,
+  "passed": 156,
+  "failed": 0,
+  "answers_with_failed": 0,
+  "answers_with_uncited": 22,
+  "uncited_sentences": 32
+ },
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "citations": 9,
+   "passed": 9,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Partial refunds are used when the customer is owed money but not the full original item price.",
+    "A partial refund may be issued when returned merchandise is missing customer removable parts, shows customer caused damage, or only part of a multi item order is being refunded.",
+    "The deduction must be tied to a documented reason, and the customer must be told the amount before the refund is finalized.",
+    "Shipping fees are refunded only when the shipping service itself failed or the return was caused by BrightCart.",
+    "Tax is recalculated based on the refunded merchandise amount.",
+    "Agents cannot invent a restocking fee when no published fee applies.",
+    "When a partial refund and a promotional credit both appear eligible, the original tender refund is calculated before any courtesy credit.",
+    "The courtesy credit is applied only after the refundable tender amount is finalized.",
+    "This precedence policy applies only when the triggering transaction state is present."
+   ]
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The function returns a zero charge and a manual review code for hazmat parcels."
+   ]
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, the time it takes to ship the item back does not count against the 30 days."
+   ]
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover how enterprise arrangements are priced when a negotiated agreement exists."
+   ]
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does list rate limits for v1 endpoints."
+   ]
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "That is an acknowledgement target, not the paging threshold given in the matrix."
+   ]
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, the Fraud Escalation Matrix covers this case."
+   ]
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It only covers who can use ACH and how it clears."
+   ]
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context does cover canceling orders before shipment.",
+    "It also covers changing orders before fulfillment."
+   ]
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It covers rate limits for list calls, not page sizes."
+   ]
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, the context indicates a six-week-old annual member would not get a cash refund for a downgrade."
+   ]
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context lists a **$25** oversized handling surcharge for this case."
+   ]
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The monthly cost of the professional marketplace plan is $39."
+   ]
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover password reset links."
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, if the incident is a SEV 1."
+   ]
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "An order with more than 100 digital gift cards is classified as a gift card bulk purchase that requires risk review.",
+    "\"order includes more than 100 digital gift cards\" and \"hold issuance until gift-card risk approves funding source\"]."
+   ]
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The refund is split in proportion to the original payment."
+   ]
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context also has a conflicting 14-day rule."
+   ]
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context covers seller payouts in other respects."
+   ]
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context also says that business organizations can have multiple users under one company profile, but each user still has a unique email."
+   ]
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context supports a refund for this scenario only if the case matches the edition's region, customer tier, and effective date."
+   ]
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, a standard label isn't the right route for an oversized freight return."
+   ]
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  }
+ ]
+}

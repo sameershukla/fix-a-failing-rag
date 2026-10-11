@@ -12,7 +12,7 @@ export RAG_CONFIG := $(CONFIG)
 endif
 
 
-.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-compare judge-calibrate dashboard compare test
+.PHONY: golden-check show-chunk setup generate-corpus generate-corpus-dry hello normalize chunk index ingest ask retrieve eval eval-gen judge-sample judge-sheet judge-run cite-check judge-compare judge-calibrate dashboard compare test
 
 # Create a local virtual environment and install the generator's dependencies.
 $(PY):
@@ -82,10 +82,20 @@ eval: $(PY)
 	$(PY) -m dashboard.build $(if $(BASE),--baseline $(BASE))
 
 # Score the ANSWERS: faithfulness of each answer to the chunks it was given (Module 4). Needs ANTHROPIC_API_KEY and costs model calls.
-#   make eval-gen SYSTEM=app CONFIG=config/experiments/g-plain.yaml   |   add LIMIT=20 to try 20 questions first   |   SUBSET=gen50 for the 50 question set in eval/golden/subsets/   |   NOCACHE=1 to ignore the call cache
+#   make eval-gen SYSTEM=app CONFIG=config/experiments/g-plain-2000.yaml   |   add LIMIT=20 to try 20 questions first   |   SUBSET=gen50 for the 50 question set in eval/golden/subsets/   |   NOCACHE=1 to ignore the call cache
 # Compare two of these runs with make compare, the same as for retrieval runs.
 eval-gen: $(PY)
 	$(PY) -m eval.generate --system $(SYSTEM) $(if $(SUBSET),--subset $(SUBSET)) $(if $(LIMIT),--limit $(LIMIT)) $(if $(NOCACHE),--no-cache)
+
+# Lesson 4.4: judge every answer in a generation run (faithfulness judge, NOT calibrated); give two run ids for the paired comparison. Needs ANTHROPIC_API_KEY.
+#   make judge-run RUN="<run id> [<run id>]"
+judge-run: $(PY)
+	$(PY) -m eval.judge_run $(RUN)
+
+# Lesson 4.4: check every citation in a generation run with code (chunk exists, quote is in it). No model call.
+#   make cite-check RUN=<generation run id>
+cite-check: $(PY)
+	$(PY) -m eval.cite_check $(RUN)
 
 # Lesson 4.2: calibrate the judge against human labels. One file, eval/judges/calibration/labels.yaml; each item is split=tune or split=test.
 #   make judge-sample RUNS="<run id> <run id>" SPLIT=test N=30 SEED=1   draws 30 more answers (stratified, repeatable, never a question already labeled) and adds them (free)

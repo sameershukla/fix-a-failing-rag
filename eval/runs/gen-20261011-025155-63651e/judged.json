@@ -1,0 +1,670 @@
+{
+ "judge": "v1",
+ "model": "claude-sonnet-5-5",
+ "calibrated": false,
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1020,
+   "unsupported": []
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 395,
+   "unsupported": [
+    "The Python snippets only define helper functions for timestamps, text normalization, and audit records"
+   ]
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 420,
+   "unsupported": [
+    "The $18 rate is handled through the manual review path"
+   ]
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 152,
+   "unsupported": []
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 73,
+   "unsupported": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 116,
+   "unsupported": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 513,
+   "unsupported": [
+    "If the termination fee is defined in the customer's signed agreement, that document governs; check the signed order form or fee schedule",
+    "For the specific fee, contact B2B Billing (subscriptions) or Marketplace Finance (seller fees)"
+   ]
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 185,
+   "unsupported": []
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 376,
+   "unsupported": []
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 270,
+   "unsupported": []
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 285,
+   "unsupported": []
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 263,
+   "unsupported": [
+    "For store pickup eligibility, check with the team that owns fulfillment or pickup policy"
+   ]
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 353,
+   "unsupported": [
+    "If not found, escalate to a supervisor or the policy team"
+   ]
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 176,
+   "unsupported": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 139,
+   "unsupported": []
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 344,
+   "unsupported": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 522,
+   "unsupported": []
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 415,
+   "unsupported": [
+    "Alaska could fall in the far zones",
+    "Confirm current rule for Alaska before quoting"
+   ]
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 192,
+   "unsupported": [
+    "The actual weight threshold can be found in the current expedited shipping policy, the warehouse eligibility rules, or by asking the fulfillment team"
+   ]
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 159,
+   "unsupported": []
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 118,
+   "unsupported": [
+    "ATP is the figure to use when determining what can be promised to a customer"
+   ]
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 461,
+   "unsupported": []
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 220,
+   "unsupported": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 352,
+   "unsupported": []
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 256,
+   "unsupported": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 1019,
+   "unsupported": [
+    "A reset followed quickly by a sensitive request is a situation security should review",
+    "Password change followed by payout request is a common account-takeover pattern",
+    "Don't disclose account details to anyone who hasn't passed verification",
+    "Escalate to security review / hold payout pending review"
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 624,
+   "unsupported": [
+    "Finance is right (about the dispute over new-seller payouts)",
+    "The sales deck should be corrected to match the policy",
+    "Sales should not rely on the old claim or use the deck to set seller expectations until fixed",
+    "Deck figures may come from an earlier policy version, and Finance can confirm which is current"
+   ]
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 83,
+   "unsupported": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 325,
+   "unsupported": []
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 269,
+   "unsupported": [
+    "The current returns policy is available in the help center"
+   ]
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 259,
+   "unsupported": [
+    "The relevant policy or registry is one that Loyalty Operations maintains"
+   ]
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 215,
+   "unsupported": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 133,
+   "unsupported": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 115,
+   "unsupported": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 328,
+   "unsupported": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 257,
+   "unsupported": [
+    "You'd need to check current product limits or ask the B2B Subscriptions owner for the authoritative number"
+   ]
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 245,
+   "unsupported": []
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 248,
+   "unsupported": [
+    "For promotional credit questions, check with the relevant policy owner or the promotion's terms"
+   ]
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 134,
+   "unsupported": [
+    "The exact length requirement is found in the current password policy document."
+   ]
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 218,
+   "unsupported": [
+    "Check with the payment security or platform team, or the processor's documentation, for encryption details"
+   ]
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 171,
+   "unsupported": [
+    "To find the URL, check the Production Incident Command Handbook",
+    "To find the URL, ask your incident commander or the team that owns public status communications"
+   ]
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 409,
+   "unsupported": []
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 657,
+   "unsupported": [
+    "The customer's request has to go through the carrier instead",
+    "The required identifier is, for example, the tracking number"
+   ]
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 541,
+   "unsupported": []
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 392,
+   "unsupported": []
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 419,
+   "unsupported": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 238,
+   "unsupported": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 204,
+   "unsupported": [
+    "ACH bank transfer is the only payment method described in the context."
+   ]
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 695,
+   "unsupported": [
+    "A second refund can result in a duplicate payment",
+    "Record the transaction identifier before any action, per the returns handbook"
+   ]
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 912,
+   "unsupported": [
+    "Tell the customer that you are escalating",
+    "Give safety guidance: stop using, keep away from heat/flames, don't charge, avoid skin contact, ventilate",
+    "Return instructions should come from the hazard handling process"
+   ]
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 489,
+   "unsupported": []
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 219,
+   "unsupported": [
+    "For review timing, check the internal tax or support process or ask the team that handles exemption verification."
+   ]
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 517,
+   "unsupported": [
+    "Seller payout or withdrawal policy should be checked with Marketplace Finance"
+   ]
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 215,
+   "unsupported": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 165,
+   "unsupported": []
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 125,
+   "unsupported": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 61,
+   "unsupported": [
+    "The customer has 14 calendar days to choose between refund or reshipment (a deadline for choosing)"
+   ]
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 920,
+   "unsupported": []
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 227,
+   "unsupported": []
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 196,
+   "unsupported": [
+    "A payment methods help article exists and can be checked for a confirmed answer"
+   ]
+  }
+ ]
+}

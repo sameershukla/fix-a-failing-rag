@@ -1,0 +1,17 @@
+{
+  "run_id": "gen-20261011-024024-d3e293",
+  "kind": "generation",
+  "config_hash": "d3e293",
+  "model": "claude-haiku-5-5",
+  "max_tokens": 1000,
+  "prompt": "cited",
+  "subset": "all",
+  "limit": 60,
+  "seed": 1,
+  "questions": 60,
+  "answerable": 36,
+  "unanswerable": 24,
+  "truncated_answers": 12,
+  "model_calls": 60,
+  "judged": false
+}

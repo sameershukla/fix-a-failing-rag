@@ -1,0 +1,645 @@
+{
+ "judge": "v1",
+ "model": "claude-sonnet-5-5",
+ "calibrated": false,
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 721,
+   "unsupported": []
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 486,
+   "unsupported": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 315,
+   "unsupported": []
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 233,
+   "unsupported": []
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 96,
+   "unsupported": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 217,
+   "unsupported": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 430,
+   "unsupported": []
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 156,
+   "unsupported": []
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 348,
+   "unsupported": []
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 412,
+   "unsupported": [
+    "The customer bought 12 gift cards in the last hour",
+    "You will need to review all 12 orders"
+   ]
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 266,
+   "unsupported": []
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 203,
+   "unsupported": []
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 522,
+   "unsupported": []
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 201,
+   "unsupported": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 256,
+   "unsupported": [
+    "Page size can be found in the API's pagination documentation or OpenAPI spec, with parameters like limit, per_page, page_size"
+   ]
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 323,
+   "unsupported": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 302,
+   "unsupported": []
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 544,
+   "unsupported": [
+    "Other surcharges can stack on top of the oversize fee if they apply"
+   ]
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 191,
+   "unsupported": [
+    "To get the exact threshold, check warehouse or carrier eligibility rules or ask the shipping/fulfillment policy owner."
+   ]
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 142,
+   "unsupported": []
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 255,
+   "unsupported": []
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 447,
+   "unsupported": [
+    "The line was canceled before pick, so it qualifies"
+   ]
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 191,
+   "unsupported": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 209,
+   "unsupported": []
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 290,
+   "unsupported": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 564,
+   "unsupported": [
+    "A completed reset means someone controlled that mailbox",
+    "If the reset wasn't customer-initiated or the account looks compromised, security is the team to involve"
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 532,
+   "unsupported": [
+    "Commission is deducted from payouts either way (regardless of reserve tier), so 'full payout' is misleading on that basis"
+   ]
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 207,
+   "unsupported": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 355,
+   "unsupported": []
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 315,
+   "unsupported": [
+    "Returns Ops team owns return label handling and can be asked about label-free drop-off"
+   ]
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 329,
+   "unsupported": [
+    "The user should check the current version of the page or the Handbook for the earn rate"
+   ]
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 390,
+   "unsupported": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 96,
+   "unsupported": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 139,
+   "unsupported": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 240,
+   "unsupported": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 246,
+   "unsupported": [
+    "To get the limit, check the current enterprise plan or contract terms"
+   ]
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 263,
+   "unsupported": [
+    "The returns operations team can also confirm the dates."
+   ]
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 365,
+   "unsupported": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 100,
+   "unsupported": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 171,
+   "unsupported": []
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 85,
+   "unsupported": [
+    "The URL should be obtained from another source such as internal documentation or the platform owner"
+   ]
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 520,
+   "unsupported": [
+    "Each card in the bulk order must still be between $10 and $500",
+    "Each card in the bulk order needs a valid recipient email address",
+    "Use the business sales process for confirmed corporate buyers and the risk review for everyone else"
+   ]
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 491,
+   "unsupported": []
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 434,
+   "unsupported": [
+    "normalizeOrderId, buildRefundReason, and createRefund all take a single orderId"
+   ]
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 299,
+   "unsupported": []
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 262,
+   "unsupported": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 176,
+   "unsupported": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 244,
+   "unsupported": []
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 455,
+   "unsupported": []
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 537,
+   "unsupported": []
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 579,
+   "unsupported": [
+    "Check consumer-law guidance or escalate statutory extension cases"
+   ]
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 191,
+   "unsupported": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 435,
+   "unsupported": []
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 335,
+   "unsupported": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 140,
+   "unsupported": []
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 123,
+   "unsupported": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 131,
+   "unsupported": []
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 967,
+   "unsupported": []
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 393,
+   "unsupported": [
+    "The surcharge function and matrix cover outbound shipping and freight fees only, so they do not apply here"
+   ]
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 149,
+   "unsupported": [
+    "To get a definite answer, check the current checkout payment options or ask the payments team."
+   ]
+  }
+ ]
+}

@@ -60,11 +60,13 @@ def main():
         sys.exit("eval-gen runs the app system only (the baseline is frozen and has no Module 4 changes).")
 
     from app.common import DATA, load_config
-    from app.generation.answer import PROMPT, SYSTEM
+    from app.generation.answer import prompt_for
     from app.retrieval.search import search
 
     cfg = load_config()
     llm = cfg["llm"]
+    style = cfg.get("generation", {}).get("prompt", "plain")
+    SYSTEM, PROMPT, fmt = prompt_for(style)
     golden = yaml.safe_load((ROOT / "eval/golden/golden.yaml").read_text(encoding="utf-8"))
     ids = None
     if args.subset:
@@ -81,7 +83,7 @@ def main():
     rows, calls = [], 0
     for i, q in enumerate(questions, 1):
         chunks = search(q["question"])
-        context = "\n\n".join(c["text"] for c in chunks)
+        context = fmt(chunks)
         user = PROMPT.format(context=context, question=q["question"])
         path = cache_dir / (cache_key(llm["model"], SYSTEM, PROMPT, llm["max_tokens"], context + "\n" + q["question"]) + ".json")
         if path.exists() and not args.no_cache:
@@ -99,7 +101,7 @@ def main():
         for r in rows:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     truncated = sum(r["stop_reason"] == "max_tokens" for r in rows)
-    record = {"run_id": run_id, "kind": "generation", "config_hash": cfg_hash, "model": llm["model"], "max_tokens": llm["max_tokens"],
+    record = {"run_id": run_id, "kind": "generation", "config_hash": cfg_hash, "model": llm["model"], "max_tokens": llm["max_tokens"], "prompt": style,
               "subset": args.subset or "all", "limit": args.limit, "seed": args.seed, "questions": len(rows),
               "answerable": sum(r["answerable"] for r in rows), "unanswerable": sum(not r["answerable"] for r in rows),
               "truncated_answers": truncated, "model_calls": calls, "judged": False}

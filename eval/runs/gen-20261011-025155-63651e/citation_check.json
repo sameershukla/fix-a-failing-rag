@@ -1,0 +1,813 @@
+{
+ "summary": {
+  "answers": 60,
+  "with_citations": 0,
+  "citations": 0,
+  "passed": 0,
+  "failed": 0,
+  "answers_with_failed": 0,
+  "answers_with_uncited": 57,
+  "uncited_sentences": 202
+ },
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Partial refunds apply when a customer is owed money but not the full original item price.",
+    "The returned merchandise is missing customer-removable parts.",
+    "Only part of a multi-item order is being refunded.",
+    "The deduction must be tied to a documented reason.",
+    "The customer must be told the amount before the refund is finalized.",
+    "Shipping fees** are refunded only when the shipping service failed or BrightCart caused the return.",
+    "Tax** is recalculated based on the refunded merchandise amount.",
+    "Restocking fees:** Agents cannot invent one.",
+    "A fee applies only if a published fee exists.",
+    "Example:** A customer returns a $120 blender without the $20 travel cup included in the package.",
+    "After the warehouse confirms the missing accessory, the refund is reduced by the cup's documented replacement value.",
+    "Precedence with courtesy credits:** When a partial refund and a promotional or courtesy credit both seem eligible, the original tender refund is calculated first.",
+    "The courtesy credit is applied only after the refundable tender amount is finalized.",
+    "Legal holds, fraud investigations, and explicit incident commands can suspend this workflow."
+   ]
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The retention matrix covers six scenarios (model evaluation traces, production agent traces, legal holds, regulator packages, vendor support tickets, and sandbox test accounts), each with a threshold, required action, and owner.",
+    "The Python snippets are truncated and only define helper functions for timestamps, text normalization, and audit records.",
+    "For example, the owner for production agent traces is AI Platform."
+   ]
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The specialist workflow then determines whether the parcel is eligible.",
+    "The shipping surcharge matrix lists a separate hazmat ground row ($18 regulated-material handling surcharge, with air service blocked).",
+    "That rate is not applied by this function.",
+    "It is handled through the manual review path."
+   ]
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Under the Standard Return Window policy, shipping time back to the warehouse does not need to fit inside the 30-day window.",
+    "What matters is that the return request is opened by the end of day 30, counted from the carrier-confirmed delivery date.",
+    "A return request counts as opened when a case or self-service return authorization is created.",
+    "For example, an order delivered on April 2 can have a return opened through May 2.",
+    "If the customer ships the package on May 4 using the approved label, the request is still timely."
+   ]
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "According to the Account Lockout Policy, the failed sign-in counter is tracked **per account, not per device**.",
+    "So failed attempts are counted against the account itself, regardless of which phone, computer, or other device is used to sign in."
+   ]
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A missing customer-removable part (reason code `MISSING_PART`) moves the case to **PARTIAL_REFUND_REVIEW** and requires **2 photos**."
+   ]
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Subscription Proration Matrix:** For an enterprise account with a negotiated proration clause, follow the signed order form instead of the consumer proration matrix.",
+    "Marketplace Seller Fee Matrix:** For a seller with a negotiated enterprise contract, apply the seller-specific rate from the signed fee schedule."
+   ]
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It is a set of rate limit tables that list endpoints, thresholds, required actions, and owning teams for the v1 endpoints.",
+    "It contains no deprecation dates, sunset policies, or version lifecycle information."
+   ]
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Within 10 minutes.** The Support Escalation SLA Matrix requires that a payment outage affecting checkout, classified as SEV-1, page the incident commander and the payments on-call within 10 minutes.",
+    "The Incident Response Process runbook separately says a SEV 1 should be *acknowledged* within 15 minutes.",
+    "Aim to page within 10 minutes so you have margin for that acknowledgment."
+   ]
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "This meets the **gift card velocity** threshold in the Fraud Escalation Matrix, which is more than ten gift cards bought in one hour.",
+    "Required action:** Pause gift-card issuance for this customer and review the funding source."
+   ]
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It says only that \"very large transfers may require additional finance approval,\" without stating a dollar amount.",
+    "The $1,500 figure in the Payment Manual Review Thresholds table doesn't apply here.",
+    "It triggers a manual risk review for new-account card orders where billing and shipping countries differ, not ACH limits."
+   ]
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Cancellation:** Allowed while an order is in received or picking status.",
+    "Once it is packed, support can't promise cancellation.",
+    "Address and quantity changes:** Allowed only in received status.",
+    "Backorders:** Items ship separately, and the card is captured when the backordered item ships."
+   ]
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "General rule:** Most unused physical items can be returned within 30 calendar days of delivery, provided they include the parts and accessories shipped with them.",
+    "Final sale:** Final sale items aren't refundable unless they arrived damaged or incorrect.",
+    "Product-specific policies:** These can be stricter than the general rule, so a custom or engraved item may have its own terms.",
+    "Defective or damaged items:** These can qualify for a return or warranty support, and BrightCart pays return shipping in those cases."
+   ]
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "ACH payments from approved business accounts normally take **2 to 3 business days** to clear.",
+    "Weekends and bank holidays can extend that time, and very large transfers may need additional finance approval.",
+    "For example, an ACH payment submitted on a Monday with no bank holiday will normally clear between Wednesday and Thursday."
+   ]
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It covers rate limits, common error codes, and the export job status endpoint, but not pagination defaults."
+   ]
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It says a verified customer's export is normally ready within 24 hours and sent as a download link valid for 48 hours, and the customer must sign in again to download it.",
+    "It also says payment processor card data is not exported as raw card data, but it doesn't name a file type such as CSV, JSON, or ZIP.",
+    "The \"Job Export API\" page says completed download links expire after 15 minutes, which conflicts with the 48-hour window in the Customer Data Export policy.",
+    "The API page may refer to a different export process, so it's worth confirming which applies before relying on either number."
+   ]
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "An annual member who asks for a cheaper plan six weeks in does not get a midterm cash credit.",
+    "Under the proration rules, a downgrade requested after day 30 of an annual plan takes effect at the next renewal, when the lower price applies.",
+    "Since six weeks is about day 42, this request falls after the day-30 cutoff.",
+    "The refund policy doesn't apply here either.",
+    "It covers only accidental renewals requested within 48 hours of the renewal charge.",
+    "If the member wants monthly billing instead, that change is also scheduled for the annual plan's expiration."
+   ]
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "For a box longer than 48 inches on its longest side going to zones 5 through 8, the surcharge is **$25**.",
+    "The oversized handling surcharge must be added before the label is purchased.",
+    "The context also includes a code snippet that charges **$45** for an oversized parcel shipped to Alaska (AK) instead of $25.",
+    "Hazmat parcels aren't priced by this logic and need manual review."
+   ]
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It only says that **oversize items and hazardous materials are not eligible**."
+   ]
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The professional marketplace plan costs **$39 per month**.",
+    "This is deducted from the seller's settlement independently of sales commission."
+   ]
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "ATP = on-hand − reservations − safety stock",
+    "Per the runbook's failure recovery section, this is the figure to use when determining what can be promised to a customer."
+   ]
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Refund only the canceled line item and its attributable tax.** Do not cancel or refund the lines that already shipped unless they independently qualify for a refund.",
+    "Customer identity** and any **existing case**.",
+    "No duplicate workflow** is already pending, so the customer isn't credited twice.",
+    "Required identifiers** are recorded in the case.",
+    "If any dependency is unresolved, leave the case pending rather than guessing an outcome.",
+    "The \"warehouse cancellation miss\" row in the Refund Adjustment Limits Matrix doesn't apply here.",
+    "That row covers a cancellation that was approved before pick but shipped anyway, which is a different scenario."
+   ]
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "International orders normally arrive **7 to 14 business days after shipment**.",
+    "This applies only to countries shown as eligible at checkout.",
+    "Customs processing can add time beyond BrightCart's control, and carrier tracking may pause while a package is in customs.",
+    "Military and diplomatic addresses use a separate carrier route and may take longer."
+   ]
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Login was disabled at 04:11 UTC** on 2026-09-19.",
+    "Session revocation completed at 04:19 UTC**, after the initial timeout logged at 04:11:08Z.",
+    "The revocation took about 8 minutes, which is within the 15-minute session revoke SLA in config.yaml."
+   ]
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The expedited cutoff is **14:00 Central Time (2:00 PM CT)**.",
+    "Orders placed after the cutoff are routed to **NEXT_BUSINESS_DAY** processing, so they ship the next business day.",
+    "Saturdays and Sundays don't count as business days."
+   ]
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does show that this sequence needs a closer look.",
+    "A reset link is valid for 30 minutes and is single-use.",
+    "Once a reset succeeds, all older reset links are invalid.",
+    "So a payout request 10 minutes after a reset falls well within the window where the new credentials were just established.",
+    "Security can force an immediate password reset after suspicious activity, which means a reset followed quickly by a sensitive request is a situation security should review.",
+    "A reset can be requested during an account lockout.",
+    "If the account was recently locked after 5 failed sign-ins, that history is relevant.",
+    "Hold the payout pending review** if your payout procedures require it."
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "New sellers do not always get full payouts.",
+    "The Seller Payout Calendar sets a **10% rolling reserve for 60 days** for the `new` tier, and the Merchant Settlement and Reserve Handbook says the same.",
+    "Their payouts are on Tuesdays, like standard sellers, but 10% of each payout is held in reserve.",
+    "| Seller tier | Payout schedule | Reserve | Reserve period | Notes |",
+    "| Standard | Tuesday | 0% | 0 days | Covers transactions cleared through the previous Friday |",
+    "| New | Tuesday | 10% | 60 days | Rolling reserve applies |",
+    "| High-risk | Every other Friday | 20% | 90 days | Finance Risk approval required |",
+    "The sales deck should be corrected to match the policy.",
+    "Sales should not rely on the old claim, and the deck shouldn't be used to set seller expectations until it's fixed."
+   ]
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The Payment Data Security Rules state that BrightCart systems must not store card CVV values after authorization, and there is no support exception that allows CVV storage."
+   ]
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "SEV 1 incident response is available 24 hours a day, including Sunday at 3 AM, through the on-call process.",
+    "a widespread outage, major security exposure, or a critical business function unavailable with no practical workaround.",
+    "The on-call path covers service incidents only.",
+    "A routine question submitted at that time waits for the next staffed period, which starts at 8:00 AM Central Time on the next business day."
+   ]
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "under the standard member redemption rule, **100 points = $1** against the merchandise subtotal, applied before tax and shipping."
+   ]
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It covers support service hours, a privacy data retention matrix, a support escalation path, and a marketplace return policy, but none of these names a VP or any executive."
+   ]
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A password reset link is valid for **30 minutes** and can be used only once.",
+    "Requesting a new reset link invalidates the previous unused link, and all older reset links become invalid after a successful reset."
+   ]
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "5 orders within a rolling 10-minute window** triggers manual review.",
+    "The rule counts authorized or captured orders for the same customer in the 10 minutes ending at the current time.",
+    "When the count reaches 5, the payment is routed to manual review rather than declined automatically.",
+    "Declines, cancellations, and attempts older than the window don't count."
+   ]
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It covers related topics, such as how seat decreases are prorated (retained through the cycle and reduced on the next invoice, owned by B2B Subscriptions) and that a verified domain can belong to only one enterprise tenant at a time, but no seat limit is given."
+   ]
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "when a federal holiday affects timing, the operational clock shifts to the next business day.",
+    "That adjusts internal processing and isn't a general extension of the 30-day standard return window."
+   ]
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The Redeeming Gift Cards section states that **\"gift cards remain valid.\"** It gives no expiration period."
+   ]
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It says only that a customer account requires \"a password that meets the current password policy,\" and that a password reset must also meet that policy."
+   ]
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It says only that payment pages use tokenized references so internal systems can identify a payment without storing raw card details.",
+    "It doesn't name an algorithm, key management approach, or storage method.",
+    "Approved processors handle raw card data within their compliant environment."
+   ]
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It only says that for SEV-1 incidents, the status page is updated at least every 30 minutes until mitigation."
+   ]
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "For an order of more than 100 digital gift cards, **issuance should be held** until the Gift Card Risk team approves the funding source.",
+    "The Bulk Order Approval Matrix routes this scenario to **Gift Card Risk** for risk review.",
+    "Also note that the Gift Card Purchase Rules say bulk corporate gift card orders use the business sales process, so this order may need to go through that process as well.",
+    "If the buyer is also purchasing more than ten gift cards within one hour, the Fraud Escalation Matrix treats that as high risk.",
+    "It requires pausing gift card issuance and reviewing the funding source, which is again handled by Gift Card Risk."
+   ]
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "BrightCart can't change the shipment address in the order system once the carrier has accepted the parcel.",
+    "The customer's request has to go through the carrier instead.",
+    "The selected shipping service supports intercept.",
+    "If either condition fails, don't offer intercept.",
+    "Explain that the address can't be changed after shipment and that delivery instructions are controlled by the carrier.",
+    "Don't rely on the customer's wording or on past exceptions made for other customers.",
+    "Those don't create a general right to change an address after shipment."
+   ]
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The OpenAPI excerpt** (`POST /v3/admin/refunds`) shows only the `Idempotency-Key` header and the 200 and 409 responses.",
+    "It has no request body schema, so it doesn't show whether a call can include a partial amount or more than one order.",
+    "The TypeScript client** is cut off at `createRefund(orderId`, so its parameters aren't visible.",
+    "The partial refund policies** describe when deductions are allowed and how they're calculated.",
+    "The excerpt does show that refund creation requires an `Idempotency-Key`, and reusing a key with different parameters returns a 409."
+   ]
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A $50 partial refund on a 50/50 gift card and Visa order is split **$25 back to the gift card and $25 back to the Visa**.",
+    "The refund follows the original payment proportions, so support can't send the whole amount to the card.",
+    "Gift card ($25):** Normally available the same day the refund is issued.",
+    "Visa ($25):** Posts on normal card posting times."
+   ]
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Reporting window:** The customer should report visible delivery damage within **7 calendar days** of delivery.",
+    "However, a leaking battery is a safety issue, so it should be **escalated immediately** rather than handled on the normal timeline.",
+    "Where the item goes:** Battery leakage sends the item to **HAZMAT_QUARANTINE**.",
+    "The customer should not ship the item back until BrightCart provides return instructions or confirms that no return is required."
+   ]
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "If `idempotency_key` is missing or falsy (`None`, an empty string, etc.), `send_refund` raises `ValueError(\"idempotency key required\")` and does not submit the refund.",
+    "supported payment and refund POST requests should include an idempotency key.",
+    "The key lets a retry return the original result instead of creating a second refund."
+   ]
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The only payment method described is ACH bank transfer, which is available to approved business accounts and isn't shown to consumer accounts at checkout."
+   ]
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, don't retry it manually.** Don't press refund again either.",
+    "Let the automatic retry run.** A failed refund is retried automatically one time.",
+    "The retry worker is configured for 2 attempts with a 900-second backoff.",
+    "If the retry also fails, open a payment operations case.** Include the order ID and refund reference.",
+    "The worker routes exhausted refunds to the payment ops queue.",
+    "Don't create a second independent refund.** That can result in a duplicate payment.",
+    "Record the transaction identifier** before any action, per the returns handbook.",
+    "Payment Operations may be able to issue an ACH fallback for a closed card, but only after identity verification and supervisor approval.",
+    "Support shouldn't promise the customer that outcome."
+   ]
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Escalate immediately.** A leaking battery is a safety issue, and it doesn't go through the normal damaged-item flow.",
+    "Escalate now** to the safety/HAZMAT path, and tell the customer you're doing so.",
+    "Give basic safety guidance:** stop using the product, keep it away from heat and flames, don't charge it, and avoid touching leaked material with bare skin.",
+    "Request photos only if the customer can safely take them.** The inspection code for battery swelling or leakage (BATTERY_SWELL) normally calls for 3 photos, but don't require them if handling the product is unsafe.",
+    "Record the reason code BATTERY_SWELL.** It routes the item to **HAZMAT_QUARANTINE**.",
+    "Do not allow restocking** of the item."
+   ]
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "For an EU customer on the standard tier, the electronics return window is **30 calendar days**, but statutory rights may extend eligibility beyond that period.",
+    "This comes from the edition \"Electronics Return Window - 2026.3-eu,\" which applies from **2026-09-01**.",
+    "The US edition (30 days, no statutory extension) also doesn't apply to EU customers."
+   ]
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The Tax Exemption Help page only covers how an exemption applies."
+   ]
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Gift Card Balance and Load Limits:** A $500 per-reload limit for verified US accounts, which must also stay under a \"rolling daily cap.\" That cap's value isn't given, and it applies to gift card reloads, not seller withdrawals.",
+    "Seller Payout Calendar:** Sets payout days and reserves by seller tier (for example, standard sellers pay out Tuesdays with no reserve, and new sellers have a 10% rolling reserve for 60 days).",
+    "expedited_payout_fee code:** Same-day payouts cost 1.5% of the amount for eligible sellers."
+   ]
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "After an email change is completed, BrightCart sends a security notice to the old email address.",
+    "The notice goes out only after the new address has been verified and becomes the sign-in identifier.",
+    "If the change was never completed, the account keeps the old email and no change notice is sent.",
+    "If a customer reports an email change they did not make, treat it as suspicious account activity and follow the session revocation process in the suspicious login runbook."
+   ]
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Each email address can be associated with only one active consumer account.",
+    "If a customer enters an email that already belongs to an existing account, registration stops, and the customer is directed to sign in or reset the existing account instead of creating a duplicate.",
+    "Business organizations can have multiple users under one company profile, but each user still needs a unique email address."
+   ]
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "For enterprise admins, the **idle timeout is 15 minutes** and the **maximum session length is 8 hours**.",
+    "MFA is also required for these sessions."
+   ]
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "El cliente tiene **14 días naturales** para elegir entre reembolso o reenvío si el paquete está retenido en aduana, según la regla de Envíos Internacionales."
+   ]
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, the shipping fee is refundable if the delay is carrier-caused and exceeds 24 hours, unless the delay is solely customs, weather, or customer-caused.",
+    "This answer comes from the edition for US, enterprise customers, effective 2026-09-01.",
+    "Edition match:** The case is US, enterprise tier, and falls on or after 2026-09-01.",
+    "If it doesn't, this edition doesn't apply.",
+    "Trigger:** The delay was caused by the carrier and lasted more than 24 hours.",
+    "Final handling:** The delay is not solely due to customs, weather, or the customer.",
+    "If it is, do not refund.",
+    "Workflow:** The operational notes say carrier delays after acceptance follow the delayed package process.",
+    "Current state:** Verify the order state, payment state, and customer identity.",
+    "Record any required identifier in the case.",
+    "If a dependency is unresolved, leave the case pending."
+   ]
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Oversize freight returns require logistics review instead of a standard label, so don't print a normal label.",
+    "Send the case to logistics for review so they can arrange the return."
+   ]
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  }
+ ]
+}

@@ -16,7 +16,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / "config/judge.yaml"
 CACHE = ROOT / "data/app/llm_cache/judge"
-CITATION = re.compile(r"\[(?:\d+|[^\]\s]*::\d+)\]|\(\s*source:[^)]*\)", re.I)
+CITATION = re.compile(r"\[\d+\s*:\s*[\"“][^\"”\]]+[\"”]\s*\]|\[(?:\d+|[^\]\s]*::\d+)\]|\(\s*source:[^)]*\)", re.I)   # [n: "quote"] (Lesson 4.4), [n], [doc::n], (source: ...)
 
 
 def load_config():

@@ -1,0 +1,17 @@
+{
+  "run_id": "gen-20261011-024453-33b32a",
+  "kind": "generation",
+  "config_hash": "33b32a",
+  "model": "claude-sonnet-5-5",
+  "max_tokens": 2000,
+  "prompt": "plain",
+  "subset": "all",
+  "limit": 60,
+  "seed": 1,
+  "questions": 60,
+  "answerable": 36,
+  "unanswerable": 24,
+  "truncated_answers": 0,
+  "model_calls": 60,
+  "judged": false
+}

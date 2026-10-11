@@ -1,0 +1,618 @@
+{
+ "judge": "v1",
+ "model": "claude-sonnet-5-5",
+ "calibrated": false,
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1526,
+   "unsupported": []
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 867,
+   "unsupported": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 824,
+   "unsupported": []
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 607,
+   "unsupported": []
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 276,
+   "unsupported": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 508,
+   "unsupported": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 743,
+   "unsupported": []
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 589,
+   "unsupported": []
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 749,
+   "unsupported": []
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 974,
+   "unsupported": []
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 462,
+   "unsupported": [
+    "The context only covers who can use ACH and how it clears."
+   ]
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 584,
+   "unsupported": []
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 510,
+   "unsupported": []
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 290,
+   "unsupported": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 514,
+   "unsupported": []
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 735,
+   "unsupported": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 903,
+   "unsupported": []
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 845,
+   "unsupported": []
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 650,
+   "unsupported": []
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 460,
+   "unsupported": []
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 236,
+   "unsupported": []
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 751,
+   "unsupported": []
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 356,
+   "unsupported": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 408,
+   "unsupported": [
+    "The context does not state a time zone for these times"
+   ]
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 704,
+   "unsupported": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 542,
+   "unsupported": []
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 962,
+   "unsupported": []
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 329,
+   "unsupported": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 1279,
+   "unsupported": []
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 744,
+   "unsupported": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 574,
+   "unsupported": []
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 494,
+   "unsupported": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 432,
+   "unsupported": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 263,
+   "unsupported": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 852,
+   "unsupported": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 569,
+   "unsupported": []
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "verdict": null,
+   "problem": "unparseable reply",
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 772,
+   "unsupported": []
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 742,
+   "unsupported": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 358,
+   "unsupported": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 463,
+   "unsupported": []
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 419,
+   "unsupported": []
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1000,
+   "unsupported": []
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 855,
+   "unsupported": []
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 944,
+   "unsupported": []
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1183,
+   "unsupported": [
+    "The order was half gift card and half Visa, with a $50 refund.",
+    "$25 goes to the gift card and $25 to the Visa."
+   ]
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 772,
+   "unsupported": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 574,
+   "unsupported": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 604,
+   "unsupported": []
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1365,
+   "unsupported": []
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 942,
+   "unsupported": [
+    "Context does not say what to tell the customer about returning the item or how to arrange a return"
+   ]
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 1099,
+   "unsupported": []
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 516,
+   "unsupported": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 1264,
+   "unsupported": []
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 446,
+   "unsupported": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 317,
+   "unsupported": []
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 399,
+   "unsupported": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "verdict": "unfaithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 301,
+   "unsupported": [
+    "The customer has 14 calendar days to choose (a deadline for the customer to make the choice)"
+   ]
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": true,
+   "output_tokens": 2000,
+   "unsupported": []
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": false,
+   "truncated": false,
+   "output_tokens": 366,
+   "unsupported": []
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "verdict": "faithful",
+   "problem": null,
+   "refused": true,
+   "truncated": false,
+   "output_tokens": 446,
+   "unsupported": []
+  }
+ ]
+}

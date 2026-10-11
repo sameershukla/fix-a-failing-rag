@@ -1,0 +1,670 @@
+{
+ "summary": {
+  "answers": 60,
+  "with_citations": 58,
+  "citations": 188,
+  "passed": 188,
+  "failed": 0,
+  "answers_with_failed": 0,
+  "answers_with_uncited": 36,
+  "uncited_sentences": 80
+ },
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "citations": 12,
+   "passed": 12,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "When a partial refund may be issued",
+    "Deductions and what the customer must be told",
+    "When a promotional credit is also eligible"
+   ]
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The function does not price a hazmat parcel.",
+    "It returns a zero charge with the action `MANUAL_HAZMAT_REVIEW`."
+   ]
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Return shipping time does not count against the 30 days.",
+    "What counts is when the request is opened, which must happen by the end of day on day 30.",
+    "The 30 days start from the carrier confirmed delivery date.",
+    "For example, an order delivered on April 2 can have a request opened through May 2, and shipping the package on May 4 with the approved label is still timely.",
+    "Electronics have a separate 14 day rule."
+   ]
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The failed login counter is tracked per account, not per device."
+   ]
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A return with a missing part goes to PARTIAL_REFUND_REVIEW, and it requires 2 photos.",
+    "It does separately say that high-value electronics require three inspection photos."
+   ]
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover related enterprise topics."
+   ]
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover rate limits for v1 endpoints."
+   ]
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Twelve gift cards in one hour is above the matrix's velocity threshold."
+   ]
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It only says that large transfers may need extra approval, without giving an amount.",
+    "ACH is available to approved business customers.",
+    "Very large transfers may need additional finance approval."
+   ]
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Customers can cancel before shipment in certain statuses.",
+    "Address and quantity changes are limited to early order status."
+   ]
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Final sale items are not refundable under the standard rule.",
+    "Most unused physical items are eligible within 30 days of delivery.",
+    "Unused is defined as not materially altered, consumed, or installed.",
+    "Product-specific policies may be stricter than the general rule."
+   ]
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover rate limits for list calls."
+   ]
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover timing and access for the export."
+   ]
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, not under the downgrade rule.",
+    "Six weeks in is past day 30, so this rule applies."
+   ]
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The professional marketplace plan costs $39 per month.",
+    "The monthly subscription fee is deducted independently of sales commission."
+   ]
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Available-to-promise inventory is calculated from on-hand minus reservations minus safety stock."
+   ]
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Refund only the canceled line and its attributable tax.",
+    "This applies when a line in a split shipment is canceled before fulfillment while the other lines ship.",
+    "Do not refund the lines that already shipped unless they independently qualify.",
+    "Before acting, verify the order state, payment state, customer identity, and any existing case.",
+    "Legal holds, fraud investigations, and explicit incident commands can suspend this workflow."
+   ]
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "According to the routing configuration, the expedited cutoff is 14:00 Central Time, and orders after it go to the next business day."
+   ]
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A reset link is valid for a limited time and for one use only.",
+    "Once a reset succeeds, older links stop working.",
+    "Security can force a reset after suspicious activity."
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, the context says SEV 1 incident response is available around the clock, though it doesn't name Sundays specifically.",
+    "Normal staffed support is different and would not cover that time.",
+    "The on call path applies to service incidents, not routine tickets."
+   ]
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover support hours and escalation."
+   ]
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Five orders within a rolling 10-minute window triggers manual review."
+   ]
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Payment pages use tokenized references, so internal systems can identify a payment without storing raw card details.",
+    "BrightCart systems must not store card CVV values after authorization.",
+    "Logs must redact sensitive card fields."
+   ]
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context also has a separate velocity rule for buying many gift cards in a short time."
+   ]
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "When a customer asks for an address change after carrier acceptance, the address cannot be edited in the order system.",
+    "The only handling the context gives is carrier intercept, and it is conditional."
+   ]
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "That describes multiple items within one order, not multiple orders in one API call."
+   ]
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The refund is split in proportion to how the order was originally paid.",
+    "Its only worked example is a 40/60 order, where a $50 proportional refund returns $20 to the gift card and $30 to the Visa.",
+    "Gift card portion:** It is normally available the same day it is issued.",
+    "Visa portion:** It follows normal card posting times."
+   ]
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "In `send_refund`, a missing idempotency key raises an error.",
+    "\"if not idempotency_key:\\n        raise ValueError(\\\"idempotency key required\\\")\"]."
+   ]
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "citations": 6,
+   "passed": 6,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, support shouldn't manually retry it.",
+    "The platform already retries a failed refund automatically once.",
+    "The context gives a closed card as an example of this.",
+    "The retry gets the same failure, and the agent opens a payment operations case with the order ID and refund reference.",
+    "The worker configuration matches this, since exhausted retries go to the payment ops queue.",
+    "For a closed card, Payment Operations may use an ACH fallback, but only after identity verification and supervisor approval."
+   ]
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The item goes to quarantine, and it must not be restocked.",
+    "The inspection reason code table lists BATTERY_SWELL (swelling or leakage) with the next state HAZMAT_QUARANTINE and a photo_count of 3.",
+    "The customer should not ship the item back until BrightCart gives return instructions or confirms no return is needed.",
+    "If the customer can't safely handle the product, don't require extra photos."
+   ]
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Standard sellers are paid on Tuesday with no reserve.",
+    "Same-day expedited payouts carry a fee when the seller is eligible."
+   ]
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, the old address is warned.",
+    "If a customer reports an email change they did not make, the context says to treat it as suspicious."
+   ]
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "citations": 4,
+   "passed": 4,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The same restriction applies when changing an email address.",
+    "Business organizations are a different case."
+   ]
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "El contexto no indica cuántos días tiene el cliente para elegir entre reembolso o reenvío.",
+    "Solo establece que, tras 14 días naturales de retención en aduana, el cliente puede elegir."
+   ]
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context has an edition that covers this case, but it applies only if the case matches its region and effective date."
+   ]
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Card brands supported for standard consumer checkout are listed.",
+    "Gift cards can be combined with other payment methods, but those methods are not named."
+   ]
+  }
+ ]
+}

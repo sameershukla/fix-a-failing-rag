@@ -1,0 +1,595 @@
+{
+ "summary": {
+  "answers": 60,
+  "with_citations": 53,
+  "citations": 110,
+  "passed": 110,
+  "failed": 0,
+  "answers_with_failed": 0,
+  "answers_with_uncited": 17,
+  "uncited_sentences": 24
+ },
+ "answers": [
+  {
+   "id": "q005",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q009",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q013",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q015",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, the time the customer takes to ship the item back does not count against the 30 days.",
+    "a package delivered April 2 can have a return opened through May 2, and a customer who ships on May 4 with the approved label is still timely because the request was opened within the window."
+   ]
+  },
+  {
+   "id": "q016",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q017",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q025",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context does cover enterprise contracts in two other areas."
+   ]
+  },
+  {
+   "id": "q055",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q057",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "For a payment outage affecting checkout at SEV-1, the threshold is \"10 minutes\""
+   ]
+  },
+  {
+   "id": "q058",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "This matches the **gift card velocity** scenario in the Fraud Escalation Matrix."
+   ]
+  },
+  {
+   "id": "q060",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q061",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q063",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover general refund eligibility."
+   ]
+  },
+  {
+   "id": "q074",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q085",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q091",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q112",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A request made after day 30 falls under the annual plan downgrade rule, which says to \"do not issue midterm cash credit; apply lower"
+   ]
+  },
+  {
+   "id": "q114",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "A long box going to the far zones may incur a $25 oversized handling surcharge."
+   ]
+  },
+  {
+   "id": "q119",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q128",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q130",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q131",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q136",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q137",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q164",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q168",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "It does cover the password reset process."
+   ]
+  },
+  {
+   "id": "q171",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q175",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q182",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Yes, if the issue is classified as a SEV 1.",
+    "Standard support is not staffed at that time.",
+    "The on call path is for service incidents, not normal tickets.",
+    "\"SEV 1 is used for a widespread outage, major security exposure, or"
+   ]
+  },
+  {
+   "id": "q184",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q189",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q192",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q194",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q196",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q203",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q208",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q215",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context does cover a holiday exception for timing."
+   ]
+  },
+  {
+   "id": "q221",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q222",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q223",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q226",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q230",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q250",
+   "answerable": true,
+   "citations": 5,
+   "passed": 5,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q251",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The refund client code defines a createRefund function,"
+   ]
+  },
+  {
+   "id": "q254",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context gives the split rule but no exact figures for a 50/50 order."
+   ]
+  },
+  {
+   "id": "q262",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "Customers should report visible delivery damage within 7 calendar days of delivery.",
+    "Battery leakage sends the item to HAZMAT_QUARANTINE, and no restock action is allowed."
+   ]
+  },
+  {
+   "id": "q273",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q275",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q294",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The context says a failed refund gets one automatic retry."
+   ]
+  },
+  {
+   "id": "q297",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q300",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "The EU-specific edition sets a 30-day window, but only for the standard tier starting 2026-09-01.",
+    "\"This edition applies in region EU to customer tier standard starting 2026"
+   ]
+  },
+  {
+   "id": "q304",
+   "answerable": false,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q306",
+   "answerable": false,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q314",
+   "answerable": true,
+   "citations": 3,
+   "passed": 3,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q321",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, the same email cannot be used on two consumer accounts.",
+    "they can have multiple users under one company profile, but each user still has a unique email."
+   ]
+  },
+  {
+   "id": "q328",
+   "answerable": true,
+   "citations": 0,
+   "passed": 0,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q329",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q346",
+   "answerable": true,
+   "citations": 2,
+   "passed": 2,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  },
+  {
+   "id": "q348",
+   "answerable": true,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": [
+    "No, you should not print a standard label for an oversize freight return."
+   ]
+  },
+  {
+   "id": "q353",
+   "answerable": false,
+   "citations": 1,
+   "passed": 1,
+   "failed": 0,
+   "failures": [],
+   "uncited_sentences": []
+  }
+ ]
+}
